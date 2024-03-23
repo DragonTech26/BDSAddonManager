@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddonManager", "AddonManager.csproj", "{FB9C695E-EE49-4763-8F6B-C7C924BF79BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB9C695E-EE49-4763-8F6B-C7C924BF79BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9C695E-EE49-4763-8F6B-C7C924BF79BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9C695E-EE49-4763-8F6B-C7C924BF79BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9C695E-EE49-4763-8F6B-C7C924BF79BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3214F688-EE05-43DC-98BE-005AFB1924D1}
+	EndGlobalSection
+EndGlobal
