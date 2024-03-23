@@ -41,4 +41,4 @@ Once the world's file paths have been validated, use the sidebar to navigate the
 
 ## License
 
-This software is released under the terms of the [Mozilla Public License 2.0](LICENSE).
+This software is released under the terms of the [Mozilla Public License 2.0](LICENSE.md).
