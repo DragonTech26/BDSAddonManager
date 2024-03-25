@@ -84,5 +84,28 @@ namespace AddonManager.Forms
                 }
             }
         }
+        private void ListView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ListView listView = sender as ListView;         //Cast the 'sender' object to a ListView type to access ListView-specific properties.
+                var focusedItem = listView.FocusedItem;
+                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))  //Check if the focused item is not null and the mouse click occurred within its bounds.
+                {
+                    ContextMenuStrip menu = new ContextMenuStrip();
+                    menu.Items.Add("Open pack files", null, (sender, args) => openFolderOption_Click(focusedItem));
+                    menu.Show(listView, e.Location);
+                }
+            }
+        }
+        private void openFolderOption_Click(ListViewItem item) //Opens file explorer to selected pack folder
+        {
+            var pack = (ManifestInfo)item.Tag;
+            string folderPath = pack.pack_folder;
+            if (!string.IsNullOrEmpty(folderPath))
+            {
+                System.Diagnostics.Process.Start("explorer.exe", folderPath);
+            }
+        }
     }
 }

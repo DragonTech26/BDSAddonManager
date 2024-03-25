@@ -7,6 +7,7 @@ namespace AddonManager
 {
     public class ManifestInfo
     {
+        public string? pack_folder { get; set; }
         public string? name { get; set; }
         public string? description { get; set; }
         public Guid? pack_id { get; set; }
@@ -76,6 +77,7 @@ namespace AddonManager
                         {
                             var manifestInfo = new ManifestInfo //Create a new ManifestInfo object and get the properties from the JSON
                             {
+                                pack_folder = directory,
                                 name = header.GetProperty("name").GetString(),
                                 description = header.GetProperty("description").GetString(),
                                 pack_id = header.GetProperty("uuid").GetGuid(),
