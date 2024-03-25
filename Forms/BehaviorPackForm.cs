@@ -94,6 +94,7 @@ namespace AddonManager.Forms
                 {
                     ContextMenuStrip menu = new ContextMenuStrip();
                     menu.Items.Add("Open pack files", null, (sender, args) => openFolderOption_Click(focusedItem));
+                    menu.Items.Add("Delete pack", null, (sender, args) => deletePackOption_Click(focusedItem));
                     menu.Show(listView, e.Location);
                 }
             }
@@ -105,6 +106,45 @@ namespace AddonManager.Forms
             if (!string.IsNullOrEmpty(folderPath))
             {
                 System.Diagnostics.Process.Start("explorer.exe", folderPath);
+            }
+        }
+        private void deletePackOption_Click(ListViewItem item) //Deletes selected pack
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this pack? This action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                var pack = (ManifestInfo)item.Tag;
+                string folderPath = pack.pack_folder;
+
+                if (Directory.Exists(folderPath))
+                {
+                    try
+                    {
+                        Directory.Delete(folderPath, true); //Attempt to delete the pack folder                     
+                        item.Remove(); //Remove the item from the ListView
+
+                        if (ResultLists.inactiveBpList.Contains(pack)) //Remove the pack from the corresponding list
+                        {
+                            ResultLists.inactiveBpList.Remove(pack);
+                        }
+                        else if (ResultLists.activeBpList.Contains(pack))
+                        {
+                            ResultLists.activeBpList.Remove(pack);
+                        }
+                    }
+                    catch (IOException ioEx)
+                    {
+                        MessageBox.Show($"An error occurred while trying to delete the folder: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (UnauthorizedAccessException unAuthEx)
+                    {
+                        MessageBox.Show($"You do not have permission to delete this folder: {unAuthEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
