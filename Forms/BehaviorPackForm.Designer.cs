@@ -81,6 +81,7 @@
             bpInactiveListView.TabIndex = 0;
             bpInactiveListView.UseCompatibleStateImageBehavior = false;
             bpInactiveListView.View = View.Details;
+            bpInactiveListView.MouseClick += ListView_MouseClick;
             // 
             // ibpNameColumn
             // 
@@ -106,6 +107,7 @@
             bpActiveListView.TabIndex = 1;
             bpActiveListView.UseCompatibleStateImageBehavior = false;
             bpActiveListView.View = View.Details;
+            bpActiveListView.MouseClick += ListView_MouseClick;
             // 
             // bpNameColumn
             // 

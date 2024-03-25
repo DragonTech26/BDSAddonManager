@@ -82,6 +82,7 @@
             rpInactiveListView.TabIndex = 0;
             rpInactiveListView.UseCompatibleStateImageBehavior = false;
             rpInactiveListView.View = View.Details;
+            rpInactiveListView.MouseClick += ListView_MouseClick;
             // 
             // irpNameColumn
             // 
@@ -107,6 +108,7 @@
             rpActiveListView.TabIndex = 0;
             rpActiveListView.UseCompatibleStateImageBehavior = false;
             rpActiveListView.View = View.Details;
+            rpActiveListView.MouseClick += ListView_MouseClick;
             // 
             // rpNameColumn
             // 
