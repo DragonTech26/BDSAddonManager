@@ -76,6 +76,7 @@
             bpInactiveListView.FullRowSelect = true;
             bpInactiveListView.GridLines = true;
             bpInactiveListView.Location = new Point(0, 0);
+            bpInactiveListView.MultiSelect = false;
             bpInactiveListView.Name = "bpInactiveListView";
             bpInactiveListView.Size = new Size(374, 397);
             bpInactiveListView.TabIndex = 0;
@@ -102,6 +103,7 @@
             bpActiveListView.FullRowSelect = true;
             bpActiveListView.GridLines = true;
             bpActiveListView.Location = new Point(0, 0);
+            bpActiveListView.MultiSelect = false;
             bpActiveListView.Name = "bpActiveListView";
             bpActiveListView.Size = new Size(370, 397);
             bpActiveListView.TabIndex = 1;
