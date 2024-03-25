@@ -77,6 +77,7 @@
             rpInactiveListView.FullRowSelect = true;
             rpInactiveListView.GridLines = true;
             rpInactiveListView.Location = new Point(0, 0);
+            rpInactiveListView.MultiSelect = false;
             rpInactiveListView.Name = "rpInactiveListView";
             rpInactiveListView.Size = new Size(374, 397);
             rpInactiveListView.TabIndex = 0;
@@ -103,6 +104,7 @@
             rpActiveListView.FullRowSelect = true;
             rpActiveListView.GridLines = true;
             rpActiveListView.Location = new Point(0, 0);
+            rpActiveListView.MultiSelect = false;
             rpActiveListView.Name = "rpActiveListView";
             rpActiveListView.Size = new Size(370, 397);
             rpActiveListView.TabIndex = 0;
