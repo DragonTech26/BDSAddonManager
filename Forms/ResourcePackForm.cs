@@ -1,5 +1,4 @@
-﻿using System.CodeDom.Compiler;
-using System.Data;
+﻿using System.Data;
 
 namespace AddonManager.Forms
 {
@@ -12,16 +11,33 @@ namespace AddonManager.Forms
             InactiveListPopulate();
             ActiveListPopulate();
         }
+        private bool IsExcludedPack(string packName)
+        {
+            string[] excludedPrefixes = { "resourcePack.education", "resourcePack.vanilla", "experimental" };
+
+            foreach (var prefix in excludedPrefixes)
+            {
+                if (packName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true; //Exclude this pack
+                }
+            }
+            return false; //Include this pack
+        }
         private void InactiveListPopulate()
         {
             rpInactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called. Used mainly for large lists
             foreach (var pack in ResultLists.inactiveRpList)
             {
-                ListViewItem item = new ListViewItem(pack.name);
-                item.SubItems.Add(pack.description);
-                item.SubItems.Add(pack.pack_folder);
-                item.Tag = pack;
-                rpInactiveListView.Items.Add(item);
+                // Check if the checkbox is checked or if the pack name is not excluded
+                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name))
+                {
+                    ListViewItem item = new ListViewItem(pack.name);
+                    item.SubItems.Add(pack.description);
+                    item.SubItems.Add(pack.pack_folder);
+                    item.Tag = pack;
+                    rpInactiveListView.Items.Add(item);
+                }
             }
             rpInactiveListView.EndUpdate(); //Enable the control to redraw
         }

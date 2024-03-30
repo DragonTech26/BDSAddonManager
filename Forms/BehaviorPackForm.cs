@@ -11,15 +11,33 @@ namespace AddonManager.Forms
             InactiveListPopulate();
             ActiveListPopulate();
         }
+        private bool IsExcludedPack(string packName)
+        {
+            string[] excludedPrefixes = { "resourcePack.education", "resourcePack.vanilla", "experimental" };
+
+            foreach (var prefix in excludedPrefixes)
+            {
+                if (packName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true; //Exclude this pack
+                }
+            }
+            return false; //Include this pack
+        }
         private void InactiveListPopulate()
         {
             bpInactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called. Optimized for large lists
             foreach (var pack in ResultLists.inactiveBpList)
             {
-                ListViewItem item = new ListViewItem(pack.name);
-                item.SubItems.Add(pack.description);
-                item.Tag = pack;
-                bpInactiveListView.Items.Add(item);
+                // Check if the checkbox is checked or if the pack name is not excluded
+                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name))
+                {
+                    ListViewItem item = new ListViewItem(pack.name);
+                    item.SubItems.Add(pack.description);
+                    item.SubItems.Add(pack.pack_folder);
+                    item.Tag = pack;
+                    bpInactiveListView.Items.Add(item);
+                }
             }
             bpInactiveListView.EndUpdate(); //Enable the control to redraw
         }
