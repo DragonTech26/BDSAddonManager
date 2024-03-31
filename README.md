@@ -26,7 +26,7 @@ Once the world's file paths have been validated, use the sidebar to navigate the
 
 - To **enable** a pack, simply select it from the list and click the button to move it into the Active list.
 - To **disable** a pack, select the active pack and click the button to move it to the Available list.
-- To **add** a pack, copy the extracted addon file into the appropriate folder, and run the program again. It will now be in the Available list.
+- To **add** a pack, drag and drop the .mcpack or .zip file onto the inactive side of the pack list. The new pack will be automatically imported and available to use.
 - To **save** the changes, select the save button and confirm in the popup.
 
 
