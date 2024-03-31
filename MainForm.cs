@@ -59,6 +59,10 @@ namespace AddonManager
         {
             OpenChildForm(new Forms.AboutForm(), sender);
         }
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.SettingsForm(), sender);
+        }
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (DirectoryForm.worldLocation == string.Empty)

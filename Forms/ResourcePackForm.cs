@@ -1,5 +1,4 @@
-﻿using System.CodeDom.Compiler;
-using System.Data;
+﻿using System.Data;
 
 namespace AddonManager.Forms
 {
@@ -12,16 +11,36 @@ namespace AddonManager.Forms
             InactiveListPopulate();
             ActiveListPopulate();
         }
+        private bool IsExcludedPack(string packName)
+        {
+            string[] excludedPrefixes = { "resourcePack.education", "resourcePack.vanilla", "experimental" };
+
+            foreach (var prefix in excludedPrefixes)
+            {
+                if (packName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true; //Exclude this pack
+                }
+            }
+            return false; //Include this pack
+        }
         private void InactiveListPopulate()
         {
-            rpInactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called. Used mainly for large lists
+            rpInactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
             foreach (var pack in ResultLists.inactiveRpList)
             {
-                ListViewItem item = new ListViewItem(pack.name);
-                item.SubItems.Add(pack.description);
-                item.SubItems.Add(pack.pack_folder);
-                item.Tag = pack;
-                rpInactiveListView.Items.Add(item);
+                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name)) //Check if the checkbox is checked or if the pack name is not excluded
+                {                  
+                    var itemExists = rpInactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name); //If the item is already in the ListView dont add it again. This fixes an issue where the list wouldn't behave correctly if a pack was added.
+                    if (!itemExists)
+                    {
+                        ListViewItem item = new ListViewItem(pack.name);
+                        item.SubItems.Add(pack.description);
+                        item.SubItems.Add(pack.pack_folder);
+                        item.Tag = pack;
+                        rpInactiveListView.Items.Add(item);
+                    }
+                }
             }
             rpInactiveListView.EndUpdate(); //Enable the control to redraw
         }
@@ -101,6 +120,32 @@ namespace AddonManager.Forms
                 }
             }
         }
+        private void rpInactiveListView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
+                else { e.Effect = DragDropEffects.None; }
+            }
+            else { e.Effect = DragDropEffects.None; }
+        }
+        private void rpInactiveListView_DragDrop(object sender, DragEventArgs e)
+        {
+            FileImport import = new FileImport();
+            foreach (var filePath in (string[])e.Data.GetData(DataFormats.FileDrop))
+            {
+                var extension = Path.GetExtension(filePath);
+                if (File.Exists(filePath) && (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                {
+                    import.ProcessFile(filePath, DirectoryForm.rpLocation);
+                    InactiveListPopulate();
+                }
+            }
+        }
         private void openFolderOption_Click(ListViewItem item) //Opens file explorer to selected pack folder
         {
             var pack = (ManifestInfo)item.Tag;
@@ -124,7 +169,7 @@ namespace AddonManager.Forms
                     {
                         Directory.Delete(folderPath, true); //Attempt to delete the pack folder                     
                         item.Remove(); //Remove the item from the ListView
-                      
+
                         if (ResultLists.inactiveRpList.Contains(pack)) //Remove the pack from the corresponding list
                         {
                             ResultLists.inactiveRpList.Remove(pack);

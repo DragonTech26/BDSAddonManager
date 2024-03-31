@@ -70,6 +70,7 @@
             // 
             // rpInactiveListView
             // 
+            rpInactiveListView.AllowDrop = true;
             rpInactiveListView.BorderStyle = BorderStyle.None;
             rpInactiveListView.Columns.AddRange(new ColumnHeader[] { irpNameColumn, irpDescriptionColumn });
             rpInactiveListView.Dock = DockStyle.Fill;
@@ -83,6 +84,8 @@
             rpInactiveListView.TabIndex = 0;
             rpInactiveListView.UseCompatibleStateImageBehavior = false;
             rpInactiveListView.View = View.Details;
+            rpInactiveListView.DragEnter += rpInactiveListView_DragEnter;
+            rpInactiveListView.DragDrop += rpInactiveListView_DragDrop;
             rpInactiveListView.MouseClick += ListView_MouseClick;
             // 
             // irpNameColumn

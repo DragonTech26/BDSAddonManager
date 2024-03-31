@@ -18,6 +18,9 @@ namespace AddonManager.Forms
         {
             InitializeComponent();
             this.Text = "SELECT FILE DIRECTORIES"; //Header title
+            worldDirectoryTextBox.Text = worldLocation;
+            rpDirectoryTextBox.Text = rpLocation;
+            bpDirectoryTextBox.Text = bpLocation;
             warningLabel.Text = "⚠️ Make sure world is not currently running!";
             if (canEdit == false) { DisableInput(); warningLabel.Text = "Restart the program to select another world."; }
         }
@@ -71,7 +74,6 @@ namespace AddonManager.Forms
         private void OpenFolderPicker(TextBox path) //Opens the file selector window and fills the results into the text boxes
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
 
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

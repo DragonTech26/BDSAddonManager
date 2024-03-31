@@ -21,7 +21,7 @@ Instructions:
 4. Once you have made the changes, press the 'Save' button to apply them to the world.
 
 Adding New Packs:
-To include a new pack, place the file into the appropriate directory and restart the program. The new pack will appear in the inactive list.
+Drag and drop the.mcpack/zip file into the inactive side of the pack selector. The new pack will now be available to select. Alternatively, place the extracted pack folder into the appropriate directory before starting the program.
 
 Credits:
 Various icons used in this project are sourced from svgrepo.com. These icons are available under the Public Domain.

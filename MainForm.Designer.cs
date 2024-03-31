@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuPanel = new Panel();
+            settingsButton = new Button();
             infoButton = new Button();
             saveButton = new Button();
             consoleButton = new Button();
@@ -52,6 +53,7 @@
             // menuPanel
             // 
             menuPanel.BackColor = Color.FromArgb(38, 43, 50);
+            menuPanel.Controls.Add(settingsButton);
             menuPanel.Controls.Add(infoButton);
             menuPanel.Controls.Add(saveButton);
             menuPanel.Controls.Add(consoleButton);
@@ -64,6 +66,25 @@
             menuPanel.Name = "menuPanel";
             menuPanel.Size = new Size(220, 561);
             menuPanel.TabIndex = 0;
+            // 
+            // settingsButton
+            // 
+            settingsButton.Dock = DockStyle.Bottom;
+            settingsButton.FlatAppearance.BorderSize = 0;
+            settingsButton.FlatStyle = FlatStyle.Flat;
+            settingsButton.ForeColor = Color.LightGray;
+            settingsButton.Image = Properties.Resources.gear;
+            settingsButton.ImageAlign = ContentAlignment.MiddleLeft;
+            settingsButton.Location = new Point(0, 441);
+            settingsButton.Name = "settingsButton";
+            settingsButton.Padding = new Padding(12, 0, 0, 0);
+            settingsButton.Size = new Size(220, 60);
+            settingsButton.TabIndex = 7;
+            settingsButton.Text = "   Settings";
+            settingsButton.TextAlign = ContentAlignment.MiddleLeft;
+            settingsButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            settingsButton.UseVisualStyleBackColor = true;
+            settingsButton.Click += settingsButton_Click;
             // 
             // infoButton
             // 
@@ -261,7 +282,7 @@
             Controls.Add(headerPanel);
             Controls.Add(menuPanel);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(850, 500);
+            MinimumSize = new Size(850, 540);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MainForm";
@@ -289,5 +310,6 @@
         private PictureBox logoPictureBox;
         private Label versionLabel;
         private Button infoButton;
+        private Button settingsButton;
     }
 }
