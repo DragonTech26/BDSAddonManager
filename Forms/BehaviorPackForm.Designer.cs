@@ -69,6 +69,7 @@
             // 
             // bpInactiveListView
             // 
+            bpInactiveListView.AllowDrop = true;
             bpInactiveListView.BorderStyle = BorderStyle.None;
             bpInactiveListView.Columns.AddRange(new ColumnHeader[] { ibpNameColumn, ibpDescriptionColumn });
             bpInactiveListView.Dock = DockStyle.Fill;
@@ -82,6 +83,8 @@
             bpInactiveListView.TabIndex = 0;
             bpInactiveListView.UseCompatibleStateImageBehavior = false;
             bpInactiveListView.View = View.Details;
+            bpInactiveListView.DragDrop += bpInactiveListView_DragDrop;
+            bpInactiveListView.DragEnter += bpInactiveListView_DragEnter;
             bpInactiveListView.MouseClick += ListView_MouseClick;
             // 
             // ibpNameColumn

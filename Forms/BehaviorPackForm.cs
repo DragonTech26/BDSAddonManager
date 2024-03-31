@@ -29,14 +29,17 @@ namespace AddonManager.Forms
             bpInactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called. Optimized for large lists
             foreach (var pack in ResultLists.inactiveBpList)
             {
-                // Check if the checkbox is checked or if the pack name is not excluded
                 if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name))
                 {
-                    ListViewItem item = new ListViewItem(pack.name);
-                    item.SubItems.Add(pack.description);
-                    item.SubItems.Add(pack.pack_folder);
-                    item.Tag = pack;
-                    bpInactiveListView.Items.Add(item);
+                    var itemExists = bpInactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name); //If the item is already in the ListView dont add it again. This fixes an issue where the list wouldn't behave correctly if a pack was added.
+                    if (!itemExists)
+                    {
+                        ListViewItem item = new ListViewItem(pack.name);
+                        item.SubItems.Add(pack.description);
+                        item.SubItems.Add(pack.pack_folder);
+                        item.Tag = pack;
+                        bpInactiveListView.Items.Add(item);
+                    }
                 }
             }
             bpInactiveListView.EndUpdate(); //Enable the control to redraw
@@ -114,6 +117,32 @@ namespace AddonManager.Forms
                     menu.Items.Add("Open pack files", null, (sender, args) => openFolderOption_Click(focusedItem));
                     menu.Items.Add("Delete pack", null, (sender, args) => deletePackOption_Click(focusedItem));
                     menu.Show(listView, e.Location);
+                }
+            }
+        }
+        private void bpInactiveListView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
+                else { e.Effect = DragDropEffects.None; }
+            }
+            else { e.Effect = DragDropEffects.None; }
+        }
+        private void bpInactiveListView_DragDrop(object sender, DragEventArgs e)
+        {
+            FileImport import = new FileImport();
+            foreach (var filePath in (string[])e.Data.GetData(DataFormats.FileDrop))
+            {
+                var extension = Path.GetExtension(filePath);
+                if (File.Exists(filePath) && (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                {
+                    import.ProcessFile(filePath, DirectoryForm.bpLocation);
+                    InactiveListPopulate();
                 }
             }
         }
