@@ -23,6 +23,23 @@ namespace AddonManager
         public static List<ManifestInfo>? activeBpList { get; set; } = new List<ManifestInfo>(); //list of currently active behavior packs (full - all data)
         public static List<ManifestInfo>? inactiveRpList { get; set; } = new List<ManifestInfo>(); //list of currently inactive resource packs (full - all data)
         public static List<ManifestInfo>? inactiveBpList { get; set; } = new List<ManifestInfo>(); //list of currently inactive behavior packs (full - all data)
+
+        public List<ManifestInfo> GetList(string listName)
+        {
+            switch (listName)
+            {
+                case "inactiveRpList":
+                    return inactiveRpList;
+                case "inactiveBpList":
+                    return inactiveBpList;
+                case "activeRpList":
+                    return activeRpList;
+                case "activeBpList":
+                    return activeBpList;
+                default:
+                    throw new ArgumentException("Invalid list name");
+            }
+        }
     }
     public static class ListExtensions //Extension method to move items in a list
     {

@@ -41,7 +41,7 @@ namespace AddonManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a world first!", "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
