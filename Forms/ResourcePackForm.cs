@@ -15,7 +15,7 @@ namespace AddonManager.Forms
         }
         private void moveToInactiveButton_Click(object sender, EventArgs e) //Move items from the active to the inactive list
         {
-            packHandler.MoveSelectedItems(rpActiveListView, rpInactiveListView, ResultLists.activeRpList, ResultLists.inactiveRpList); 
+            packHandler.MoveSelectedItems(rpActiveListView, rpInactiveListView, ResultLists.activeRpList, ResultLists.inactiveRpList);
         }
         private void moveToActiveButton_Click(object sender, EventArgs e) //Move items from the inactive to the active list
         {

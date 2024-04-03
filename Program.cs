@@ -9,6 +9,7 @@ namespace AddonManager
         public static string title = "BDS Addon Manager";
 
         public static bool hideDefaultPacks = true;
+        public static bool hideConsoleTab = true;
 
         [STAThread]
         static void Main()

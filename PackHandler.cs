@@ -31,6 +31,7 @@ namespace AddonManager
             {
                 if (packName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                 {
+                    Logger.Log("Pack: " + packName + " was hidden. Toggle 'Hide default packs' in Settings to view! ");
                     return true; //Exclude this pack
                 }
             }
@@ -50,7 +51,8 @@ namespace AddonManager
                         item.SubItems.Add(pack.description);
                         item.SubItems.Add(pack.pack_folder);
                         item.Tag = pack;
-                        inactiveListView.Items.Add(item);        
+                        inactiveListView.Items.Add(item);
+                        Logger.Log("Pack: " + pack.name + " was added to " + inactiveListView.Name);
                     }
                 }
             }
@@ -65,6 +67,7 @@ namespace AddonManager
                 item.SubItems.Add(pack.description);
                 item.Tag = pack;
                 activeListView.Items.Add(item);
+                Logger.Log("Pack: " + pack.name + " was added to " + activeListView.Name);
             }
             activeListView.EndUpdate();
         }
@@ -76,29 +79,14 @@ namespace AddonManager
                 var pack = (ManifestInfo)item.Tag; //Retrieve the full data object from the Tag property
                 sourceList.Remove(pack); //Remove the pack from the source list
                 destinationList.Add(pack); //Add the pack to the destination list
-
                 source.Items.Remove(item); //Remove the item from the source list view
                 destination.Items.Add(item); //Add the item to the destination list view
+                Logger.Log("Pack: " + item.Text + " was moved to " + destination.Name);
             }
         }
         public void MoveItems(ListView source, ListView destination, List<ManifestInfo> sourceList, List<ManifestInfo> destinationList)
         {
             MoveSelectedItems(source, destination, sourceList, destinationList);
-        }
-        public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                ListView listView = sender as ListView;         //Cast the 'sender' object to a ListView type to access ListView-specific properties.
-                var focusedItem = listView.FocusedItem;
-                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))  //Check if the focused item is not null and the mouse click occurred within its bounds.
-                {
-                    ContextMenuStrip menu = new ContextMenuStrip();
-                    menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
-                    menu.Items.Add("Delete pack", null, (sender, args) => deletePackAction(focusedItem));
-                    menu.Show(listView, e.Location);
-                }
-            }
         }
         public void MoveItemUpOrDown(System.Windows.Forms.ListView listView, List<ManifestInfo> list, int direction)
         {
@@ -112,6 +100,7 @@ namespace AddonManager
                     listView.Items.Insert(index + direction, selectedItem);
                     list.Move(index, index + direction);
                 }
+                Logger.Log("Pack: " + selectedItem.Text + " was moved " + direction + " on side: " + listView.Name);
             }
         }
         public void DragEnterHandler(DragEventArgs e)
@@ -142,6 +131,22 @@ namespace AddonManager
             activeList = resultLists.GetList(activeListName);
             inactiveListView.Items.Clear();
             InactiveListPopulate();
+            Logger.Log("New pack was successfully imported and added!");
+        }
+        public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ListView listView = sender as ListView;         //Cast the 'sender' object to a ListView type to access ListView-specific properties.
+                var focusedItem = listView.FocusedItem;
+                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))  //Check if the focused item is not null and the mouse click occurred within its bounds.
+                {
+                    ContextMenuStrip menu = new ContextMenuStrip();
+                    menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
+                    menu.Items.Add("Delete pack", null, (sender, args) => deletePackAction(focusedItem));
+                    menu.Show(listView, e.Location);
+                }
+            }
         }
         public void OpenFolder(ListViewItem item)
         {
@@ -150,6 +155,7 @@ namespace AddonManager
             if (!string.IsNullOrEmpty(folderPath))
             {
                 System.Diagnostics.Process.Start("explorer.exe", folderPath);
+                Logger.Log("Pack location opened from context menu!");
             }
         }
         public void DeletePack(ListViewItem item)
@@ -179,16 +185,20 @@ namespace AddonManager
                     catch (IOException ioEx)
                     {
                         MessageBox.Show($"An error occurred while trying to delete the folder: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Logger.Log("Something happened and the pack was unable to be deleted.", "ERROR");
                     }
                     catch (UnauthorizedAccessException unAuthEx)
                     {
                         MessageBox.Show($"You do not have permission to delete this folder: {unAuthEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Logger.Log("Invalid permissions to delete pack.", "ERROR");
                     }
                 }
                 else
                 {
                     MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Log("The directory was probably manually removed or renamed. Pack could not be deleted (or found).", "ERROR");
                 }
+                Logger.Log("Pack: " + pack.name + "was deleted from the disk!");
             }
         }
     }
