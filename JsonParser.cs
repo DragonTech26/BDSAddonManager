@@ -23,6 +23,23 @@ namespace AddonManager
         public static List<ManifestInfo>? activeBpList { get; set; } = new List<ManifestInfo>(); //list of currently active behavior packs (full - all data)
         public static List<ManifestInfo>? inactiveRpList { get; set; } = new List<ManifestInfo>(); //list of currently inactive resource packs (full - all data)
         public static List<ManifestInfo>? inactiveBpList { get; set; } = new List<ManifestInfo>(); //list of currently inactive behavior packs (full - all data)
+
+        public List<ManifestInfo> GetList(string listName)
+        {
+            switch (listName)
+            {
+                case "inactiveRpList":
+                    return inactiveRpList;
+                case "inactiveBpList":
+                    return inactiveBpList;
+                case "activeRpList":
+                    return activeRpList;
+                case "activeBpList":
+                    return activeBpList;
+                default:
+                    throw new ArgumentException("Invalid list name");
+            }
+        }
     }
     public static class ListExtensions //Extension method to move items in a list
     {
@@ -45,6 +62,7 @@ namespace AddonManager
 
             ParseManifestJson(rpJsonContent, ResultLists.currentlyActiveRpList);
             ParseManifestJson(bpJsonContent, ResultLists.currentlyActiveBpList);
+            Logger.Log("Active world .json packs have been parsed!");
         }
         private void ParseManifestJson(string jsonContent, List<ManifestInfo> manifestList) //parse and store active lists
         {
@@ -59,6 +77,7 @@ namespace AddonManager
                 };
                 manifestList.Add(manifestInfo);
             }
+            Logger.Log("Currently active lists have been populated!");
         }
         public void ParsePackFolder(string path, List<ManifestInfo> list) //Example: DirectoryForm.rpLocation, ResultLists.rpList
         {
@@ -89,6 +108,7 @@ namespace AddonManager
                     catch (Exception ex)
                     {
                         Debug.WriteLine("Error parsing manifest: " + ex.Message);
+                        Logger.Log("Invalid manifest file was found and was could not be parsed.", "WARN");
                     }
                 }
             }
@@ -105,11 +125,13 @@ namespace AddonManager
                 manifestInfo.name = RemoveSectionSignAndNextChar(manifestInfo.name);
                 manifestInfo.description = RemoveSectionSignAndNextChar(manifestInfo.description);
             }
+            Logger.Log("Removed Bedrock color code modifiers from pack names!");
         }
         private void GetActivePacks()
         {
             ResultLists.activeRpList = ResultLists.rpList.Where(rp => ResultLists.currentlyActiveRpList.Any(activeRp => activeRp.pack_id == rp.pack_id && Enumerable.SequenceEqual(activeRp.version, rp.version))).ToList();
             ResultLists.activeBpList = ResultLists.bpList.Where(bp => ResultLists.currentlyActiveBpList.Any(activeBp => activeBp.pack_id == bp.pack_id && Enumerable.SequenceEqual(activeBp.version, bp.version))).ToList();
+            Logger.Log("Active lists populated!");
             SortAndFilterActiveRpList();
             SortAndFilterActiveBpList();
         }
@@ -117,6 +139,7 @@ namespace AddonManager
         {
             ResultLists.inactiveRpList = ResultLists.rpList.Where(rp => !ResultLists.currentlyActiveRpList.Any(activeRp => activeRp.pack_id == rp.pack_id && Enumerable.SequenceEqual(activeRp.version, rp.version))).ToList();
             ResultLists.inactiveBpList = ResultLists.bpList.Where(bp => !ResultLists.currentlyActiveBpList.Any(activeBp => activeBp.pack_id == bp.pack_id && Enumerable.SequenceEqual(activeBp.version, bp.version))).ToList();
+            Logger.Log("Inactive lists populated!");
         }
         private void SortAndFilterActiveRpList() //Create a HashSet for fast lookup of GUIDs in the currentlyActiveList
         {
@@ -140,10 +163,12 @@ namespace AddonManager
             // Serialize and save the projected resource packs list
             string rpJsonData = JsonSerializer.Serialize(tempRpListToSave, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(rpJsonPath, rpJsonData);
+            Logger.Log("world_resource_packs.json has been written to disk!");
 
             // Serialize and save the projected behavior packs list
             string bpJsonData = JsonSerializer.Serialize(tempBpListToSave, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(bpJsonPath, bpJsonData);
+            Logger.Log("world_behavior_packs.json has been written to disk!");
         }
     }
 }

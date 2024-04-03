@@ -6,6 +6,7 @@ namespace AddonManager
     public partial class MainForm : Form
     {
         private Form activeForm;
+        public Button ConsoleButton {  get; set; }
 
         public MainForm()
         {
@@ -13,7 +14,10 @@ namespace AddonManager
             this.Text = Program.title;
             logoLabel.Text = Program.title;
             versionLabel.Text = Program.version;
+            Logger.Log(Program.title + " " + Program.version + " loaded!");
             OpenChildForm(new Forms.DirectoryForm(), null); //Start on directory screen
+            ConsoleButton = consoleButton;
+            if (Program.hideConsoleTab) { consoleButton.Visible = false; }
         }
         private void OpenChildForm(Form childForm, object buttonSender)
         {
@@ -30,6 +34,7 @@ namespace AddonManager
             childForm.BringToFront();
             childForm.Show();
             headerLabel.Text = childForm.Text;
+            //Logger.Log(childForm.Text + " was clicked!");
         }
         private void logoPictureBox_Click(object sender, EventArgs e) //Link to project when clicking logo
         {
@@ -37,7 +42,7 @@ namespace AddonManager
             {
                 FileName = "https://github.com/DragonTech26/BDSAddonManager",
                 UseShellExecute = true
-            });
+            });        
         }
         private void directoryButton_Click(object sender, EventArgs e)
         {
@@ -61,13 +66,14 @@ namespace AddonManager
         }
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.SettingsForm(), sender);
+            OpenChildForm(new Forms.SettingsForm(this), sender);
         }
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (DirectoryForm.worldLocation == string.Empty)
             {
                 MessageBox.Show("Error: No world selected!", "Save error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Log("Save: No world selected.", "ERROR");
                 return;
             }
             DialogResult result = MessageBox.Show("Save pack changes to " + DirectoryForm.worldName + "?", "Save Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -76,9 +82,10 @@ namespace AddonManager
                 Cursor.Current = Cursors.WaitCursor;
                 JsonParser.SaveToJson();
                 MessageBox.Show("World pack(s) saved!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Logger.Log("Active world packs have successfully saved to disk!");
                 Cursor.Current = Cursors.Default;
             }
-            else { return; }
+            else { Logger.Log("Save: Save cancelled."); return; }
         }
     }
 }

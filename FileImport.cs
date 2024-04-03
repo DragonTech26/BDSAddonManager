@@ -20,6 +20,7 @@ namespace AddonManager
                     if (Directory.Exists(destFolder)) //Add -copy if directory already exists to prevent accidental overwrites
                     {
                         destFolder += "-copy";
+                        Logger.Log("Imported pack file name matched existing file. Appended -copy.", "WARN");
                     }
                     archive.ExtractToDirectory(destFolder, true);
 
@@ -30,7 +31,6 @@ namespace AddonManager
                             Directory.Move(dirPath, dirPath.Replace(manifestDir, destFolder));
                         foreach (var newPath in Directory.GetFiles(manifestDir, "*.*", SearchOption.AllDirectories))
                             File.Move(newPath, newPath.Replace(manifestDir, destFolder));
-
                         Directory.Delete(manifestDir, true); //Delete the empty subfolder
                     }
                 }
@@ -41,7 +41,8 @@ namespace AddonManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a world first!", "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.Log("Pack import failed because a world hasn't been selected yet!", "ERROR");
             }
         }
     }
