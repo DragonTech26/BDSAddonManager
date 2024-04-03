@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 namespace AddonManager
 {
     public class PackHandler
@@ -49,7 +51,7 @@ namespace AddonManager
                     {
                         ListViewItem item = new ListViewItem(pack.name);
                         item.SubItems.Add(pack.description);
-                        item.SubItems.Add(pack.pack_folder);
+                        item.SubItems.Add(string.Join(", ", pack.version));
                         item.Tag = pack;
                         inactiveListView.Items.Add(item);
                         Logger.Log("Pack: " + pack.name + " was added to " + inactiveListView.Name);
@@ -65,6 +67,7 @@ namespace AddonManager
             {
                 ListViewItem item = new ListViewItem(pack.name);
                 item.SubItems.Add(pack.description);
+                item.SubItems.Add(string.Join(", ", pack.version));
                 item.Tag = pack;
                 activeListView.Items.Add(item);
                 Logger.Log("Pack: " + pack.name + " was added to " + activeListView.Name);

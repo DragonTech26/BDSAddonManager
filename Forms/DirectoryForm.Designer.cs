@@ -65,6 +65,7 @@
             // 
             worldFilePicker.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             worldFilePicker.BackColor = Color.Transparent;
+            worldFilePicker.Cursor = Cursors.Hand;
             worldFilePicker.FlatAppearance.BorderSize = 0;
             worldFilePicker.FlatStyle = FlatStyle.Flat;
             worldFilePicker.Image = Properties.Resources.folder;
@@ -79,6 +80,7 @@
             // 
             resourcePackPicker.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             resourcePackPicker.BackColor = Color.Transparent;
+            resourcePackPicker.Cursor = Cursors.Hand;
             resourcePackPicker.FlatAppearance.BorderSize = 0;
             resourcePackPicker.FlatStyle = FlatStyle.Flat;
             resourcePackPicker.Image = Properties.Resources.folder;
@@ -112,6 +114,7 @@
             // 
             behaviorPackPicker.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             behaviorPackPicker.BackColor = Color.Transparent;
+            behaviorPackPicker.Cursor = Cursors.Hand;
             behaviorPackPicker.FlatAppearance.BorderSize = 0;
             behaviorPackPicker.FlatStyle = FlatStyle.Flat;
             behaviorPackPicker.Image = Properties.Resources.folder;
