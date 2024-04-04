@@ -105,7 +105,7 @@ namespace AddonManager
                                 version = header.GetProperty("version").EnumerateArray().Select(element => element.GetInt32()).ToArray()
                             };
                             try { manifestInfo.pack_icon = Image.FromFile(Path.Combine(directory, "pack_icon.png")); }
-                            catch (Exception) { manifestInfo.pack_icon = fallbackIcon; }
+                            catch (Exception) { manifestInfo.pack_icon = fallbackIcon; Logger.Log("No pack icon was found for pack: " + manifestInfo.name); }
                             list.Add(manifestInfo);
                         }
                     }
