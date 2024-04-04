@@ -32,6 +32,7 @@
             hideConsoleCheckBox = new CheckBox();
             generalHeaderLabel = new Label();
             experimentalHeaderLabel = new Label();
+            disableStringCleanerCheckBox = new CheckBox();
             SuspendLayout();
             // 
             // hidePacksCheckBox
@@ -79,11 +80,24 @@
             experimentalHeaderLabel.Text = "Experimental:";
             experimentalHeaderLabel.Visible = false;
             // 
+            // disableStringCleanerCheckBox
+            // 
+            disableStringCleanerCheckBox.AutoSize = true;
+            disableStringCleanerCheckBox.Font = new Font("Segoe UI Variable Small", 10F);
+            disableStringCleanerCheckBox.Location = new Point(12, 90);
+            disableStringCleanerCheckBox.Name = "disableStringCleanerCheckBox";
+            disableStringCleanerCheckBox.Size = new Size(519, 23);
+            disableStringCleanerCheckBox.TabIndex = 4;
+            disableStringCleanerCheckBox.Text = "Disable Bedrock color code removal (must be enabled before loading save)";
+            disableStringCleanerCheckBox.UseVisualStyleBackColor = true;
+            disableStringCleanerCheckBox.CheckedChanged += disableStringCleanerCheckBox_CheckedChanged;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(748, 442);
+            Controls.Add(disableStringCleanerCheckBox);
             Controls.Add(experimentalHeaderLabel);
             Controls.Add(generalHeaderLabel);
             Controls.Add(hideConsoleCheckBox);
@@ -100,5 +114,6 @@
         private CheckBox hideConsoleCheckBox;
         private Label generalHeaderLabel;
         private Label experimentalHeaderLabel;
+        private CheckBox disableStringCleanerCheckBox;
     }
 }

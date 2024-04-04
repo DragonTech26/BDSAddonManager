@@ -10,6 +10,7 @@ namespace AddonManager
 
         public static bool hideDefaultPacks = true;
         public static bool hideConsoleTab = true;
+        public static bool disableStringCleaner = false;
 
         [STAThread]
         static void Main()

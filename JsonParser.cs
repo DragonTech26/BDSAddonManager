@@ -118,14 +118,18 @@ namespace AddonManager
         }
         private void StringCleaner(List<ManifestInfo> list) //removes '§' symbol and the next character (Bedrock text modifier codes)
         {
-            string RemoveSectionSignAndNextChar(string input) { return Regex.Replace(input, @"§.", string.Empty); }
-
-            foreach (var manifestInfo in list)
+            if (!Program.disableStringCleaner)
             {
-                manifestInfo.name = RemoveSectionSignAndNextChar(manifestInfo.name);
-                manifestInfo.description = RemoveSectionSignAndNextChar(manifestInfo.description);
+                string RemoveSectionSignAndNextChar(string input) { return Regex.Replace(input, @"§.", string.Empty); }
+
+                foreach (var manifestInfo in list)
+                {
+                    manifestInfo.name = RemoveSectionSignAndNextChar(manifestInfo.name);
+                    manifestInfo.description = RemoveSectionSignAndNextChar(manifestInfo.description);
+                }
+                Logger.Log("Removed Bedrock color code modifiers from pack names!");
             }
-            Logger.Log("Removed Bedrock color code modifiers from pack names!");
+            else { Logger.Log("Pack name cleaning has been disabled!"); }
         }
         private void GetActivePacks()
         {

@@ -16,6 +16,7 @@ namespace AddonManager.Forms
         {
             hidePacksCheckBox.Checked = Program.hideDefaultPacks;
             hideConsoleCheckBox.Checked = Program.hideConsoleTab;
+            disableStringCleanerCheckBox.Checked = Program.disableStringCleaner;
         }
         private void hidePacksCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -27,6 +28,12 @@ namespace AddonManager.Forms
             Program.hideConsoleTab = hideConsoleCheckBox.Checked;
             mainForm.ConsoleButton.Visible = !hideConsoleCheckBox.Checked;
             Logger.Log("Hide console tab state has been changed!");
+        }
+
+        private void disableStringCleanerCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.disableStringCleaner = disableStringCleanerCheckBox.Checked;
+            Logger.Log("StringCleaner active state has changed!");
         }
     }
 }
