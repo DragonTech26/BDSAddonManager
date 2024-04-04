@@ -12,6 +12,7 @@ namespace AddonManager
         public string? description { get; set; }
         public Guid? pack_id { get; set; }
         public int[]? version { get; set; }
+        public Image? pack_icon { get; set; }
     }
     public class ResultLists
     {
@@ -91,6 +92,7 @@ namespace AddonManager
                     {
                         var manifestContent = File.ReadAllText(manifestPath); //Read the content of the manifest file              
                         var manifestJson = JsonDocument.Parse(manifestContent); //Parse the JSON content of the manifest
+                        Image fallbackIcon = Properties.Resources.pack_icon_fallback;
 
                         if (manifestJson.RootElement.TryGetProperty("header", out var header)) //Check for the 'header' property in the JSON
                         {
@@ -102,7 +104,9 @@ namespace AddonManager
                                 pack_id = header.GetProperty("uuid").GetGuid(),
                                 version = header.GetProperty("version").EnumerateArray().Select(element => element.GetInt32()).ToArray()
                             };
-                            list.Add(manifestInfo); //Add the ManifestInfo object to the provided list
+                            try { manifestInfo.pack_icon = Image.FromFile(Path.Combine(directory, "pack_icon.png")); }
+                            catch (Exception) { manifestInfo.pack_icon = fallbackIcon; }
+                            list.Add(manifestInfo);
                         }
                     }
                     catch (Exception ex)

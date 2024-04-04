@@ -30,9 +30,9 @@
         {
             rpSplitContainer = new SplitContainer();
             rpInactiveListView = new ListView();
-            irpVersionColumn = new ColumnHeader();
             irpNameColumn = new ColumnHeader();
             irpDescriptionColumn = new ColumnHeader();
+            irpVersionColumn = new ColumnHeader();
             rpActiveListView = new ListView();
             rpNameColumn = new ColumnHeader();
             rpDescriptionColumn = new ColumnHeader();
@@ -90,10 +90,6 @@
             rpInactiveListView.DragEnter += rpInactiveListView_DragEnter;
             rpInactiveListView.MouseClick += ListView_MouseClick;
             // 
-            // irpVersionColumn
-            // 
-            irpVersionColumn.Text = "Version";
-            // 
             // irpNameColumn
             // 
             irpNameColumn.Text = "Name";
@@ -103,6 +99,10 @@
             // 
             irpDescriptionColumn.Text = "Description";
             irpDescriptionColumn.Width = 300;
+            // 
+            // irpVersionColumn
+            // 
+            irpVersionColumn.Text = "Version";
             // 
             // rpActiveListView
             // 
