@@ -10,24 +10,23 @@ namespace AddonManager.Forms
             aboutLabel.Text = about;
         }
         string about =
-    @"This tool is designed to streamline the management of addons for self-hosted Minecraft: Bedrock Edition servers.
+@"This tool is designed to simplify the management of addons for self-hosted Minecraft: Bedrock Edition servers.
 
-⚠️ Modifying an existing world may lead to unexpected results. It is advised to create a backup before proceeding.
+⚠️ Please note: Modifying an existing world may lead to unexpected results. It's recommended to create a backup before proceeding.
 
 Instructions:
-1. On the Directory screen, locate the root world folder containing 'level.dat', as well as the root resource and behavior pack folders.
-2. Click the 'Validate' button to verify world paths and begin the loading process.
-3. Select the desired pack type from the sidebar and use the mouse to select packs. Once selected, use the buttons to arrange them. Packs listed higher in the list will have precedence.
-4. Once you have made the changes, press the 'Save' button to apply them to the world.
+1. In the Directory screen, locate the root world folder that contains 'level.dat', as well as the root resource and behavior pack folders.
+2. Click the 'Validate' button to verify the world paths and initiate the loading process.
+3. From the sidebar, select the desired pack type and use the mouse to select packs. Once selected, use the buttons to arrange them. Packs listed higher in the list will take precedence.
+4. After making the changes, press the 'Save' button to apply them to the world.
 
 Adding New Packs:
-Drag and drop the.mcpack/zip file into the inactive side of the pack selector. The new pack will now be available to select. Alternatively, place the extracted pack folder into the appropriate directory before starting the program.
+Simply drag and drop the .mcpack/zip file into the 'inactive' side of the pack selector. The new pack will then be available for selection. Alternatively, you can place the extracted pack folder into the appropriate directory before launching the program.
 
-Credits:
-Various icons used in this project are sourced from svgrepo.com. These icons are available under the Public Domain.
+Attribution:
+This application includes a variety of icons and media elements. For a detailed list, please refer to the source code.
 
 Disclaimer:
-This is not an official Minecraft product, nor is it endorsed by or affiliated with Mojang or Microsoft.
-";
+This is not an official Minecraft product and is neither endorsed nor affiliated with Mojang or Microsoft.";
     }
 }
