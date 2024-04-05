@@ -42,6 +42,8 @@
             moveUpButton = new Button();
             moveToActiveButton = new Button();
             moveToInactiveButton = new Button();
+            bpVersionColumn = new ColumnHeader();
+            ibpVersionColumn = new ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)bpSplitContainer).BeginInit();
             bpSplitContainer.Panel1.SuspendLayout();
             bpSplitContainer.Panel2.SuspendLayout();
@@ -71,7 +73,7 @@
             // 
             bpInactiveListView.AllowDrop = true;
             bpInactiveListView.BorderStyle = BorderStyle.None;
-            bpInactiveListView.Columns.AddRange(new ColumnHeader[] { ibpNameColumn, ibpDescriptionColumn });
+            bpInactiveListView.Columns.AddRange(new ColumnHeader[] { ibpNameColumn, ibpDescriptionColumn, ibpVersionColumn });
             bpInactiveListView.Dock = DockStyle.Fill;
             bpInactiveListView.Font = new Font("Segoe UI Variable Small", 10F);
             bpInactiveListView.FullRowSelect = true;
@@ -100,7 +102,7 @@
             // bpActiveListView
             // 
             bpActiveListView.BorderStyle = BorderStyle.None;
-            bpActiveListView.Columns.AddRange(new ColumnHeader[] { bpNameColumn, bpDescriptionColumn });
+            bpActiveListView.Columns.AddRange(new ColumnHeader[] { bpNameColumn, bpDescriptionColumn, bpVersionColumn });
             bpActiveListView.Dock = DockStyle.Fill;
             bpActiveListView.Font = new Font("Segoe UI Variable Small", 10F);
             bpActiveListView.FullRowSelect = true;
@@ -207,6 +209,14 @@
             moveToInactiveButton.UseVisualStyleBackColor = true;
             moveToInactiveButton.Click += moveToInactiveButton_Click;
             // 
+            // bpVersionColumn
+            // 
+            bpVersionColumn.Text = "Version";
+            // 
+            // ibpVersionColumn
+            // 
+            ibpVersionColumn.Text = "Version";
+            // 
             // BehaviorPackForm
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
@@ -241,5 +251,7 @@
         private Button moveUpButton;
         private Label label2;
         private Label label1;
+        private ColumnHeader ibpVersionColumn;
+        private ColumnHeader bpVersionColumn;
     }
 }

@@ -12,6 +12,7 @@ namespace AddonManager
         public string? description { get; set; }
         public Guid? pack_id { get; set; }
         public int[]? version { get; set; }
+        public Image? pack_icon { get; set; }
     }
     public class ResultLists
     {
@@ -91,6 +92,7 @@ namespace AddonManager
                     {
                         var manifestContent = File.ReadAllText(manifestPath); //Read the content of the manifest file              
                         var manifestJson = JsonDocument.Parse(manifestContent); //Parse the JSON content of the manifest
+                        Image fallbackIcon = Properties.Resources.pack_icon_fallback;
 
                         if (manifestJson.RootElement.TryGetProperty("header", out var header)) //Check for the 'header' property in the JSON
                         {
@@ -102,7 +104,9 @@ namespace AddonManager
                                 pack_id = header.GetProperty("uuid").GetGuid(),
                                 version = header.GetProperty("version").EnumerateArray().Select(element => element.GetInt32()).ToArray()
                             };
-                            list.Add(manifestInfo); //Add the ManifestInfo object to the provided list
+                            try { manifestInfo.pack_icon = Image.FromFile(Path.Combine(directory, "pack_icon.png")); }
+                            catch (Exception) { manifestInfo.pack_icon = fallbackIcon; Logger.Log("No pack icon was found for pack: " + manifestInfo.name); }
+                            list.Add(manifestInfo);
                         }
                     }
                     catch (Exception ex)
@@ -118,14 +122,18 @@ namespace AddonManager
         }
         private void StringCleaner(List<ManifestInfo> list) //removes '§' symbol and the next character (Bedrock text modifier codes)
         {
-            string RemoveSectionSignAndNextChar(string input) { return Regex.Replace(input, @"§.", string.Empty); }
-
-            foreach (var manifestInfo in list)
+            if (!Program.disableStringCleaner)
             {
-                manifestInfo.name = RemoveSectionSignAndNextChar(manifestInfo.name);
-                manifestInfo.description = RemoveSectionSignAndNextChar(manifestInfo.description);
+                string RemoveSectionSignAndNextChar(string input) { return Regex.Replace(input, @"§.", string.Empty); }
+
+                foreach (var manifestInfo in list)
+                {
+                    manifestInfo.name = RemoveSectionSignAndNextChar(manifestInfo.name);
+                    manifestInfo.description = RemoveSectionSignAndNextChar(manifestInfo.description);
+                }
+                Logger.Log("Removed Bedrock color code modifiers from pack names!");
             }
-            Logger.Log("Removed Bedrock color code modifiers from pack names!");
+            else { Logger.Log("Pack name cleaning has been disabled!"); }
         }
         private void GetActivePacks()
         {

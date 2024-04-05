@@ -32,9 +32,11 @@
             rpInactiveListView = new ListView();
             irpNameColumn = new ColumnHeader();
             irpDescriptionColumn = new ColumnHeader();
+            irpVersionColumn = new ColumnHeader();
             rpActiveListView = new ListView();
             rpNameColumn = new ColumnHeader();
             rpDescriptionColumn = new ColumnHeader();
+            rpVersionColumn = new ColumnHeader();
             moveDownButton = new Button();
             moveUpButton = new Button();
             moveToInactiveButton = new Button();
@@ -72,7 +74,7 @@
             // 
             rpInactiveListView.AllowDrop = true;
             rpInactiveListView.BorderStyle = BorderStyle.None;
-            rpInactiveListView.Columns.AddRange(new ColumnHeader[] { irpNameColumn, irpDescriptionColumn });
+            rpInactiveListView.Columns.AddRange(new ColumnHeader[] { irpNameColumn, irpDescriptionColumn, irpVersionColumn });
             rpInactiveListView.Dock = DockStyle.Fill;
             rpInactiveListView.Font = new Font("Segoe UI Variable Small", 10F);
             rpInactiveListView.FullRowSelect = true;
@@ -84,8 +86,8 @@
             rpInactiveListView.TabIndex = 0;
             rpInactiveListView.UseCompatibleStateImageBehavior = false;
             rpInactiveListView.View = View.Details;
-            rpInactiveListView.DragEnter += rpInactiveListView_DragEnter;
             rpInactiveListView.DragDrop += rpInactiveListView_DragDrop;
+            rpInactiveListView.DragEnter += rpInactiveListView_DragEnter;
             rpInactiveListView.MouseClick += ListView_MouseClick;
             // 
             // irpNameColumn
@@ -98,10 +100,14 @@
             irpDescriptionColumn.Text = "Description";
             irpDescriptionColumn.Width = 300;
             // 
+            // irpVersionColumn
+            // 
+            irpVersionColumn.Text = "Version";
+            // 
             // rpActiveListView
             // 
             rpActiveListView.BorderStyle = BorderStyle.None;
-            rpActiveListView.Columns.AddRange(new ColumnHeader[] { rpNameColumn, rpDescriptionColumn });
+            rpActiveListView.Columns.AddRange(new ColumnHeader[] { rpNameColumn, rpDescriptionColumn, rpVersionColumn });
             rpActiveListView.Dock = DockStyle.Fill;
             rpActiveListView.Font = new Font("Segoe UI Variable Small", 10F);
             rpActiveListView.FullRowSelect = true;
@@ -124,6 +130,10 @@
             // 
             rpDescriptionColumn.Text = "Description";
             rpDescriptionColumn.Width = 300;
+            // 
+            // rpVersionColumn
+            // 
+            rpVersionColumn.Text = "Version";
             // 
             // moveDownButton
             // 
@@ -242,5 +252,7 @@
         private Panel buttonPanel;
         private Label label2;
         private Label label1;
+        private ColumnHeader irpVersionColumn;
+        private ColumnHeader rpVersionColumn;
     }
 }

@@ -5,11 +5,12 @@ namespace AddonManager
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        public static string version = "v1.3.0";
+        public static string version = "v1.4.0";
         public static string title = "BDS Addon Manager";
 
         public static bool hideDefaultPacks = true;
         public static bool hideConsoleTab = true;
+        public static bool disableStringCleaner = false;
 
         [STAThread]
         static void Main()

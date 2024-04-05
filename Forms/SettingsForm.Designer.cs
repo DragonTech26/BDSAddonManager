@@ -30,13 +30,16 @@
         {
             hidePacksCheckBox = new CheckBox();
             hideConsoleCheckBox = new CheckBox();
+            generalHeaderLabel = new Label();
+            experimentalHeaderLabel = new Label();
+            disableStringCleanerCheckBox = new CheckBox();
             SuspendLayout();
             // 
             // hidePacksCheckBox
             // 
             hidePacksCheckBox.AutoSize = true;
             hidePacksCheckBox.Font = new Font("Segoe UI Variable Small", 10F);
-            hidePacksCheckBox.Location = new Point(12, 12);
+            hidePacksCheckBox.Location = new Point(12, 32);
             hidePacksCheckBox.Name = "hidePacksCheckBox";
             hidePacksCheckBox.Size = new Size(192, 23);
             hidePacksCheckBox.TabIndex = 0;
@@ -48,7 +51,7 @@
             // 
             hideConsoleCheckBox.AutoSize = true;
             hideConsoleCheckBox.Font = new Font("Segoe UI Variable Small", 10F);
-            hideConsoleCheckBox.Location = new Point(12, 41);
+            hideConsoleCheckBox.Location = new Point(12, 61);
             hideConsoleCheckBox.Name = "hideConsoleCheckBox";
             hideConsoleCheckBox.Size = new Size(186, 23);
             hideConsoleCheckBox.TabIndex = 1;
@@ -56,11 +59,47 @@
             hideConsoleCheckBox.UseVisualStyleBackColor = true;
             hideConsoleCheckBox.CheckedChanged += hideConsoleCheckBox_CheckedChanged;
             // 
+            // generalHeaderLabel
+            // 
+            generalHeaderLabel.AutoSize = true;
+            generalHeaderLabel.Font = new Font("Segoe UI Variable Small", 10F, FontStyle.Bold);
+            generalHeaderLabel.Location = new Point(8, 9);
+            generalHeaderLabel.Name = "generalHeaderLabel";
+            generalHeaderLabel.Size = new Size(66, 19);
+            generalHeaderLabel.TabIndex = 2;
+            generalHeaderLabel.Text = "General:";
+            // 
+            // experimentalHeaderLabel
+            // 
+            experimentalHeaderLabel.AutoSize = true;
+            experimentalHeaderLabel.Font = new Font("Segoe UI Variable Small", 10F, FontStyle.Bold);
+            experimentalHeaderLabel.Location = new Point(8, 206);
+            experimentalHeaderLabel.Name = "experimentalHeaderLabel";
+            experimentalHeaderLabel.Size = new Size(104, 19);
+            experimentalHeaderLabel.TabIndex = 3;
+            experimentalHeaderLabel.Text = "Experimental:";
+            experimentalHeaderLabel.Visible = false;
+            // 
+            // disableStringCleanerCheckBox
+            // 
+            disableStringCleanerCheckBox.AutoSize = true;
+            disableStringCleanerCheckBox.Font = new Font("Segoe UI Variable Small", 10F);
+            disableStringCleanerCheckBox.Location = new Point(12, 90);
+            disableStringCleanerCheckBox.Name = "disableStringCleanerCheckBox";
+            disableStringCleanerCheckBox.Size = new Size(519, 23);
+            disableStringCleanerCheckBox.TabIndex = 4;
+            disableStringCleanerCheckBox.Text = "Disable Bedrock color code removal (must be enabled before loading save)";
+            disableStringCleanerCheckBox.UseVisualStyleBackColor = true;
+            disableStringCleanerCheckBox.CheckedChanged += disableStringCleanerCheckBox_CheckedChanged;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(748, 442);
+            Controls.Add(disableStringCleanerCheckBox);
+            Controls.Add(experimentalHeaderLabel);
+            Controls.Add(generalHeaderLabel);
             Controls.Add(hideConsoleCheckBox);
             Controls.Add(hidePacksCheckBox);
             Name = "SettingsForm";
@@ -73,5 +112,8 @@
 
         private CheckBox hidePacksCheckBox;
         private CheckBox hideConsoleCheckBox;
+        private Label generalHeaderLabel;
+        private Label experimentalHeaderLabel;
+        private CheckBox disableStringCleanerCheckBox;
     }
 }

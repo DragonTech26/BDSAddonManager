@@ -39,6 +39,10 @@ namespace AddonManager
         }
         public void InactiveListPopulate()
         {
+            var imageList = new ImageList();
+            imageList.ImageSize = new Size(32, 32);
+            inactiveListView.SmallImageList = imageList;
+
             inactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
             foreach (var pack in inactiveList)
             {
@@ -48,8 +52,9 @@ namespace AddonManager
                     if (!itemExists)
                     {
                         ListViewItem item = new ListViewItem(pack.name);
+                        item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
                         item.SubItems.Add(pack.description);
-                        item.SubItems.Add(pack.pack_folder);
+                        item.SubItems.Add(string.Join(", ", pack.version));
                         item.Tag = pack;
                         inactiveListView.Items.Add(item);
                         Logger.Log("Pack: " + pack.name + " was added to " + inactiveListView.Name);
@@ -60,11 +65,17 @@ namespace AddonManager
         }
         public void ActiveListPopulate()
         {
+            var imageList = new ImageList();
+            imageList.ImageSize = new Size(32, 32);
+            activeListView.SmallImageList = imageList;
+
             activeListView.BeginUpdate();
             foreach (var pack in activeList)
             {
                 ListViewItem item = new ListViewItem(pack.name);
+                item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
                 item.SubItems.Add(pack.description);
+                item.SubItems.Add(string.Join(", ", pack.version));
                 item.Tag = pack;
                 activeListView.Items.Add(item);
                 Logger.Log("Pack: " + pack.name + " was added to " + activeListView.Name);
@@ -73,20 +84,22 @@ namespace AddonManager
         }
         public void MoveSelectedItems(System.Windows.Forms.ListView source, System.Windows.Forms.ListView destination, List<ManifestInfo> sourceList, List<ManifestInfo> destinationList)
         {
-            var itemsToMove = source.SelectedItems.Cast<ListViewItem>().ToList(); //Get the selected items to move
-            foreach (ListViewItem item in itemsToMove) //Iterate through the selected items
+            var itemsToMove = source.SelectedItems.Cast<ListViewItem>().ToList();
+            foreach (ListViewItem item in itemsToMove)
             {
-                var pack = (ManifestInfo)item.Tag; //Retrieve the full data object from the Tag property
-                sourceList.Remove(pack); //Remove the pack from the source list
-                destinationList.Add(pack); //Add the pack to the destination list
-                source.Items.Remove(item); //Remove the item from the source list view
-                destination.Items.Add(item); //Add the item to the destination list view
+                var pack = (ManifestInfo)item.Tag;
+                int imageIndex = destination.SmallImageList.Images.Add(source.SmallImageList.Images[item.ImageIndex], Color.Transparent);
+                sourceList.Remove(pack);
+                destinationList.Add(pack);
+                
+                ListViewItem newItem = new ListViewItem(item.Text, imageIndex);
+                newItem.SubItems.Add(pack.description);
+                newItem.SubItems.Add(string.Join(", ", pack.version));
+                newItem.Tag = pack;
+                source.Items.Remove(item);
+                destination.Items.Add(newItem);
                 Logger.Log("Pack: " + item.Text + " was moved to " + destination.Name);
             }
-        }
-        public void MoveItems(ListView source, ListView destination, List<ManifestInfo> sourceList, List<ManifestInfo> destinationList)
-        {
-            MoveSelectedItems(source, destination, sourceList, destinationList);
         }
         public void MoveItemUpOrDown(System.Windows.Forms.ListView listView, List<ManifestInfo> list, int direction)
         {

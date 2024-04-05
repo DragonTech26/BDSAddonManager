@@ -69,6 +69,7 @@
             // 
             // settingsButton
             // 
+            settingsButton.Cursor = Cursors.Hand;
             settingsButton.Dock = DockStyle.Bottom;
             settingsButton.FlatAppearance.BorderSize = 0;
             settingsButton.FlatStyle = FlatStyle.Flat;
@@ -88,6 +89,7 @@
             // 
             // infoButton
             // 
+            infoButton.Cursor = Cursors.Hand;
             infoButton.Dock = DockStyle.Top;
             infoButton.FlatAppearance.BorderSize = 0;
             infoButton.FlatStyle = FlatStyle.Flat;
@@ -107,6 +109,7 @@
             // 
             // saveButton
             // 
+            saveButton.Cursor = Cursors.Hand;
             saveButton.Dock = DockStyle.Bottom;
             saveButton.FlatAppearance.BorderSize = 0;
             saveButton.FlatStyle = FlatStyle.Flat;
@@ -126,6 +129,7 @@
             // 
             // consoleButton
             // 
+            consoleButton.Cursor = Cursors.Hand;
             consoleButton.Dock = DockStyle.Top;
             consoleButton.FlatAppearance.BorderSize = 0;
             consoleButton.FlatStyle = FlatStyle.Flat;
@@ -145,6 +149,7 @@
             // 
             // bpButton
             // 
+            bpButton.Cursor = Cursors.Hand;
             bpButton.Dock = DockStyle.Top;
             bpButton.FlatAppearance.BorderSize = 0;
             bpButton.FlatStyle = FlatStyle.Flat;
@@ -164,6 +169,7 @@
             // 
             // rpButton
             // 
+            rpButton.Cursor = Cursors.Hand;
             rpButton.Dock = DockStyle.Top;
             rpButton.FlatAppearance.BorderSize = 0;
             rpButton.FlatStyle = FlatStyle.Flat;
@@ -183,6 +189,7 @@
             // 
             // directoryButton
             // 
+            directoryButton.Cursor = Cursors.Hand;
             directoryButton.Dock = DockStyle.Top;
             directoryButton.FlatAppearance.BorderSize = 0;
             directoryButton.FlatStyle = FlatStyle.Flat;
@@ -214,6 +221,7 @@
             // 
             // logoPictureBox
             // 
+            logoPictureBox.Cursor = Cursors.Hand;
             logoPictureBox.Image = Properties.Resources.logo;
             logoPictureBox.Location = new Point(24, 12);
             logoPictureBox.Name = "logoPictureBox";
