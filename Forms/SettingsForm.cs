@@ -29,7 +29,6 @@ namespace AddonManager.Forms
             mainForm.ConsoleButton.Visible = !hideConsoleCheckBox.Checked;
             Logger.Log("Hide console tab state has been changed!");
         }
-
         private void disableStringCleanerCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             Program.disableStringCleaner = disableStringCleanerCheckBox.Checked;
