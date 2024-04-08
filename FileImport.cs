@@ -17,10 +17,16 @@ namespace AddonManager
                     var zipFileName = Path.GetFileNameWithoutExtension(filePath);
                     var destFolder = Path.Combine(folderLocation, zipFileName);
 
-                    if (Directory.Exists(destFolder)) //Add -copy if directory already exists to prevent accidental overwrites
+                    if (Directory.Exists(destFolder))
                     {
-                        destFolder += "-copy";
-                        Logger.Log("Imported pack file name matched existing file. Appended -copy.", "WARN");
+                        DialogResult result = MessageBox.Show("A folder with the same name already exists in the directory. Do you want to replace it?", "Existing pack detected!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if (result == DialogResult.Yes)
+                        {
+                            try { Directory.Delete(destFolder, true); }
+                            catch (Exception ex) { MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                        } 
+                        else { return; }
+                        Logger.Log("Replaced pack folder!");
                     }
                     archive.ExtractToDirectory(destFolder, true);
 
