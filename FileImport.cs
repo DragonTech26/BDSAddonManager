@@ -10,6 +10,7 @@ namespace AddonManager
             JsonParser parser = new JsonParser();
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 using (var archive = ZipFile.OpenRead(filePath))
                 {
                     var entry = archive.Entries.FirstOrDefault(e => Path.GetFileName(e.FullName).Equals("manifest.json", StringComparison.OrdinalIgnoreCase));
@@ -44,6 +45,7 @@ namespace AddonManager
                 ResultLists.bpList.Clear();
                 parser.ParsePackFolder(DirectoryForm.rpLocation, ResultLists.rpList);
                 parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList);
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
