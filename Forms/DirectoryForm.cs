@@ -46,8 +46,9 @@ namespace AddonManager.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
                 parser.ParseWorldJson();
-                parser.ParsePackFolder(DirectoryForm.rpLocation, ResultLists.rpList);
-                parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList);
+                Task task1 = Task.Run(() => parser.ParsePackFolder(DirectoryForm.rpLocation, ResultLists.rpList));
+                Task task2 = Task.Run(() => parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList));
+                Task.WaitAll(task1, task2); // Wait for both tasks to complete
                 GetWorldName();
                 canEdit = false;
                 DisableInput();

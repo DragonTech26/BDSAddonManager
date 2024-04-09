@@ -80,9 +80,9 @@ namespace AddonManager
             }
             Logger.Log("Currently active lists have been populated!");
         }
-        public void ParsePackFolder(string path, List<ManifestInfo> list) //Example: DirectoryForm.rpLocation, ResultLists.rpList
+        public void ParsePackFolder(string path, List<ManifestInfo> list)
         {
-            foreach (var directory in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
+            Parallel.ForEach(Directory.GetDirectories(path), (directory) =>
             {
                 var manifestPath = Path.Combine(directory, "manifest.json");
 
@@ -106,7 +106,7 @@ namespace AddonManager
                             };
                             try { manifestInfo.pack_icon = Image.FromFile(Path.Combine(directory, "pack_icon.png")); }
                             catch (Exception) { manifestInfo.pack_icon = fallbackIcon; Logger.Log("No pack icon was found for pack: " + manifestInfo.name); }
-                            list.Add(manifestInfo);
+                            lock (list) { list.Add(manifestInfo); } //Use lock to ensure thread safety
                         }
                     }
                     catch (Exception ex)
@@ -115,7 +115,7 @@ namespace AddonManager
                         Logger.Log("Invalid manifest file was found and was could not be parsed.", "WARN");
                     }
                 }
-            }
+            });
             StringCleaner(list);
             GetInactivePacks();
             GetActivePacks();
