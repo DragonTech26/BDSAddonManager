@@ -10,6 +10,7 @@ namespace AddonManager
             JsonParser parser = new JsonParser();
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 using (var archive = ZipFile.OpenRead(filePath))
                 {
                     var entry = archive.Entries.FirstOrDefault(e => Path.GetFileName(e.FullName).Equals("manifest.json", StringComparison.OrdinalIgnoreCase));
@@ -17,10 +18,16 @@ namespace AddonManager
                     var zipFileName = Path.GetFileNameWithoutExtension(filePath);
                     var destFolder = Path.Combine(folderLocation, zipFileName);
 
-                    if (Directory.Exists(destFolder)) //Add -copy if directory already exists to prevent accidental overwrites
+                    if (Directory.Exists(destFolder))
                     {
-                        destFolder += "-copy";
-                        Logger.Log("Imported pack file name matched existing file. Appended -copy.", "WARN");
+                        DialogResult result = MessageBox.Show("A folder with the same name already exists in the directory. Do you want to replace it?", "Existing pack detected!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if (result == DialogResult.Yes)
+                        {
+                            try { Directory.Delete(destFolder, true); }
+                            catch (Exception ex) { MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                        } 
+                        else { return; }
+                        Logger.Log("Replaced pack folder!");
                     }
                     archive.ExtractToDirectory(destFolder, true);
 
@@ -38,6 +45,7 @@ namespace AddonManager
                 ResultLists.bpList.Clear();
                 parser.ParsePackFolder(DirectoryForm.rpLocation, ResultLists.rpList);
                 parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList);
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
