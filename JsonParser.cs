@@ -104,7 +104,13 @@ namespace AddonManager
                                 pack_id = header.GetProperty("uuid").GetGuid(),
                                 version = header.GetProperty("version").EnumerateArray().Select(element => element.GetInt32()).ToArray()
                             };
-                            try { manifestInfo.pack_icon = Image.FromFile(Path.Combine(directory, "pack_icon.png")); }
+                            try
+                            {
+                                using (Image temp = Image.FromFile(Path.Combine(directory, "pack_icon.png")))
+                                {
+                                    manifestInfo.pack_icon = new Bitmap(temp);
+                                }
+                            }
                             catch (Exception) { manifestInfo.pack_icon = fallbackIcon; Logger.Log("No pack icon was found for pack: " + manifestInfo.name); }
                             lock (list) { list.Add(manifestInfo); } //Use lock to ensure thread safety
                         }
