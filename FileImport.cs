@@ -47,7 +47,7 @@ namespace AddonManager
                 parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList);
                 Cursor.Current = Cursors.Default;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Please select a world first!", "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.Log("Pack import failed because a world hasn't been selected yet!", "ERROR");

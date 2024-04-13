@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-
+﻿
 namespace AddonManager.Forms
 {
     public partial class DirectoryForm : Form
