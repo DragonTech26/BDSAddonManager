@@ -141,6 +141,12 @@ namespace AddonManager
             }
             else { Logger.Log("Pack name cleaning has been disabled!"); }
         }
+        private void GetInactivePacks() //Compares each pack in the full list with the active list. If a pack is not found in the active list (based on both pack_id and version), it is considered inactive and added to the inactive list.
+        {
+            ResultLists.inactiveRpList = ResultLists.rpList.Where(rp => !ResultLists.currentlyActiveRpList.Any(activeRp => activeRp.pack_id == rp.pack_id && Enumerable.SequenceEqual(activeRp.version, rp.version))).ToList();
+            ResultLists.inactiveBpList = ResultLists.bpList.Where(bp => !ResultLists.currentlyActiveBpList.Any(activeBp => activeBp.pack_id == bp.pack_id && Enumerable.SequenceEqual(activeBp.version, bp.version))).ToList();
+            Logger.Log("Inactive lists populated!");
+        }
         private void GetActivePacks()
         {
             ResultLists.activeRpList = ResultLists.rpList.Where(rp => ResultLists.currentlyActiveRpList.Any(activeRp => activeRp.pack_id == rp.pack_id && Enumerable.SequenceEqual(activeRp.version, rp.version))).ToList();
@@ -148,12 +154,6 @@ namespace AddonManager
             Logger.Log("Active lists populated!");
             SortAndFilterActiveRpList();
             SortAndFilterActiveBpList();
-        }
-        private void GetInactivePacks() //Compares each pack in the full list with the active list. If a pack is not found in the active list (based on both pack_id and version), it is considered inactive and added to the inactive list.
-        {
-            ResultLists.inactiveRpList = ResultLists.rpList.Where(rp => !ResultLists.currentlyActiveRpList.Any(activeRp => activeRp.pack_id == rp.pack_id && Enumerable.SequenceEqual(activeRp.version, rp.version))).ToList();
-            ResultLists.inactiveBpList = ResultLists.bpList.Where(bp => !ResultLists.currentlyActiveBpList.Any(activeBp => activeBp.pack_id == bp.pack_id && Enumerable.SequenceEqual(activeBp.version, bp.version))).ToList();
-            Logger.Log("Inactive lists populated!");
         }
         private void SortAndFilterActiveRpList() //Create a HashSet for fast lookup of GUIDs in the currentlyActiveList
         {
