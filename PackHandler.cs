@@ -92,8 +92,8 @@ namespace AddonManager
                 sourceList.Remove(pack);
                 destinationList.Add(pack);
 
-                ResultLists.currentlyActiveRpList.RemoveAll(p => p.pack_id == pack.pack_id);
-                ResultLists.currentlyActiveBpList.RemoveAll(p => p.pack_id == pack.pack_id);
+                if(activeList == ResultLists.activeRpList) { ResultLists.currentlyActiveRpList.RemoveAll(p => p.pack_id == pack.pack_id); }
+                if(activeList == ResultLists.activeBpList) { ResultLists.currentlyActiveBpList.RemoveAll(p => p.pack_id == pack.pack_id); }
 
                 ListViewItem newItem = new ListViewItem(item.Text, imageIndex);
                 newItem.SubItems.Add(pack.description);
