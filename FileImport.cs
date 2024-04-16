@@ -14,7 +14,7 @@ namespace AddonManager
                 using (var archive = ZipFile.OpenRead(filePath))
                 {
                     var entry = archive.Entries.FirstOrDefault(e => Path.GetFileName(e.FullName).Equals("manifest.json", StringComparison.OrdinalIgnoreCase));
-                    if (entry == null) return;
+                    if (entry == null) { return; }
                     var zipFileName = Path.GetFileNameWithoutExtension(filePath);
                     var destFolder = Path.Combine(folderLocation, zipFileName);
 
