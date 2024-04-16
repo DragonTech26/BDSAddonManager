@@ -91,7 +91,10 @@ namespace AddonManager
                 int imageIndex = destination.SmallImageList.Images.Add(source.SmallImageList.Images[item.ImageIndex], Color.Transparent);
                 sourceList.Remove(pack);
                 destinationList.Add(pack);
-                
+
+                ResultLists.currentlyActiveRpList.RemoveAll(p => p.pack_id == pack.pack_id);
+                ResultLists.currentlyActiveBpList.RemoveAll(p => p.pack_id == pack.pack_id);
+
                 ListViewItem newItem = new ListViewItem(item.Text, imageIndex);
                 newItem.SubItems.Add(pack.description);
                 newItem.SubItems.Add(string.Join(", ", pack.version));
