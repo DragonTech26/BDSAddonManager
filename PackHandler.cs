@@ -25,7 +25,7 @@ namespace AddonManager
         }
         public bool IsExcludedPack(string packName)
         {
-            string[] excludedPrefixes = { "resourcePack.education", "resourcePack.vanilla", "experimental" };
+            string[] excludedPrefixes = { "resourcePack.education", "resourcePack.vanilla", "behaviorPack.education", "behaviorPack.vanilla", "experimental" };
 
             foreach (var prefix in excludedPrefixes)
             {
