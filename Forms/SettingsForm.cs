@@ -8,10 +8,11 @@ namespace AddonManager.Forms
         public SettingsForm(MainForm mainForm)
         {
             InitializeComponent();
-            this.Text = "SETTINGS"; //Header title
+            this.Text = "SETTINGS"; 
             this.mainForm = mainForm;
             LoadDefaultStates();
         }
+        // Set default option values
         private void LoadDefaultStates()
         {
             hidePacksCheckBox.Checked = Program.hideDefaultPacks;

@@ -16,28 +16,36 @@ namespace AddonManager.Forms
         public DirectoryForm()
         {
             InitializeComponent();
-            this.Text = "SELECT FILE DIRECTORIES"; //Header title
+            this.Text = "SELECT FILE DIRECTORIES";
             worldDirectoryTextBox.Text = worldLocation;
             rpDirectoryTextBox.Text = rpLocation;
             bpDirectoryTextBox.Text = bpLocation;
             warningLabel.Text = "⚠️ Make sure world is not currently running!";
-            if (canEdit == false) { DisableInput(); warningLabel.Text = "Restart the program to select another world."; }
+            if (canEdit == false)
+            {
+                DisableInput();
+                warningLabel.Text = "Restart the program to select another world.";
+            }
         }
-        private void worldFilePicker_Click(object sender, EventArgs e) //The file picker for the worlds button
+        // The file picker for the worlds button
+        private void worldFilePicker_Click(object sender, EventArgs e)
         {
             OpenFolderPicker(worldDirectoryTextBox);
             Logger.Log("World directory file explorer launched!");
         }
-        private void resourcePackPicker_Click(object sender, EventArgs e) //The file picker for the resource packs button
+        // The file picker for the resource packs button
+        private void resourcePackPicker_Click(object sender, EventArgs e)
         {
             OpenFolderPicker(rpDirectoryTextBox);
             Logger.Log("RP directory file explorer launched!");
         }
-        private void behaviorPackPicker_Click(object sender, EventArgs e) //The file picker for the behavior packs button
+        // The file picker for the behavior packs button
+        private void behaviorPackPicker_Click(object sender, EventArgs e) 
         {
             OpenFolderPicker(bpDirectoryTextBox);
             Logger.Log("BP directory file explorer launched!");
         }
+        // Validates the file paths and parses the world JSON and pack folders
         private void validatePathsButton_Click(object sender, EventArgs e)
         {
             CheckFilePaths();
@@ -47,7 +55,7 @@ namespace AddonManager.Forms
                 parser.ParseWorldJson();
                 Task task1 = Task.Run(() => parser.ParsePackFolder(DirectoryForm.rpLocation, ResultLists.rpList));
                 Task task2 = Task.Run(() => parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList));
-                Task.WaitAll(task1, task2); // Wait for both tasks to complete
+                Task.WaitAll(task1, task2);
                 GetWorldName();
                 canEdit = false;
                 DisableInput();
@@ -55,6 +63,7 @@ namespace AddonManager.Forms
                 Logger.Log("World data has been successfully loaded!");
             }
         }
+        // Retrieves the world name from the levelname.txt file in the world directory
         private void GetWorldName()
         {
             try
@@ -66,7 +75,8 @@ namespace AddonManager.Forms
             }
             catch { worldNameLabel.Text = "Loaded save: UNKNOWN"; }
         }
-        private void DisableInput() 
+        // Disables the input fields and buttons on the directory form
+        private void DisableInput()
         {
             worldDirectoryTextBox.ReadOnly = true;
             rpDirectoryTextBox.ReadOnly = true;
@@ -77,7 +87,8 @@ namespace AddonManager.Forms
             validatePathsButton.Enabled = false;
             Logger.Log("Directory form input has been disabled!");
         }
-        private void OpenFolderPicker(TextBox path) //Opens the file selector window and fills the results into the text boxes
+        // Opens a folder picker dialog and sets the selected path to the provided TextBox
+        private void OpenFolderPicker(TextBox path) 
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
@@ -87,7 +98,8 @@ namespace AddonManager.Forms
             }
             else { path.Text = ""; }
         }
-        private void CheckFilePaths() //Verifies all file locations are present, and checks for a level.dat file.
+        // Verifies that the locations are not null or empty and that the level.dat file exists in the world location
+        private void CheckFilePaths() 
         {
             worldLocation = worldDirectoryTextBox.Text;
             rpLocation = rpDirectoryTextBox.Text;
@@ -98,9 +110,10 @@ namespace AddonManager.Forms
                 MessageBox.Show("Please select a path for missing location(s).", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Logger.Log("One or more world locations missing.", "WARN");
             }
-            else 
+            else
             {
-                if (rpLocation.Contains("behavior_packs") || bpLocation.Contains("resource_packs")) //Check if paths were switched
+                // Check if paths were switched
+                if (rpLocation.Contains("behavior_packs") || bpLocation.Contains("resource_packs")) 
                 {
                     MessageBox.Show("Incorrect pack path detected!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Logger.Log("Directory path was unexpected for path type.", "ERROR");
@@ -114,7 +127,10 @@ namespace AddonManager.Forms
                 worldFlag = true;
                 Logger.Log("Level.dat was found in world directory. Flag has been set to TRUE!");
             }
-            else { MessageBox.Show("level.dat not found. Please check your world path.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            else
+            {
+                MessageBox.Show("level.dat not found. Please check your world path.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

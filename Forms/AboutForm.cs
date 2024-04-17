@@ -6,7 +6,7 @@ namespace AddonManager.Forms
         public AboutForm()
         {
             InitializeComponent();
-            this.Text = "ABOUT"; //Header title
+            this.Text = "ABOUT";
             aboutLabel.Text = about;
         }
         string about =

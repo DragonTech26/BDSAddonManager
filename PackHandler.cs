@@ -13,7 +13,7 @@ namespace AddonManager
         private string inactiveListName;
         private string activeListName;
 
-        public void FormDeclaration(ListView iLV, ListView aLV, string inactiveListName, string activeListName) 
+        public void FormDeclaration(ListView iLV, ListView aLV, string inactiveListName, string activeListName)
         {
             inactiveListView = iLV;
             activeListView = aLV;
@@ -23,6 +23,7 @@ namespace AddonManager
             this.inactiveListName = inactiveListName;
             this.activeListName = activeListName;
         }
+        // Determines if a pack is excluded based on its name prefix
         public bool IsExcludedPack(string packName)
         {
             string[] excludedPrefixes = { "resourcePack.education", "resourcePack.vanilla", "behaviorPack.education", "behaviorPack.vanilla", "experimental" };
@@ -32,10 +33,10 @@ namespace AddonManager
                 if (packName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                 {
                     Logger.Log("Pack: " + packName + " was hidden. Toggle 'Hide default packs' in Settings to view! ");
-                    return true; //Exclude this pack
+                    return true;
                 }
             }
-            return false; //Include this pack
+            return false;
         }
         public void InactiveListPopulate()
         {
@@ -46,9 +47,11 @@ namespace AddonManager
             inactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
             foreach (var pack in inactiveList)
             {
-                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name)) //Check if the checkbox is checked or if the pack name is not excluded
+                // Check if the checkbox is checked or if the pack name is not excluded
+                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name)) 
                 {
-                    bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name); //If the item is already in the ListView dont add it again. This fixes an issue where the list wouldn't behave correctly if a pack was added.
+                    // If the item is already in the ListView don't add it again. 
+                    bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name); 
                     if (!itemExists)
                     {
                         ListViewItem item = new ListViewItem(pack.name);
@@ -82,6 +85,7 @@ namespace AddonManager
             }
             activeListView.EndUpdate();
         }
+        // Moves selected items from one ListView to another and updates the corresponding lists
         public void MoveSelectedItems(System.Windows.Forms.ListView source, System.Windows.Forms.ListView destination, List<ManifestInfo> sourceList, List<ManifestInfo> destinationList)
         {
             var itemsToMove = source.SelectedItems.Cast<ListViewItem>().ToList();
@@ -92,8 +96,14 @@ namespace AddonManager
                 sourceList.Remove(pack);
                 destinationList.Add(pack);
 
-                if(activeList == ResultLists.activeRpList) { ResultLists.currentlyActiveRpList.RemoveAll(p => p.pack_id == pack.pack_id); }
-                if(activeList == ResultLists.activeBpList) { ResultLists.currentlyActiveBpList.RemoveAll(p => p.pack_id == pack.pack_id); }
+                if (activeList == ResultLists.activeRpList)
+                {
+                    ResultLists.currentlyActiveRpList.RemoveAll(p => p.pack_id == pack.pack_id);
+                }
+                if (activeList == ResultLists.activeBpList)
+                {
+                    ResultLists.currentlyActiveBpList.RemoveAll(p => p.pack_id == pack.pack_id);
+                }
 
                 ListViewItem newItem = new ListViewItem(item.Text, imageIndex);
                 newItem.SubItems.Add(pack.description);
@@ -104,6 +114,7 @@ namespace AddonManager
                 Logger.Log("Pack: " + item.Text + " was moved to " + destination.Name);
             }
         }
+        // Moves a selected item up or down within a ListView and updates the corresponding list
         public void MoveItemUpOrDown(System.Windows.Forms.ListView listView, List<ManifestInfo> list, int direction)
         {
             if (listView.SelectedItems.Count > 0)
@@ -119,12 +130,14 @@ namespace AddonManager
                 Logger.Log("Pack: " + selectedItem.Text + " was moved " + direction + " on side: " + listView.Name);
             }
         }
+        // Handles the DragEnter event for the listview, allowing only files with .zip or .mcpack extensions to be dropped
         public void DragEnterHandler(DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) //Check if the dragged data is a file
+            //Check if the dragged data is a valid file
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase))) //Check if the file has a .zip or .mcpack extension
+                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase))) 
                 {
                     e.Effect = DragDropEffects.Copy;
                 }
@@ -132,6 +145,7 @@ namespace AddonManager
             }
             else { e.Effect = DragDropEffects.None; }
         }
+        // Handles the DragDrop event for a control, which processes each file, updates the active and inactive lists, and repopulates the inactive list view
         public void DragDropHandler(DragEventArgs e, string location)
         {
             FileImport import = new FileImport();
@@ -149,13 +163,16 @@ namespace AddonManager
             InactiveListPopulate();
             Logger.Log("New pack was successfully imported and added!");
         }
+        // Show a context menu with options for the right-clicked item.
         public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction)
         {
             if (e.Button == MouseButtons.Right)
             {
-                ListView listView = sender as ListView;         //Cast the 'sender' object to a ListView type to access ListView-specific properties.
+                // Cast the 'sender' object to a ListView type to access ListView-specific properties
+                ListView listView = sender as ListView; 
                 var focusedItem = listView.FocusedItem;
-                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))  //Check if the focused item is not null and the mouse click occurred within its bounds.
+                // Check if the focused item is not null and the mouse click occurred within its bounds
+                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location)) 
                 {
                     ContextMenuStrip menu = new ContextMenuStrip();
                     menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
@@ -186,10 +203,10 @@ namespace AddonManager
                 {
                     try
                     {
-                        Directory.Delete(folderPath, true); //Attempt to delete the pack folder                     
-                        item.Remove(); //Remove the item from the ListView
+                        Directory.Delete(folderPath, true);
+                        item.Remove(); 
 
-                        if (inactiveList.Contains(pack)) //Remove the pack from the corresponding list
+                        if (inactiveList.Contains(pack))
                         {
                             inactiveList.Remove(pack);
                         }
