@@ -1,12 +1,12 @@
-using AddonManager.Forms;
 using System.Diagnostics;
+using AddonManager.Forms;
 
 namespace AddonManager
 {
     public partial class MainForm : Form
     {
         private Form activeForm;
-        public Button ConsoleButton {  get; set; }
+        public Button ConsoleButton { get; set; }
 
         public MainForm()
         {
@@ -15,10 +15,16 @@ namespace AddonManager
             logoLabel.Text = Program.title;
             versionLabel.Text = Program.version;
             Logger.Log(Program.title + " " + Program.version + " loaded!");
-            OpenChildForm(new Forms.DirectoryForm(), null); //Start on directory screen
+
+            //Start on directory screen
+            OpenChildForm(new Forms.DirectoryForm(), null);
             ConsoleButton = consoleButton;
-            if (Program.hideConsoleTab) { consoleButton.Visible = false; }
+            if (Program.hideConsoleTab)
+            {
+                consoleButton.Visible = false;
+            }
         }
+        // Opens a child form within a parent form, replacing any currently open child form
         private void OpenChildForm(Form childForm, object buttonSender)
         {
             if (activeForm != null)
@@ -36,13 +42,10 @@ namespace AddonManager
             headerLabel.Text = childForm.Text;
             //Logger.Log(childForm.Text + " was clicked!");
         }
-        private void logoPictureBox_Click(object sender, EventArgs e) //Link to project when clicking logo
+        // Link to the project's page when clicking the logo
+        private void logoPictureBox_Click(object sender, EventArgs e) 
         {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/DragonTech26/BDSAddonManager",
-                UseShellExecute = true
-            });        
+            Process.Start(new ProcessStartInfo { FileName = "https://github.com/DragonTech26/BDSAddonManager", UseShellExecute = true });
         }
         private void directoryButton_Click(object sender, EventArgs e)
         {
@@ -68,6 +71,7 @@ namespace AddonManager
         {
             OpenChildForm(new Forms.SettingsForm(this), sender);
         }
+        // If a world is selected, prompt the user for confirmation to save pack changes
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (DirectoryForm.worldLocation == string.Empty)
@@ -85,7 +89,11 @@ namespace AddonManager
                 Logger.Log("Active world packs have successfully saved to disk!");
                 Cursor.Current = Cursors.Default;
             }
-            else { Logger.Log("Save: Save cancelled."); return; }
+            else
+            {
+                Logger.Log("Save: Save cancelled.");
+                return;
+            }
         }
     }
 }

@@ -31,7 +31,6 @@
             hidePacksCheckBox = new CheckBox();
             hideConsoleCheckBox = new CheckBox();
             generalHeaderLabel = new Label();
-            experimentalHeaderLabel = new Label();
             disableStringCleanerCheckBox = new CheckBox();
             SuspendLayout();
             // 
@@ -69,26 +68,15 @@
             generalHeaderLabel.TabIndex = 2;
             generalHeaderLabel.Text = "General:";
             // 
-            // experimentalHeaderLabel
-            // 
-            experimentalHeaderLabel.AutoSize = true;
-            experimentalHeaderLabel.Font = new Font("Segoe UI Variable Small", 10F, FontStyle.Bold);
-            experimentalHeaderLabel.Location = new Point(8, 206);
-            experimentalHeaderLabel.Name = "experimentalHeaderLabel";
-            experimentalHeaderLabel.Size = new Size(104, 19);
-            experimentalHeaderLabel.TabIndex = 3;
-            experimentalHeaderLabel.Text = "Experimental:";
-            experimentalHeaderLabel.Visible = false;
-            // 
             // disableStringCleanerCheckBox
             // 
             disableStringCleanerCheckBox.AutoSize = true;
             disableStringCleanerCheckBox.Font = new Font("Segoe UI Variable Small", 10F);
             disableStringCleanerCheckBox.Location = new Point(12, 90);
             disableStringCleanerCheckBox.Name = "disableStringCleanerCheckBox";
-            disableStringCleanerCheckBox.Size = new Size(519, 23);
+            disableStringCleanerCheckBox.Size = new Size(538, 23);
             disableStringCleanerCheckBox.TabIndex = 4;
-            disableStringCleanerCheckBox.Text = "Disable Bedrock color code removal (must be enabled before loading save)";
+            disableStringCleanerCheckBox.Text = "Show Bedrock text modifier characters  (must be enabled before loading save)";
             disableStringCleanerCheckBox.UseVisualStyleBackColor = true;
             disableStringCleanerCheckBox.CheckedChanged += disableStringCleanerCheckBox_CheckedChanged;
             // 
@@ -98,7 +86,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(748, 442);
             Controls.Add(disableStringCleanerCheckBox);
-            Controls.Add(experimentalHeaderLabel);
             Controls.Add(generalHeaderLabel);
             Controls.Add(hideConsoleCheckBox);
             Controls.Add(hidePacksCheckBox);
@@ -113,7 +100,6 @@
         private CheckBox hidePacksCheckBox;
         private CheckBox hideConsoleCheckBox;
         private Label generalHeaderLabel;
-        private Label experimentalHeaderLabel;
         private CheckBox disableStringCleanerCheckBox;
     }
 }
