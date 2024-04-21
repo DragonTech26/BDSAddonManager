@@ -78,7 +78,7 @@ namespace AddonManager
                 ListViewItem item = new ListViewItem(pack.name);
                 item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
                 item.SubItems.Add(pack.description);
-                item.SubItems.Add(string.Join(", ", pack.version));
+                item.SubItems.Add(string.Join(".", pack.version));
                 item.Tag = pack;
                 activeListView.Items.Add(item);
                 Logger.Log("Pack: " + pack.name + " was added to " + activeListView.Name);
@@ -231,7 +231,7 @@ namespace AddonManager
                     MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Logger.Log("The directory was probably manually removed or renamed. Pack could not be deleted (or found).", "ERROR");
                 }
-                Logger.Log("Pack: " + pack.name + "was deleted from the disk!");
+                Logger.Log("Pack: " + pack.name + " was deleted from the disk!");
             }
         }
     }
