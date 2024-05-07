@@ -46,16 +46,16 @@ namespace AddonManager
                     if (manifestDir != null && manifestDir != destFolder)
                     {
                         //Move the contents of the subfolder to the root folder
-                        foreach (var dirPath in Directory.GetDirectories(manifestDir, "*", SearchOption.AllDirectories)) 
+                        foreach (var dirPath in Directory.GetDirectories(manifestDir, "*", SearchOption.AllDirectories))
                             Directory.Move(dirPath, dirPath.Replace(manifestDir, destFolder));
                         foreach (var newPath in Directory.GetFiles(manifestDir, "*.*", SearchOption.AllDirectories))
                             File.Move(newPath, newPath.Replace(manifestDir, destFolder));
                         //Delete the empty subfolder
-                        Directory.Delete(manifestDir, true); 
+                        Directory.Delete(manifestDir, true);
                     }
                 }
                 // Reset and parse the updated lists
-                ResultLists.rpList.Clear(); 
+                ResultLists.rpList.Clear();
                 ResultLists.bpList.Clear();
                 parser.ParsePackFolder(DirectoryForm.rpLocation, ResultLists.rpList);
                 parser.ParsePackFolder(DirectoryForm.bpLocation, ResultLists.bpList);

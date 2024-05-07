@@ -48,12 +48,20 @@ namespace AddonManager
             foreach (var pack in inactiveList)
             {
                 // Check if the checkbox is checked or if the pack name is not excluded
-                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name)) 
+                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name))
                 {
                     // If the item is already in the ListView don't add it again. 
-                    bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name); 
+                    bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name);
                     if (!itemExists)
                     {
+                        if (pack.type == "resources" && inactiveList != ResultLists.inactiveRpList)
+                        {
+                            pack.description = "⚠️ This is a resource pack!";
+                        }
+                        if ((pack.type == "data" || pack.type == "script") && inactiveList != ResultLists.inactiveBpList)
+                        {
+                            pack.description = "⚠️ This is a behavior pack!";
+                        }
                         ListViewItem item = new ListViewItem(pack.name);
                         item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
                         item.SubItems.Add(pack.description);
@@ -75,6 +83,14 @@ namespace AddonManager
             activeListView.BeginUpdate();
             foreach (var pack in activeList)
             {
+                if (pack.type == "resources" && activeList != ResultLists.activeRpList)
+                {
+                    pack.description = "⚠️ This is a resource pack!";
+                }
+                if ((pack.type == "data" || pack.type == "script") && activeList != ResultLists.activeBpList)
+                {
+                    pack.description = "⚠️ This is a behavior pack!";
+                }
                 ListViewItem item = new ListViewItem(pack.name);
                 item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
                 item.SubItems.Add(pack.description);
@@ -134,10 +150,10 @@ namespace AddonManager
         public void DragEnterHandler(DragEventArgs e)
         {
             //Check if the dragged data is a valid file
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase))) 
+                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
                 {
                     e.Effect = DragDropEffects.Copy;
                 }
@@ -169,10 +185,10 @@ namespace AddonManager
             if (e.Button == MouseButtons.Right)
             {
                 // Cast the 'sender' object to a ListView type to access ListView-specific properties
-                ListView listView = sender as ListView; 
+                ListView listView = sender as ListView;
                 var focusedItem = listView.FocusedItem;
                 // Check if the focused item is not null and the mouse click occurred within its bounds
-                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location)) 
+                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))
                 {
                     ContextMenuStrip menu = new ContextMenuStrip();
                     menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
@@ -204,7 +220,7 @@ namespace AddonManager
                     try
                     {
                         Directory.Delete(folderPath, true);
-                        item.Remove(); 
+                        item.Remove();
 
                         if (inactiveList.Contains(pack))
                         {

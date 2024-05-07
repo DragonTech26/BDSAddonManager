@@ -13,6 +13,7 @@ namespace AddonManager
         public Guid? pack_id { get; set; }
         public int[]? version { get; set; }
         public Image? pack_icon { get; set; }
+        public string? type { get; set; }
     }
     public class ResultLists
     {
@@ -87,9 +88,7 @@ namespace AddonManager
         // Parses the pack folders at a given path and populates a list with the parsed data
         public void ParsePackFolder(string path, List<ManifestInfo> list)
         {
-            Parallel.ForEach(
-                Directory.GetDirectories(path),
-                (directory) =>
+            Parallel.ForEach(Directory.GetDirectories(path), (directory) =>
                 {
                     var manifestPath = Path.Combine(directory, "manifest.json");
 
@@ -112,6 +111,19 @@ namespace AddonManager
                                     pack_id = header.GetProperty("uuid").GetGuid(),
                                     version = header.GetProperty("version").EnumerateArray().Select(element => element.GetInt32()).ToArray()
                                 };
+                                // Check if the JSON content contains a 'modules' property
+                                if (manifestJson.RootElement.TryGetProperty("modules", out var modules))
+                                {
+                                    // Iterate over each object in the 'modules' array
+                                    foreach (var module in modules.EnumerateArray())
+                                    {
+                                        // Get the 'type' property from each object in the 'modules' array
+                                        if (module.TryGetProperty("type", out var type))
+                                        {
+                                            manifestInfo.type = type.GetString();
+                                        }
+                                    }
+                                }
                                 try
                                 {
                                     // Attempt to load the pack icon.
