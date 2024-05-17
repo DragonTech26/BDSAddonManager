@@ -184,21 +184,36 @@ namespace AddonManager
         {
             ListView listView = sender as ListView;
             ContextMenuStrip menu = new ContextMenuStrip();
-            var focusedItem = listView.FocusedItem;
 
             if (e.Button == MouseButtons.Right)
             {
-                // Check if the focused item is not null and the mouse click occurred within its bounds
-                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))
+                // Check if an item is selected
+                if (listView.SelectedItems.Count > 0)
                 {
-                    menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
-                    menu.Items.Add("Delete pack", null, (sender, args) => deletePackAction(focusedItem));
+                    menu.Items.Add("Open pack files", null, (sender, args) =>
+                    {
+                        foreach (ListViewItem item in listView.SelectedItems)
+                        {
+                            openFolderAction(item);
+                        }
+                    });
+                    menu.Items.Add($"Delete {listView.SelectedItems.Count} pack(s)", null, (sender, args) =>
+                    {
+                        DialogResult result = MessageBox.Show($"Are you sure you want to delete these {listView.SelectedItems.Count} pack(s)? This action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            foreach (ListViewItem item in listView.SelectedItems)
+                            {
+                                deletePackAction(item);
+                            }
+                        }
+                    });
                 }
                 else
                 {
                     // TODO: show new context option to import pack via file picker
                 }
-                menu.Show(listView, e.Location);
+                menu.Show(Cursor.Position);
             }
         }
         public void OpenFolder(ListViewItem item)
@@ -213,46 +228,42 @@ namespace AddonManager
         }
         public void DeletePack(ListViewItem item)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to delete this pack? This action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+            var pack = (ManifestInfo)item.Tag;
+            string folderPath = pack.pack_folder;
+
+            if (Directory.Exists(folderPath))
             {
-                var pack = (ManifestInfo)item.Tag;
-                string folderPath = pack.pack_folder;
-
-                if (Directory.Exists(folderPath))
+                try
                 {
-                    try
-                    {
-                        Directory.Delete(folderPath, true);
-                        item.Remove();
+                    Directory.Delete(folderPath, true);
+                    item.Remove();
 
-                        if (inactiveList.Contains(pack))
-                        {
-                            inactiveList.Remove(pack);
-                        }
-                        else if (activeList.Contains(pack))
-                        {
-                            activeList.Remove(pack);
-                        }
-                    }
-                    catch (IOException ioEx)
+                    if (inactiveList.Contains(pack))
                     {
-                        MessageBox.Show($"An error occurred while trying to delete the folder: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Logger.Log("Something happened and the pack was unable to be deleted.", "ERROR");
+                        inactiveList.Remove(pack);
                     }
-                    catch (UnauthorizedAccessException unAuthEx)
+                    else if (activeList.Contains(pack))
                     {
-                        MessageBox.Show($"You do not have permission to delete this folder: {unAuthEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Logger.Log("Invalid permissions to delete pack.", "ERROR");
+                        activeList.Remove(pack);
                     }
                 }
-                else
+                catch (IOException ioEx)
                 {
-                    MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Logger.Log("The directory was probably manually removed or renamed. Pack could not be deleted (or found).", "ERROR");
+                    MessageBox.Show($"An error occurred while trying to delete the folder: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Log("Something happened and the pack was unable to be deleted.", "ERROR");
                 }
-                Logger.Log("Pack: " + pack.name + " was deleted from the disk!");
+                catch (UnauthorizedAccessException unAuthEx)
+                {
+                    MessageBox.Show($"You do not have permission to delete this folder: {unAuthEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Log("Invalid permissions to delete pack.", "ERROR");
+                }
             }
+            else
+            {
+                MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.Log("The directory was probably manually removed or renamed. Pack could not be deleted (or found).", "ERROR");
+            }
+            Logger.Log("Pack: " + pack.name + " was deleted from the disk!");
         }
         public void ImportPack() 
         {
