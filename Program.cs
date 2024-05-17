@@ -6,11 +6,6 @@ namespace AddonManager
         public static string version = "v1.4.2";
         public static string title = "BDS Addon Manager";
 
-        //Settings options
-        public static bool hideDefaultPacks = true;
-        public static bool hideConsoleTab = true;
-        public static bool disableStringCleaner = false;
-
         [STAThread]
         static void Main()
         {

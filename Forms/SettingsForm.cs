@@ -5,6 +5,10 @@ namespace AddonManager.Forms
     {
         MainForm mainForm;
 
+        public static bool hideDefaultPacks = true;
+        public static bool hideConsoleTab = true;
+        public static bool disableStringCleaner = false;
+
         public SettingsForm(MainForm mainForm)
         {
             InitializeComponent();
@@ -15,24 +19,24 @@ namespace AddonManager.Forms
         // Set default option values
         private void LoadDefaultStates()
         {
-            hidePacksCheckBox.Checked = Program.hideDefaultPacks;
-            hideConsoleCheckBox.Checked = Program.hideConsoleTab;
-            disableStringCleanerCheckBox.Checked = Program.disableStringCleaner;
+            hidePacksCheckBox.Checked = hideDefaultPacks;
+            hideConsoleCheckBox.Checked = hideConsoleTab;
+            disableStringCleanerCheckBox.Checked = disableStringCleaner;
         }
         private void hidePacksCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Program.hideDefaultPacks = hidePacksCheckBox.Checked;
+            hideDefaultPacks = hidePacksCheckBox.Checked;
             Logger.Log("Hide default packs state has been changed!");
         }
         private void hideConsoleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Program.hideConsoleTab = hideConsoleCheckBox.Checked;
+            hideConsoleTab = hideConsoleCheckBox.Checked;
             mainForm.ConsoleButton.Visible = !hideConsoleCheckBox.Checked;
             Logger.Log("Hide console tab state has been changed!");
         }
         private void disableStringCleanerCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Program.disableStringCleaner = disableStringCleanerCheckBox.Checked;
+            disableStringCleaner = disableStringCleanerCheckBox.Checked;
             Logger.Log("StringCleaner active state has changed!");
         }
     }

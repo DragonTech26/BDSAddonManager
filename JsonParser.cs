@@ -155,7 +155,7 @@ namespace AddonManager
         private void StringCleaner(List<ManifestInfo> list)
         {
             // Remove '§' symbol and the next character (Bedrock text modifier codes)
-            if (!Program.disableStringCleaner)
+            if (!SettingsForm.disableStringCleaner)
             {
                 string RemoveSectionSignAndNextChar(string input)
                 {

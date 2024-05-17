@@ -1,4 +1,6 @@
 ﻿
+using AddonManager.Forms;
+
 namespace AddonManager
 {
     public class PackHandler
@@ -48,7 +50,7 @@ namespace AddonManager
             foreach (var pack in inactiveList)
             {
                 // Check if the checkbox is checked or if the pack name is not excluded
-                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name))
+                if (!SettingsForm.hideDefaultPacks || !IsExcludedPack(pack.name))
                 {
                     // If the item is already in the ListView don't add it again. 
                     bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name);
