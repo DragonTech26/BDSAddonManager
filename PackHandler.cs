@@ -180,21 +180,25 @@ namespace AddonManager
             Logger.Log("New pack was successfully imported and added!");
         }
         // Show a context menu with options for the right-clicked item.
-        public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction)
+        public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction, Action importFileAction)
         {
+            ListView listView = sender as ListView;
+            ContextMenuStrip menu = new ContextMenuStrip();
+            var focusedItem = listView.FocusedItem;
+
             if (e.Button == MouseButtons.Right)
             {
-                // Cast the 'sender' object to a ListView type to access ListView-specific properties
-                ListView listView = sender as ListView;
-                var focusedItem = listView.FocusedItem;
                 // Check if the focused item is not null and the mouse click occurred within its bounds
                 if (focusedItem != null && focusedItem.Bounds.Contains(e.Location))
                 {
-                    ContextMenuStrip menu = new ContextMenuStrip();
                     menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
                     menu.Items.Add("Delete pack", null, (sender, args) => deletePackAction(focusedItem));
-                    menu.Show(listView, e.Location);
                 }
+                else
+                {
+                    // TODO: show new context option to import pack via file picker
+                }
+                menu.Show(listView, e.Location);
             }
         }
         public void OpenFolder(ListViewItem item)
@@ -250,5 +254,9 @@ namespace AddonManager
                 Logger.Log("Pack: " + pack.name + " was deleted from the disk!");
             }
         }
+        public void ImportPack() 
+        {
+            // TODO: open file explorer and pass location to the file importer
+        } 
     }
 }
