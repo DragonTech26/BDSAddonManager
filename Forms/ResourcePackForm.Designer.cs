@@ -87,7 +87,7 @@
             rpInactiveListView.View = View.Details;
             rpInactiveListView.DragDrop += rpInactiveListView_DragDrop;
             rpInactiveListView.DragEnter += rpInactiveListView_DragEnter;
-            rpInactiveListView.MouseClick += ListView_MouseClick;
+            rpInactiveListView.MouseDown += ListView_MouseDown;
             // 
             // irpNameColumn
             // 
@@ -117,7 +117,7 @@
             rpActiveListView.TabIndex = 0;
             rpActiveListView.UseCompatibleStateImageBehavior = false;
             rpActiveListView.View = View.Details;
-            rpActiveListView.MouseClick += ListView_MouseClick;
+            rpActiveListView.MouseDown += ListView_MouseDown;
             // 
             // rpNameColumn
             // 

@@ -1,5 +1,6 @@
 ﻿
 using AddonManager.Forms;
+using System.Diagnostics;
 
 namespace AddonManager
 {
@@ -210,10 +211,17 @@ namespace AddonManager
                             }
                         }
                     });
+                    menu.Items.Add("Import pack", null, (sender, args) =>
+                    {
+                        importFileAction();
+                    });
                 }
                 else
                 {
-                    // TODO: show new context option to import pack via file picker
+                    menu.Items.Add("Import pack", null, (sender, args) =>
+                    {
+                        importFileAction();
+                    });
                 }
                 menu.Show(Cursor.Position);
             }
@@ -267,9 +275,19 @@ namespace AddonManager
             }
             Logger.Log("Pack: " + pack.name + " was deleted from the disk!");
         }
-        public void ImportPack() 
+        public void ImportPack(string location) 
         {
-            // TODO: open file explorer and pass location to the file importer
-        } 
+            FileImport import = new FileImport();
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Addon files (*.mcpack;*.mcaddon;*.zip)|*.mcpack;*.mcaddon;*.zip|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                   string filePath = openFileDialog.FileName;
+                   import.ProcessFile(filePath, location);
+                }
+            }
+        }        
     }
 }

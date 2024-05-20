@@ -40,24 +40,26 @@
             validatePathsButton = new Button();
             worldNameLabel = new Label();
             warningLabel = new Label();
+            resetButton = new Button();
             SuspendLayout();
             // 
             // worldDirectoryTextBox
             // 
             worldDirectoryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             worldDirectoryTextBox.Font = new Font("Segoe UI Variable Small", 10F);
-            worldDirectoryTextBox.Location = new Point(28, 58);
+            worldDirectoryTextBox.Location = new Point(32, 72);
+            worldDirectoryTextBox.Margin = new Padding(3, 4, 3, 4);
             worldDirectoryTextBox.Name = "worldDirectoryTextBox";
-            worldDirectoryTextBox.Size = new Size(677, 25);
+            worldDirectoryTextBox.Size = new Size(773, 30);
             worldDirectoryTextBox.TabIndex = 0;
             // 
             // worldDirLabel
             // 
             worldDirLabel.AutoSize = true;
             worldDirLabel.Font = new Font("Segoe UI Variable Small", 12F);
-            worldDirLabel.Location = new Point(28, 23);
+            worldDirLabel.Location = new Point(32, 29);
             worldDirLabel.Name = "worldDirLabel";
-            worldDirLabel.Size = new Size(129, 21);
+            worldDirLabel.Size = new Size(157, 27);
             worldDirLabel.TabIndex = 1;
             worldDirLabel.Text = "World directory:";
             // 
@@ -69,9 +71,10 @@
             worldFilePicker.FlatAppearance.BorderSize = 0;
             worldFilePicker.FlatStyle = FlatStyle.Flat;
             worldFilePicker.Image = Properties.Resources.folder;
-            worldFilePicker.Location = new Point(703, 51);
+            worldFilePicker.Location = new Point(803, 64);
+            worldFilePicker.Margin = new Padding(3, 4, 3, 4);
             worldFilePicker.Name = "worldFilePicker";
-            worldFilePicker.Size = new Size(38, 38);
+            worldFilePicker.Size = new Size(43, 48);
             worldFilePicker.TabIndex = 2;
             worldFilePicker.UseVisualStyleBackColor = false;
             worldFilePicker.Click += worldFilePicker_Click;
@@ -84,9 +87,10 @@
             resourcePackPicker.FlatAppearance.BorderSize = 0;
             resourcePackPicker.FlatStyle = FlatStyle.Flat;
             resourcePackPicker.Image = Properties.Resources.folder;
-            resourcePackPicker.Location = new Point(703, 125);
+            resourcePackPicker.Location = new Point(803, 156);
+            resourcePackPicker.Margin = new Padding(3, 4, 3, 4);
             resourcePackPicker.Name = "resourcePackPicker";
-            resourcePackPicker.Size = new Size(38, 38);
+            resourcePackPicker.Size = new Size(43, 48);
             resourcePackPicker.TabIndex = 5;
             resourcePackPicker.UseVisualStyleBackColor = false;
             resourcePackPicker.Click += resourcePackPicker_Click;
@@ -95,9 +99,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Variable Small", 12F);
-            label1.Location = new Point(28, 97);
+            label1.Location = new Point(32, 121);
             label1.Name = "label1";
-            label1.Size = new Size(191, 21);
+            label1.Size = new Size(234, 27);
             label1.TabIndex = 4;
             label1.Text = "Resource pack directory:";
             // 
@@ -105,9 +109,10 @@
             // 
             rpDirectoryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             rpDirectoryTextBox.Font = new Font("Segoe UI Variable Small", 10F);
-            rpDirectoryTextBox.Location = new Point(28, 132);
+            rpDirectoryTextBox.Location = new Point(32, 165);
+            rpDirectoryTextBox.Margin = new Padding(3, 4, 3, 4);
             rpDirectoryTextBox.Name = "rpDirectoryTextBox";
-            rpDirectoryTextBox.Size = new Size(677, 25);
+            rpDirectoryTextBox.Size = new Size(773, 30);
             rpDirectoryTextBox.TabIndex = 3;
             // 
             // behaviorPackPicker
@@ -118,9 +123,10 @@
             behaviorPackPicker.FlatAppearance.BorderSize = 0;
             behaviorPackPicker.FlatStyle = FlatStyle.Flat;
             behaviorPackPicker.Image = Properties.Resources.folder;
-            behaviorPackPicker.Location = new Point(703, 198);
+            behaviorPackPicker.Location = new Point(803, 248);
+            behaviorPackPicker.Margin = new Padding(3, 4, 3, 4);
             behaviorPackPicker.Name = "behaviorPackPicker";
-            behaviorPackPicker.Size = new Size(38, 38);
+            behaviorPackPicker.Size = new Size(43, 48);
             behaviorPackPicker.TabIndex = 8;
             behaviorPackPicker.UseVisualStyleBackColor = false;
             behaviorPackPicker.Click += behaviorPackPicker_Click;
@@ -129,9 +135,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Variable Small", 12F);
-            label2.Location = new Point(28, 170);
+            label2.Location = new Point(32, 212);
             label2.Name = "label2";
-            label2.Size = new Size(186, 21);
+            label2.Size = new Size(231, 27);
             label2.TabIndex = 7;
             label2.Text = "Behavior pack directory:";
             // 
@@ -139,17 +145,19 @@
             // 
             bpDirectoryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             bpDirectoryTextBox.Font = new Font("Segoe UI Variable Small", 10F);
-            bpDirectoryTextBox.Location = new Point(28, 205);
+            bpDirectoryTextBox.Location = new Point(32, 256);
+            bpDirectoryTextBox.Margin = new Padding(3, 4, 3, 4);
             bpDirectoryTextBox.Name = "bpDirectoryTextBox";
-            bpDirectoryTextBox.Size = new Size(677, 25);
+            bpDirectoryTextBox.Size = new Size(773, 30);
             bpDirectoryTextBox.TabIndex = 6;
             // 
             // validatePathsButton
             // 
             validatePathsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            validatePathsButton.Location = new Point(630, 256);
+            validatePathsButton.Location = new Point(720, 320);
+            validatePathsButton.Margin = new Padding(3, 4, 3, 4);
             validatePathsButton.Name = "validatePathsButton";
-            validatePathsButton.Size = new Size(75, 23);
+            validatePathsButton.Size = new Size(86, 29);
             validatePathsButton.TabIndex = 9;
             validatePathsButton.Text = "Validate";
             validatePathsButton.UseVisualStyleBackColor = true;
@@ -159,9 +167,9 @@
             // 
             worldNameLabel.AutoSize = true;
             worldNameLabel.Font = new Font("Segoe UI Variable Small", 10F);
-            worldNameLabel.Location = new Point(28, 260);
+            worldNameLabel.Location = new Point(32, 325);
             worldNameLabel.Name = "worldNameLabel";
-            worldNameLabel.Size = new Size(170, 19);
+            worldNameLabel.Size = new Size(198, 22);
             worldNameLabel.TabIndex = 10;
             worldNameLabel.Text = "Loaded world: My World";
             worldNameLabel.Visible = false;
@@ -171,17 +179,30 @@
             warningLabel.AutoSize = true;
             warningLabel.Dock = DockStyle.Bottom;
             warningLabel.Font = new Font("Segoe UI Variable Small", 10F);
-            warningLabel.Location = new Point(0, 423);
+            warningLabel.Location = new Point(0, 530);
             warningLabel.Name = "warningLabel";
-            warningLabel.Size = new Size(65, 19);
+            warningLabel.Size = new Size(78, 22);
             warningLabel.TabIndex = 11;
             warningLabel.Text = "Warning:";
             // 
+            // resetButton
+            // 
+            resetButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            resetButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            resetButton.Location = new Point(803, 500);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(40, 40);
+            resetButton.TabIndex = 12;
+            resetButton.Text = "⟳";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += resetButton_Click;
+            // 
             // DirectoryForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 16F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(748, 442);
+            ClientSize = new Size(855, 552);
+            Controls.Add(resetButton);
             Controls.Add(warningLabel);
             Controls.Add(worldNameLabel);
             Controls.Add(validatePathsButton);
@@ -194,6 +215,7 @@
             Controls.Add(worldFilePicker);
             Controls.Add(worldDirLabel);
             Controls.Add(worldDirectoryTextBox);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "DirectoryForm";
             Text = "DirectoryForm";
             ResumeLayout(false);
@@ -214,5 +236,6 @@
         private Button validatePathsButton;
         private Label worldNameLabel;
         private Label warningLabel;
+        private Button resetButton;
     }
 }
