@@ -1,6 +1,5 @@
 ﻿
 using AddonManager.Forms;
-using System.Diagnostics;
 
 namespace AddonManager
 {
@@ -41,27 +40,27 @@ namespace AddonManager
             }
             return false;
         }
-        public void InactiveListPopulate()
+        private void PopulateList(List<ManifestInfo> packList, ListView listView, string listName)
         {
             var imageList = new ImageList();
             imageList.ImageSize = new Size(32, 32);
-            inactiveListView.SmallImageList = imageList;
+            listView.SmallImageList = imageList;
 
-            inactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
-            foreach (var pack in inactiveList)
+            listView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
+            foreach (var pack in packList)
             {
                 // Check if the checkbox is checked or if the pack name is not excluded
                 if (!SettingsForm.hideDefaultPacks || !IsExcludedPack(pack.name))
                 {
                     // If the item is already in the ListView don't add it again. 
-                    bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name);
+                    bool itemExists = listView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name);
                     if (!itemExists)
                     {
-                        if (pack.type == "resources" && inactiveList != ResultLists.inactiveRpList)
+                        if (pack.type == "resources" && listName != "inactiveRpList" && listName != "activeRpList")
                         {
                             pack.description = "⚠️ This is a resource pack!";
                         }
-                        if ((pack.type == "data" || pack.type == "script") && inactiveList != ResultLists.inactiveBpList)
+                        if ((pack.type == "data" || pack.type == "script") && listName != "inactiveBpList" && listName != "activeBpList")
                         {
                             pack.description = "⚠️ This is a behavior pack!";
                         }
@@ -70,39 +69,20 @@ namespace AddonManager
                         item.SubItems.Add(pack.description);
                         item.SubItems.Add(string.Join(", ", pack.version));
                         item.Tag = pack;
-                        inactiveListView.Items.Add(item);
-                        Logger.Log("Pack: " + pack.name + " was added to " + inactiveListView.Name);
+                        listView.Items.Add(item);
+                        Logger.Log("Pack: " + pack.name + " was added to " + listView.Name);
                     }
                 }
             }
-            inactiveListView.EndUpdate(); //Enable the control to redraw
+            listView.EndUpdate(); //Enable the control to redraw
+        }
+        public void InactiveListPopulate()
+        {
+            PopulateList(inactiveList, inactiveListView, inactiveListName);
         }
         public void ActiveListPopulate()
         {
-            var imageList = new ImageList();
-            imageList.ImageSize = new Size(32, 32);
-            activeListView.SmallImageList = imageList;
-
-            activeListView.BeginUpdate();
-            foreach (var pack in activeList)
-            {
-                if (pack.type == "resources" && activeList != ResultLists.activeRpList)
-                {
-                    pack.description = "⚠️ This is a resource pack!";
-                }
-                if ((pack.type == "data" || pack.type == "script") && activeList != ResultLists.activeBpList)
-                {
-                    pack.description = "⚠️ This is a behavior pack!";
-                }
-                ListViewItem item = new ListViewItem(pack.name);
-                item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
-                item.SubItems.Add(pack.description);
-                item.SubItems.Add(string.Join(".", pack.version));
-                item.Tag = pack;
-                activeListView.Items.Add(item);
-                Logger.Log("Pack: " + pack.name + " was added to " + activeListView.Name);
-            }
-            activeListView.EndUpdate();
+            PopulateList(activeList, activeListView, activeListName);
         }
         // Moves selected items from one ListView to another and updates the corresponding lists
         public void MoveSelectedItems(System.Windows.Forms.ListView source, System.Windows.Forms.ListView destination, List<ManifestInfo> sourceList, List<ManifestInfo> destinationList)
