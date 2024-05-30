@@ -67,9 +67,9 @@ namespace AddonManager
                             archive.ExtractToDirectory(tempFolder, true);
                         }
                     }
-                    string manifestPath = Path.Combine(tempFolder, "manifest.json");
-                    // Checks manifest and changes save directory if incorrect pack is imported
-                    if (File.Exists(manifestPath))
+                    // Recursively search for the manifest.json file in all subdirectories
+                    var manifestPath = Directory.GetFiles(tempFolder, "manifest.json", SearchOption.AllDirectories).FirstOrDefault();
+                    if (manifestPath != null)
                     {
                         var manifest = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(manifestPath));
                         if (manifest.ContainsKey("modules"))
@@ -98,6 +98,40 @@ namespace AddonManager
                                     }
                                 }
                             }
+                        }
+                        // Move the manifest.json file to the root of the tempFolder
+                        var rootManifestPath = Path.Combine(tempFolder, "manifest.json");
+                        if (manifestPath != rootManifestPath)
+                        {
+                            if (File.Exists(rootManifestPath))
+                            {
+                                File.Delete(rootManifestPath);
+                            }
+                            File.Move(manifestPath, rootManifestPath);
+                        }
+                        // Move all other files and directories to the root of the tempFolder
+                        var subfolderPath = Path.GetDirectoryName(manifestPath);
+                        if (subfolderPath != tempFolder)
+                        {
+                            foreach (var dirPath in Directory.GetDirectories(subfolderPath))
+                            {
+                                var destDirPath = dirPath.Replace(subfolderPath, tempFolder);
+                                if (!Directory.Exists(destDirPath))
+                                {
+                                    Directory.Move(dirPath, destDirPath);
+                                }
+                            }
+                            foreach (var newFilePath in Directory.GetFiles(subfolderPath))
+                            {
+                                var destFilePath = newFilePath.Replace(subfolderPath, tempFolder);
+                                if (!File.Exists(destFilePath))
+                                {
+                                    File.Move(newFilePath, destFilePath);
+                                }
+                            }
+
+                            // Delete the now-empty subfolder
+                            Directory.Delete(subfolderPath);
                         }
                     }
                     if (Directory.Exists(destFolder))
