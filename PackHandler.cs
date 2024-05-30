@@ -46,7 +46,7 @@ namespace AddonManager
             imageList.ImageSize = new Size(32, 32);
             listView.SmallImageList = imageList;
 
-            listView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
+            listView.BeginUpdate();
             foreach (var pack in packList)
             {
                 // Check if the checkbox is checked or if the pack name is not excluded
@@ -129,14 +129,14 @@ namespace AddonManager
                 Logger.Log("Pack: " + selectedItem.Text + " was moved " + direction + " on side: " + listView.Name);
             }
         }
-        // Handles the DragEnter event for the listview, allowing only files with .zip or .mcpack extensions to be dropped
+        // Handles the DragEnter event for the listview, allowing only files with expected extensions to be dropped
         public void DragEnterHandler(DragEventArgs e)
         {
             //Check if the dragged data is a valid file
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcaddon", StringComparison.OrdinalIgnoreCase)))
                 {
                     e.Effect = DragDropEffects.Copy;
                 }
@@ -151,9 +151,9 @@ namespace AddonManager
             foreach (var filePath in (string[])e.Data.GetData(DataFormats.FileDrop))
             {
                 var extension = Path.GetExtension(filePath);
-                if (File.Exists(filePath) && (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                if (File.Exists(filePath) && (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcpack", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcaddon", StringComparison.OrdinalIgnoreCase)))
                 {
-                    import.ProcessFile(filePath, location);
+                    import.ProcessPack(filePath, location);
                 }
             }
             inactiveList = resultLists.GetList(inactiveListName);
@@ -265,7 +265,7 @@ namespace AddonManager
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                    string filePath = openFileDialog.FileName;
-                   import.ProcessFile(filePath, location);
+                   import.ProcessPack(filePath, location);
                 }
             }
         }        
