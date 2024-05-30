@@ -21,7 +21,7 @@ Instructions:
 4. After making the changes, press the 'Save' button to apply them to the world.
 
 Adding New Packs:
-Simply drag and drop the .mcpack/zip file into the 'inactive' side of the pack selector. The new pack will then be available for selection. Alternatively, you can place the extracted pack folder into the appropriate directory before launching the program.
+Simply drag and drop a .mcpack/.mcaddon/.zip file into the 'inactive' side of the pack selector. The new pack will then be available for selection. Alternatively, you can right click and import a pack with the file picker.
 
 Attribution:
 This application includes a variety of icons and media elements. For a detailed list, please refer to the source code.
