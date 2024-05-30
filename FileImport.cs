@@ -15,10 +15,12 @@ namespace AddonManager
             var extension = Path.GetExtension(filePath);
             if (extension.Equals(".mcaddon", StringComparison.OrdinalIgnoreCase))
             {
+                Logger.Log("Attempting to import mcaddon file.");
                 ProcessMcAddon(filePath, folderLocation);
             }
             else
             {
+                Logger.Log("Attempting to import addon file.");
                 ProcessOtherFiles(filePath, folderLocation);
             }
         }
@@ -86,6 +88,7 @@ namespace AddonManager
                                         if (!DirectoryForm.rpLocation.Equals(folderLocation))
                                         {
                                             MessageBox.Show("You've input a resource pack on the behavior pack screen. The pack has been placed in the correct directory.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            Logger.Log("Resource pack moved from behavior pack folder.");
                                         }
                                     }
                                     if (type == "data" || type == "script")
@@ -94,6 +97,7 @@ namespace AddonManager
                                         if (!DirectoryForm.bpLocation.Equals(folderLocation))
                                         {
                                             MessageBox.Show("You've input a behavior pack on the resource pack screen. The pack has been placed in the correct directory.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            Logger.Log("Behavior pack moved from resource pack folder.");
                                         }
                                     }
                                 }

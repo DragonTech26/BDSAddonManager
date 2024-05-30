@@ -135,6 +135,7 @@ namespace AddonManager.Forms
         private void resetButton_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Reset the program? All unsaved changes will be lost.", "Restart?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            Logger.Log("Restart button clicked.");
             if (result == DialogResult.Yes)
             {
                 Application.Restart();
