@@ -1,4 +1,6 @@
 ﻿
+using AddonManager.Forms;
+
 namespace AddonManager
 {
     public class PackHandler
@@ -38,52 +40,49 @@ namespace AddonManager
             }
             return false;
         }
-        public void InactiveListPopulate()
+        private void PopulateList(List<ManifestInfo> packList, ListView listView, string listName)
         {
             var imageList = new ImageList();
             imageList.ImageSize = new Size(32, 32);
-            inactiveListView.SmallImageList = imageList;
+            listView.SmallImageList = imageList;
 
-            inactiveListView.BeginUpdate(); //Prevent the control from drawing until the EndUpdate method is called
-            foreach (var pack in inactiveList)
+            listView.BeginUpdate();
+            foreach (var pack in packList)
             {
                 // Check if the checkbox is checked or if the pack name is not excluded
-                if (!Program.hideDefaultPacks || !IsExcludedPack(pack.name)) 
+                if (!SettingsForm.hideDefaultPacks || !IsExcludedPack(pack.name))
                 {
                     // If the item is already in the ListView don't add it again. 
-                    bool itemExists = inactiveListView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name); 
+                    bool itemExists = listView.Items.Cast<ListViewItem>().Any(item => item.Text == pack.name);
                     if (!itemExists)
                     {
+                        if (pack.type == "resources" && listName != "inactiveRpList" && listName != "activeRpList")
+                        {
+                            pack.description = "⚠️ This is a resource pack!";
+                        }
+                        if ((pack.type == "data" || pack.type == "script") && listName != "inactiveBpList" && listName != "activeBpList")
+                        {
+                            pack.description = "⚠️ This is a behavior pack!";
+                        }
                         ListViewItem item = new ListViewItem(pack.name);
                         item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
                         item.SubItems.Add(pack.description);
                         item.SubItems.Add(string.Join(", ", pack.version));
                         item.Tag = pack;
-                        inactiveListView.Items.Add(item);
-                        Logger.Log("Pack: " + pack.name + " was added to " + inactiveListView.Name);
+                        listView.Items.Add(item);
+                        Logger.Log("Pack: " + pack.name + " was added to " + listView.Name);
                     }
                 }
             }
-            inactiveListView.EndUpdate(); //Enable the control to redraw
+            listView.EndUpdate(); //Enable the control to redraw
+        }
+        public void InactiveListPopulate()
+        {
+            PopulateList(inactiveList, inactiveListView, inactiveListName);
         }
         public void ActiveListPopulate()
         {
-            var imageList = new ImageList();
-            imageList.ImageSize = new Size(32, 32);
-            activeListView.SmallImageList = imageList;
-
-            activeListView.BeginUpdate();
-            foreach (var pack in activeList)
-            {
-                ListViewItem item = new ListViewItem(pack.name);
-                item.ImageIndex = imageList.Images.Add(pack.pack_icon, Color.Transparent);
-                item.SubItems.Add(pack.description);
-                item.SubItems.Add(string.Join(", ", pack.version));
-                item.Tag = pack;
-                activeListView.Items.Add(item);
-                Logger.Log("Pack: " + pack.name + " was added to " + activeListView.Name);
-            }
-            activeListView.EndUpdate();
+            PopulateList(activeList, activeListView, activeListName);
         }
         // Moves selected items from one ListView to another and updates the corresponding lists
         public void MoveSelectedItems(System.Windows.Forms.ListView source, System.Windows.Forms.ListView destination, List<ManifestInfo> sourceList, List<ManifestInfo> destinationList)
@@ -130,14 +129,14 @@ namespace AddonManager
                 Logger.Log("Pack: " + selectedItem.Text + " was moved " + direction + " on side: " + listView.Name);
             }
         }
-        // Handles the DragEnter event for the listview, allowing only files with .zip or .mcpack extensions to be dropped
+        // Handles the DragEnter event for the listview, allowing only files with expected extensions to be dropped
         public void DragEnterHandler(DragEventArgs e)
         {
             //Check if the dragged data is a valid file
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase))) 
+                if (files.All(file => Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcpack", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".mcaddon", StringComparison.OrdinalIgnoreCase)))
                 {
                     e.Effect = DragDropEffects.Copy;
                 }
@@ -152,9 +151,9 @@ namespace AddonManager
             foreach (var filePath in (string[])e.Data.GetData(DataFormats.FileDrop))
             {
                 var extension = Path.GetExtension(filePath);
-                if (File.Exists(filePath) && (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcpack", StringComparison.OrdinalIgnoreCase)))
+                if (File.Exists(filePath) && (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcpack", StringComparison.OrdinalIgnoreCase) || extension.Equals(".mcaddon", StringComparison.OrdinalIgnoreCase)))
                 {
-                    import.ProcessFile(filePath, location);
+                    import.ProcessPack(filePath, location);
                 }
             }
             inactiveList = resultLists.GetList(inactiveListName);
@@ -164,21 +163,47 @@ namespace AddonManager
             Logger.Log("New pack was successfully imported and added!");
         }
         // Show a context menu with options for the right-clicked item.
-        public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction)
+        public void HandleMouseClick(object sender, MouseEventArgs e, Action<ListViewItem> openFolderAction, Action<ListViewItem> deletePackAction, Action importFileAction)
         {
+            ListView listView = sender as ListView;
+            ContextMenuStrip menu = new ContextMenuStrip();
+
             if (e.Button == MouseButtons.Right)
             {
-                // Cast the 'sender' object to a ListView type to access ListView-specific properties
-                ListView listView = sender as ListView; 
-                var focusedItem = listView.FocusedItem;
-                // Check if the focused item is not null and the mouse click occurred within its bounds
-                if (focusedItem != null && focusedItem.Bounds.Contains(e.Location)) 
+                // Check if an item is selected
+                if (listView.SelectedItems.Count > 0)
                 {
-                    ContextMenuStrip menu = new ContextMenuStrip();
-                    menu.Items.Add("Open pack files", null, (sender, args) => openFolderAction(focusedItem));
-                    menu.Items.Add("Delete pack", null, (sender, args) => deletePackAction(focusedItem));
-                    menu.Show(listView, e.Location);
+                    menu.Items.Add("Open pack files", null, (sender, args) =>
+                    {
+                        foreach (ListViewItem item in listView.SelectedItems)
+                        {
+                            openFolderAction(item);
+                        }
+                    });
+                    menu.Items.Add($"Delete {listView.SelectedItems.Count} pack(s)", null, (sender, args) =>
+                    {
+                        DialogResult result = MessageBox.Show($"Are you sure you want to delete these {listView.SelectedItems.Count} pack(s)? This action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            foreach (ListViewItem item in listView.SelectedItems)
+                            {
+                                deletePackAction(item);
+                            }
+                        }
+                    });
+                    menu.Items.Add("Import pack", null, (sender, args) =>
+                    {
+                        importFileAction();
+                    });
                 }
+                else
+                {
+                    menu.Items.Add("Import pack", null, (sender, args) =>
+                    {
+                        importFileAction();
+                    });
+                }
+                menu.Show(Cursor.Position);
             }
         }
         public void OpenFolder(ListViewItem item)
@@ -193,46 +218,56 @@ namespace AddonManager
         }
         public void DeletePack(ListViewItem item)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to delete this pack? This action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+            var pack = (ManifestInfo)item.Tag;
+            string folderPath = pack.pack_folder;
+
+            if (Directory.Exists(folderPath))
             {
-                var pack = (ManifestInfo)item.Tag;
-                string folderPath = pack.pack_folder;
-
-                if (Directory.Exists(folderPath))
+                try
                 {
-                    try
-                    {
-                        Directory.Delete(folderPath, true);
-                        item.Remove(); 
+                    Directory.Delete(folderPath, true);
+                    item.Remove();
 
-                        if (inactiveList.Contains(pack))
-                        {
-                            inactiveList.Remove(pack);
-                        }
-                        else if (activeList.Contains(pack))
-                        {
-                            activeList.Remove(pack);
-                        }
-                    }
-                    catch (IOException ioEx)
+                    if (inactiveList.Contains(pack))
                     {
-                        MessageBox.Show($"An error occurred while trying to delete the folder: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Logger.Log("Something happened and the pack was unable to be deleted.", "ERROR");
+                        inactiveList.Remove(pack);
                     }
-                    catch (UnauthorizedAccessException unAuthEx)
+                    else if (activeList.Contains(pack))
                     {
-                        MessageBox.Show($"You do not have permission to delete this folder: {unAuthEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Logger.Log("Invalid permissions to delete pack.", "ERROR");
+                        activeList.Remove(pack);
                     }
                 }
-                else
+                catch (IOException ioEx)
                 {
-                    MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Logger.Log("The directory was probably manually removed or renamed. Pack could not be deleted (or found).", "ERROR");
+                    MessageBox.Show($"An error occurred while trying to delete the folder: {ioEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Log("Something happened and the pack was unable to be deleted.", "ERROR");
                 }
-                Logger.Log("Pack: " + pack.name + "was deleted from the disk!");
+                catch (UnauthorizedAccessException unAuthEx)
+                {
+                    MessageBox.Show($"You do not have permission to delete this folder: {unAuthEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Log("Invalid permissions to delete pack.", "ERROR");
+                }
             }
+            else
+            {
+                MessageBox.Show("The directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.Log("The directory was probably manually removed or renamed. Pack could not be deleted (or found).", "ERROR");
+            }
+            Logger.Log("Pack: " + pack.name + " was deleted from the disk!");
         }
+        public void ImportPack(string location) 
+        {
+            FileImport import = new FileImport();
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Addon files (*.mcpack;*.mcaddon;*.zip)|*.mcpack;*.mcaddon;*.zip|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                   string filePath = openFileDialog.FileName;
+                   import.ProcessPack(filePath, location);
+                }
+            }
+        }        
     }
 }

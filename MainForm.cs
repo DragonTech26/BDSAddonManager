@@ -19,7 +19,7 @@ namespace AddonManager
             //Start on directory screen
             OpenChildForm(new Forms.DirectoryForm(), null);
             ConsoleButton = consoleButton;
-            if (Program.hideConsoleTab)
+            if (SettingsForm.hideConsoleTab)
             {
                 consoleButton.Visible = false;
             }

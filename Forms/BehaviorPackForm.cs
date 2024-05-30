@@ -33,10 +33,10 @@ namespace AddonManager.Forms
             // Move item down in list
             packHandler.MoveItemUpOrDown(bpActiveListView, ResultLists.activeBpList, 1);
         }
-        private void ListView_MouseClick(object sender, MouseEventArgs e) 
+        private void ListView_MouseDown(object sender, MouseEventArgs e)
         {
             // Handle right click menu detection
-            packHandler.HandleMouseClick(sender, e, openFolderOption_Click, deletePackOption_Click);
+            packHandler.HandleMouseClick(sender, e, openFolderOption_Click, deletePackOption_Click, importPackOption_Click);
         }
         private void bpInactiveListView_DragEnter(object sender, DragEventArgs e) 
         {
@@ -57,6 +57,11 @@ namespace AddonManager.Forms
         {
             // Deletes selected pack
             packHandler.DeletePack(item);
+        }
+        private void importPackOption_Click()
+        {
+            // Opens a file picker
+            packHandler.ImportPack(DirectoryForm.bpLocation);
         }
     }
 }

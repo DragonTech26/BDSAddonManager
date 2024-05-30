@@ -80,7 +80,6 @@
             rpInactiveListView.FullRowSelect = true;
             rpInactiveListView.GridLines = true;
             rpInactiveListView.Location = new Point(0, 0);
-            rpInactiveListView.MultiSelect = false;
             rpInactiveListView.Name = "rpInactiveListView";
             rpInactiveListView.Size = new Size(374, 397);
             rpInactiveListView.TabIndex = 0;
@@ -88,7 +87,7 @@
             rpInactiveListView.View = View.Details;
             rpInactiveListView.DragDrop += rpInactiveListView_DragDrop;
             rpInactiveListView.DragEnter += rpInactiveListView_DragEnter;
-            rpInactiveListView.MouseClick += ListView_MouseClick;
+            rpInactiveListView.MouseDown += ListView_MouseDown;
             // 
             // irpNameColumn
             // 
@@ -113,13 +112,12 @@
             rpActiveListView.FullRowSelect = true;
             rpActiveListView.GridLines = true;
             rpActiveListView.Location = new Point(0, 0);
-            rpActiveListView.MultiSelect = false;
             rpActiveListView.Name = "rpActiveListView";
             rpActiveListView.Size = new Size(370, 397);
             rpActiveListView.TabIndex = 0;
             rpActiveListView.UseCompatibleStateImageBehavior = false;
             rpActiveListView.View = View.Details;
-            rpActiveListView.MouseClick += ListView_MouseClick;
+            rpActiveListView.MouseDown += ListView_MouseDown;
             // 
             // rpNameColumn
             // 

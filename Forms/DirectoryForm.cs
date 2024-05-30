@@ -24,7 +24,7 @@ namespace AddonManager.Forms
             if (canEdit == false)
             {
                 DisableInput();
-                warningLabel.Text = "Restart the program to select another world.";
+                warningLabel.Text = "Press the restart button to select another world.";
             }
         }
         // The file picker for the worlds button
@@ -40,7 +40,7 @@ namespace AddonManager.Forms
             Logger.Log("RP directory file explorer launched!");
         }
         // The file picker for the behavior packs button
-        private void behaviorPackPicker_Click(object sender, EventArgs e) 
+        private void behaviorPackPicker_Click(object sender, EventArgs e)
         {
             OpenFolderPicker(bpDirectoryTextBox);
             Logger.Log("BP directory file explorer launched!");
@@ -88,7 +88,7 @@ namespace AddonManager.Forms
             Logger.Log("Directory form input has been disabled!");
         }
         // Opens a folder picker dialog and sets the selected path to the provided TextBox
-        private void OpenFolderPicker(TextBox path) 
+        private void OpenFolderPicker(TextBox path)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
@@ -99,7 +99,7 @@ namespace AddonManager.Forms
             else { path.Text = ""; }
         }
         // Verifies that the locations are not null or empty and that the level.dat file exists in the world location
-        private void CheckFilePaths() 
+        private void CheckFilePaths()
         {
             worldLocation = worldDirectoryTextBox.Text;
             rpLocation = rpDirectoryTextBox.Text;
@@ -113,7 +113,7 @@ namespace AddonManager.Forms
             else
             {
                 // Check if paths were switched
-                if (rpLocation.Contains("behavior_packs") || bpLocation.Contains("resource_packs")) 
+                if (rpLocation.Contains("behavior_packs") || bpLocation.Contains("resource_packs"))
                 {
                     MessageBox.Show("Incorrect pack path detected!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Logger.Log("Directory path was unexpected for path type.", "ERROR");
@@ -130,6 +130,15 @@ namespace AddonManager.Forms
             else
             {
                 MessageBox.Show("level.dat not found. Please check your world path.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Reset the program? All unsaved changes will be lost.", "Restart?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            Logger.Log("Restart button clicked.");
+            if (result == DialogResult.Yes)
+            {
+                Application.Restart();
             }
         }
     }

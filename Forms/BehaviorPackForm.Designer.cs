@@ -32,9 +32,11 @@
             bpInactiveListView = new ListView();
             ibpNameColumn = new ColumnHeader();
             ibpDescriptionColumn = new ColumnHeader();
+            ibpVersionColumn = new ColumnHeader();
             bpActiveListView = new ListView();
             bpNameColumn = new ColumnHeader();
             bpDescriptionColumn = new ColumnHeader();
+            bpVersionColumn = new ColumnHeader();
             buttonPanel = new Panel();
             label2 = new Label();
             label1 = new Label();
@@ -42,8 +44,6 @@
             moveUpButton = new Button();
             moveToActiveButton = new Button();
             moveToInactiveButton = new Button();
-            bpVersionColumn = new ColumnHeader();
-            ibpVersionColumn = new ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)bpSplitContainer).BeginInit();
             bpSplitContainer.Panel1.SuspendLayout();
             bpSplitContainer.Panel2.SuspendLayout();
@@ -79,7 +79,6 @@
             bpInactiveListView.FullRowSelect = true;
             bpInactiveListView.GridLines = true;
             bpInactiveListView.Location = new Point(0, 0);
-            bpInactiveListView.MultiSelect = false;
             bpInactiveListView.Name = "bpInactiveListView";
             bpInactiveListView.Size = new Size(374, 397);
             bpInactiveListView.TabIndex = 0;
@@ -87,7 +86,7 @@
             bpInactiveListView.View = View.Details;
             bpInactiveListView.DragDrop += bpInactiveListView_DragDrop;
             bpInactiveListView.DragEnter += bpInactiveListView_DragEnter;
-            bpInactiveListView.MouseClick += ListView_MouseClick;
+            bpInactiveListView.MouseDown += ListView_MouseDown;
             // 
             // ibpNameColumn
             // 
@@ -99,6 +98,10 @@
             ibpDescriptionColumn.Text = "Description";
             ibpDescriptionColumn.Width = 300;
             // 
+            // ibpVersionColumn
+            // 
+            ibpVersionColumn.Text = "Version";
+            // 
             // bpActiveListView
             // 
             bpActiveListView.BorderStyle = BorderStyle.None;
@@ -108,13 +111,12 @@
             bpActiveListView.FullRowSelect = true;
             bpActiveListView.GridLines = true;
             bpActiveListView.Location = new Point(0, 0);
-            bpActiveListView.MultiSelect = false;
             bpActiveListView.Name = "bpActiveListView";
             bpActiveListView.Size = new Size(370, 397);
             bpActiveListView.TabIndex = 1;
             bpActiveListView.UseCompatibleStateImageBehavior = false;
             bpActiveListView.View = View.Details;
-            bpActiveListView.MouseClick += ListView_MouseClick;
+            bpActiveListView.MouseDown += ListView_MouseDown;
             // 
             // bpNameColumn
             // 
@@ -125,6 +127,10 @@
             // 
             bpDescriptionColumn.Text = "Description";
             bpDescriptionColumn.Width = 300;
+            // 
+            // bpVersionColumn
+            // 
+            bpVersionColumn.Text = "Version";
             // 
             // buttonPanel
             // 
@@ -208,14 +214,6 @@
             moveToInactiveButton.Text = "◀";
             moveToInactiveButton.UseVisualStyleBackColor = true;
             moveToInactiveButton.Click += moveToInactiveButton_Click;
-            // 
-            // bpVersionColumn
-            // 
-            bpVersionColumn.Text = "Version";
-            // 
-            // ibpVersionColumn
-            // 
-            ibpVersionColumn.Text = "Version";
             // 
             // BehaviorPackForm
             // 
