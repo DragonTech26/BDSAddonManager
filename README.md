@@ -27,7 +27,7 @@ Once the world's file paths have been validated, use the sidebar to navigate the
 
 - To **enable** a pack, simply select it from the list and click the button to move it into the Active list.
 - To **disable** a pack, select the active pack and click the button to move it to the Available/Inactive list.
-- To **add** a pack, drag and drop the .mcpack or .zip file onto the inactive side of the pack list. The new pack will be automatically imported and available to use.
+- To **add** a pack, either drag and drop the addon file onto the inactive side of the pack list or right click and select import.
 - To **remove** a pack, right click on the pack and select Delete pack.
 - To **save** the changes, select the save button and confirm in the popup.
 
@@ -40,6 +40,8 @@ Once the world's file paths have been validated, use the sidebar to navigate the
 - A: Yes, but there's no reason to do so.
 - Q: Does this program support multiple servers?
 - A: Yes, as long as the file paths are correct. Only a single server can be edited at a time.
+- Q: What files does this program support?
+- A: .zip/.mcpack/.mcaddon file types are supported.
 
 ## License
 
