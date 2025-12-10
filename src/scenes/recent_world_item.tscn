@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://cknk70xro36qb"]
+
+[ext_resource type="Texture2D" uid="uid://crvwtgx6aaqua" path="res://assets/graphics/goto.svg" id="1_68lx3"]
+[ext_resource type="Script" uid="uid://csjjg7enc1whd" path="res://src/scripts/recent_world_item.gd" id="1_twmtp"]
+[ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="2_twmtp"]
+
+[node name="recent_world_item" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+offset_right = 1024.0
+offset_bottom = 75.0
+script = ExtResource("1_twmtp")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.10980392, 0.11764706, 0.13333334, 1)
+
+[node name="WorldIcon" type="TextureRect" parent="Background"]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -37.5
+offset_right = 64.0
+offset_bottom = 37.5
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorldName" type="RichTextLabel" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/paragraph_separation = 4
+text = "World Name"
+fit_content = true
+vertical_alignment = 1
+
+[node name="WorldFilePath" type="RichTextLabel" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "/world/file/path"
+fit_content = true
+vertical_alignment = 1
+
+[node name="RemoveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+tooltip_text = "Remove entry from list"
+mouse_default_cursor_shape = 2
+theme_override_colors/icon_hover_color = Color(0.7384635, 0.20232531, 0.3207173, 1)
+icon = ExtResource("2_twmtp")
+icon_alignment = 1
+
+[node name="EditButton" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+tooltip_text = "Edit world"
+mouse_default_cursor_shape = 2
+theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
+icon = ExtResource("1_68lx3")
+icon_alignment = 1
+
+[connection signal="pressed" from="RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="EditButton" to="." method="_on_edit_button_pressed"]

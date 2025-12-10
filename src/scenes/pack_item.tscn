@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqy501w7qksn3"]
+
+[ext_resource type="Texture2D" uid="uid://bw4pw55p2addk" path="res://assets/graphics/placeholder.svg" id="1_0j157"]
+[ext_resource type="Script" uid="uid://ckvjj3prd0vj3" path="res://src/scripts/pack_item.gd" id="1_5hvgd"]
+[ext_resource type="Texture2D" uid="uid://bf03mn4cuut37" path="res://assets/graphics/warning-circle.svg" id="4_3vdsl"]
+[ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="4_4jlgp"]
+[ext_resource type="Texture2D" uid="uid://cs2v2xpasrnty" path="res://assets/graphics/caret.svg" id="4_kn27u"]
+
+[node name="PackItem" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -546.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_5hvgd")
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(800, 75)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.10980392, 0.11764706, 0.13333334, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="UpButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/UpButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_kn27u")
+flip_v = true
+
+[node name="DownButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/DownButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_kn27u")
+
+[node name="PackIcon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 16
+texture = ExtResource("1_0j157")
+expand_mode = 3
+
+[node name="NameLabel" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(250, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Resource/Behavior Pack Name"
+fit_content = true
+
+[node name="DependencyInfo" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+tooltip_text = "This pack requires a dependency to work properly!"
+mouse_default_cursor_shape = 16
+texture = ExtResource("4_3vdsl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubpackDropdown" type="OptionButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+text_overrun_behavior = 3
+clip_text = true
+fit_to_longest_item = false
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+text = "enabled?"
+icon_alignment = 1
+expand_icon = true
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/icon_hover_color = Color(0.7372549, 0.20392157, 0.32156864, 1)
+icon = ExtResource("4_4jlgp")
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/UpButton" to="." method="_on_up_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="item_selected" from="HBoxContainer/SubpackDropdown" to="." method="_on_subpack_dropdown_item_selected"]
+[connection signal="toggled" from="HBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
