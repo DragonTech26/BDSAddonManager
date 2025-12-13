@@ -18,6 +18,7 @@ func setup(data):
 	pack_data = data
 
 	name_label.text = data.name
+	pack_version_label.text = "v" + String(".").join(data.version)
 	icon.tooltip_text = data.description
 
 	# Use pre-loaded icon from manifest data
