@@ -103,6 +103,9 @@ func _on_delete_button_pressed():
 
 
 func _on_confirm_delete() -> void:
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
+	await get_tree().process_frame
+
 	var base_path := ""
 	var ptype := str(pack_data.type)
 	if ptype == "behavior":
@@ -113,6 +116,8 @@ func _on_confirm_delete() -> void:
 	var target_dir := base_path.path_join(str(pack_data.pack_folder))
 
 	var ok := _delete_directory_recursive(target_dir)
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
+
 	if ok:
 		var container := get_parent()
 		# Remove from UI immediately so sync excludes this item

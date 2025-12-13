@@ -37,7 +37,9 @@ func GetAdvancedPaths(root_path: String) -> void:
 
 
 func ValidatePaths():
-	mouse_default_cursor_shape = Control.CURSOR_WAIT
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
+	await get_tree().process_frame
+
 	var world_dir: String = world_path.text.strip_edges()
 	var rp_dir: String = resource_pack_path.text.strip_edges()
 	var bp_dir: String = behavior_pack_path.text.strip_edges()
@@ -68,7 +70,7 @@ func ValidatePaths():
 
 	var parser: JsonParser = JsonParser.new()
 	parser.ReadData()
-	mouse_default_cursor_shape = Control.CURSOR_ARROW
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 	Global.WorldLoaded = true
 	AlertManager.show_alert("Successfully loaded world: " + Global.WorldName, Color.GREEN)
 

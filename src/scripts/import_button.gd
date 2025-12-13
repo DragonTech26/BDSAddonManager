@@ -12,8 +12,12 @@ func _ready() -> void:
 
 
 func _on_files_selected(paths: PackedStringArray) -> void:
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
+	await get_tree().process_frame
+
 	PackImporter.import_files(paths)
 	_refresh_pack_pages()
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 
 
 func _on_mouse_entered() -> void:

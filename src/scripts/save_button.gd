@@ -28,7 +28,11 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 func _on_confirm_save() -> void:
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
+	await get_tree().process_frame
+
 	var ok := _save_active_packs()
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 	if ok:
 		AlertManager.show_alert("Saved world: " + Global.WorldName, Color.GREEN)
 	else:
