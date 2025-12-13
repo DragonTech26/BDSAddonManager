@@ -81,11 +81,11 @@ func _build_ui_state_map(container: Node) -> Dictionary:
 			"subpack": "",
 		}
 		# Read checkbox directly from node tree for robustness
-		var cb: CheckBox = c.get_node_or_null("HBoxContainer/CheckBox")
+		var cb: CheckBox = c.get_node_or_null("MarginContainer/HBoxContainer/CheckBox")
 		if cb != null:
 			state["active"] = cb.button_pressed
 		# Read dropdown selection
-		var dd: OptionButton = c.get_node_or_null("HBoxContainer/SubpackDropdown")
+		var dd: OptionButton = c.get_node_or_null("MarginContainer/HBoxContainer/SubpackDropdown")
 		if dd != null and dd.visible and not dd.disabled and d.subpacks.size() > 0:
 			var sel_idx: int = dd.selected
 			if sel_idx >= 0 and sel_idx < d.subpacks.size():
