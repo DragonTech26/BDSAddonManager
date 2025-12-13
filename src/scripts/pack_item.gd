@@ -4,14 +4,15 @@ var pack_data
 var _delete_dialog: ConfirmationDialog
 var _error_dialog: AcceptDialog
 
-@onready var up_button: Button = $HBoxContainer/VBoxContainer/UpButton
-@onready var down_button: Button = $HBoxContainer/VBoxContainer/DownButton
-@onready var icon: TextureRect = $HBoxContainer/PackIcon
-@onready var name_label: RichTextLabel = $HBoxContainer/NameLabel
-@onready var check_box: CheckBox = $HBoxContainer/CheckBox
-@onready var dropdown: OptionButton = $HBoxContainer/SubpackDropdown
-@onready var delete_btn: Button = $HBoxContainer/DeleteButton
-@onready var dependency_alert: TextureRect = $HBoxContainer/DependencyInfo
+@onready var up_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/UpButton
+@onready var down_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/DownButton
+@onready var icon: TextureRect = $MarginContainer/HBoxContainer/PackIcon
+@onready var pack_version_label: RichTextLabel = $MarginContainer/HBoxContainer/VersionLabel
+@onready var name_label: RichTextLabel = $MarginContainer/HBoxContainer/NameLabel
+@onready var check_box: CheckBox = $MarginContainer/HBoxContainer/CheckBox
+@onready var dropdown: OptionButton = $MarginContainer/HBoxContainer/SubpackDropdown
+@onready var delete_btn: Button = $MarginContainer/HBoxContainer/DeleteButton
+@onready var dependency_alert: TextureRect = $MarginContainer/HBoxContainer/DependencyInfo
 
 
 func setup(data):
