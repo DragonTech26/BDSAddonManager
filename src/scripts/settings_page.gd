@@ -1,5 +1,8 @@
 extends Control
 
+@onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
+
+
 func _ready() -> void:
 	# Initialize checkboxes with current settings
 	$HBoxContainer/VBoxContainer/CheckBox1.button_pressed = LoadSettings.get_setting("HIDE_DEFAULT_SERVER_PACKS")
@@ -12,3 +15,7 @@ func _ready() -> void:
 
 func _on_checkbox_toggled(pressed: bool, key: String) -> void:
 	LoadSettings.set_setting(key, pressed)
+
+
+func _on_visibility_changed() -> void:
+	titlebar.text = "Settings"

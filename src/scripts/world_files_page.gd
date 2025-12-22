@@ -6,6 +6,7 @@ var WorldValidator = preload("res://src/scripts/world_validator.gd").new()
 @onready var world_path: LineEdit = $VBoxContainer/HBoxContainer/WorldFolderLine
 @onready var resource_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer/ResourcePackLine
 @onready var behavior_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BehaviorPackLine
+@onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
 
 
 # Main functions
@@ -175,3 +176,10 @@ func _on_recent_delete_pressed(index: int):
 	LoadRecentWorlds.recent_worlds.remove_at(index)
 	LoadRecentWorlds.save_recent_worlds()
 	GetRecentWorldsList()
+
+
+func _on_visibility_changed() -> void:
+	if titlebar == null:
+		await ready
+		titlebar.text = "World Files"
+	titlebar.text = "World Files"

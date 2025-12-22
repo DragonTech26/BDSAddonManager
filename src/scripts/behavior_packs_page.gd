@@ -4,6 +4,7 @@ var PackItemScene: PackedScene = preload("res://src/scenes/pack_item.tscn")
 
 @onready var list_container: VBoxContainer = $ScrollContainer/VBoxContainer
 @onready var info_label: Label = $Label
+@onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
 
 
 func load_packs(packs):
@@ -68,3 +69,4 @@ func load_packs(packs):
 func _on_visibility_changed():
 	if is_visible():
 		load_packs(Global.BPList) # Populate with manifest data when page becomes visible
+		titlebar.text = "Behavior Packs"
