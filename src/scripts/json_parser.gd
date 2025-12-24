@@ -198,12 +198,8 @@ func _load_full_manifest(path: String) -> ManifestInfo:
 	info.name = h.get("name", "")
 	info.description = h.get("description", "")
 	info.pack_id = h.get("uuid", "")
-	info.version = []
-	for v in h.get("version", []):
-		info.version.append(int(v))
-	info.min_engine_version = []
-	for v in h.get("min_engine_version", []):
-		info.min_engine_version.append(int(v))
+	info.version = _parse_version(h.get("version"))
+	info.min_engine_version = _parse_version(h.get("min_engine_version"))
 
 	# Dependencies
 	if root.has("dependencies"):
@@ -228,6 +224,19 @@ func _load_full_manifest(path: String) -> ManifestInfo:
 		print(JSON.stringify(root, "\t"))
 
 	return info
+
+
+func _parse_version(value) -> Array[int]:
+	var result: Array[int] = []
+
+	if typeof(value) == TYPE_STRING:
+		for p in value.split("."):
+			result.append(int(p))
+	elif typeof(value) == TYPE_ARRAY:
+		for p in value:
+			result.append(int(p))
+
+	return result
 
 
 func _order_and_split(all_list: Array, active_json_list: Array, inactive_list: Array):
