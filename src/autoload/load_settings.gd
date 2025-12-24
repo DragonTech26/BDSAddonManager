@@ -5,6 +5,7 @@ const SETTINGS_FILE: String = "user://settings.conf"
 var settings: Dictionary = {
 	"HIDE_DEFAULT_SERVER_PACKS": true,
 	"HIDE_TEXT_MODIFIER_SYMBOLS": true,
+	"IMPORT_AS_UNIQUE_FOLDER_NAME": true,
 	"SUPER_SECRET_SETTING": false,
 }
 

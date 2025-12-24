@@ -138,6 +138,11 @@ func _find_manifest_in_path(search_dir: String) -> String:
 	return ""
 
 
+func _build_unique_folder_name(base_name: String) -> String:
+	var timestamp: int = int(Time.get_unix_time_from_system())
+	return "%s_%s" % [base_name, str(timestamp)]
+
+
 func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basename: String) -> void:
 	var content: String = FileAccess.get_file_as_string(manifest_path)
 	var json: JSON = JSON.new()
@@ -193,7 +198,12 @@ func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basenam
 	if source_pack_folder.replace("\\", "/") == temp_root.replace("\\", "/"):
 		pack_folder_name = zip_basename
 
-	var final_destination: String = target_root.path_join(pack_folder_name)
+	var final_name := pack_folder_name
+
+	if LoadSettings.get_setting("IMPORT_AS_UNIQUE_FOLDER_NAME"):
+		final_name = _build_unique_folder_name(pack_folder_name)
+
+	var final_destination: String = target_root.path_join(final_name)
 
 	_copy_recursive(source_pack_folder, final_destination)
 	print("PackImporter: Imported ", pack_folder_name, " to ", final_destination)
