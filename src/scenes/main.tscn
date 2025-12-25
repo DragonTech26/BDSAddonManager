@@ -695,6 +695,11 @@ tooltip_text = "Adds import date to pack folder name."
 theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
 text = "Avoid pack import conflicts"
 
+[node name="CheckBox4" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
+text = "Prefer system trash on delete"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -100,7 +100,11 @@ func _on_delete_button_pressed():
 		add_child(_delete_dialog)
 		_delete_dialog.confirmed.connect(_on_confirm_delete)
 
-	_delete_dialog.dialog_text = "Are you sure you want to permanently delete\n'%s' from file system?" % str(pack_data.name)
+	if LoadSettings.get_setting("USE_SYSTEM_TRASH_ON_DELETE"):
+		_delete_dialog.dialog_text = "Are you sure you want to delete\n'%s'?" % str(pack_data.name)
+	else:
+		_delete_dialog.dialog_text = "Are you sure you want to permanently delete\n'%s' from file system?" % str(pack_data.name)
+
 	_delete_dialog.popup_centered()
 
 
@@ -109,27 +113,31 @@ func _on_confirm_delete() -> void:
 	await get_tree().process_frame
 
 	var base_path := ""
-	var ptype := str(pack_data.type)
-	if ptype == "behavior":
+	if str(pack_data.type) == "behavior":
 		base_path = Global.WorldBehaviorPackPath
 	else:
 		base_path = Global.WorldResourcePackPath
 
 	var target_dir := base_path.path_join(str(pack_data.pack_folder))
+	var success := false
 
-	var ok := _delete_directory_recursive(target_dir)
+	# Try system trash
+	if LoadSettings.get_setting("USE_SYSTEM_TRASH_ON_DELETE"):
+		if OS.move_to_trash(target_dir) == OK:
+			success = true
+
+	# Manual Recursion (Slower Fallback)
+	if not success:
+		success = _delete_directory_recursive(target_dir)
+
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 
-	if ok:
+	if success:
 		var container := get_parent()
-		# Remove from UI immediately so sync excludes this item
 		if container != null:
 			container.remove_child(self)
-		# Sync lists and refresh buttons
-		if container != null:
 			_sync_global_order(container)
 			_update_buttons_for_all(container)
-		# Finally free the node
 		queue_free()
 	else:
 		if _error_dialog == null:
@@ -141,7 +149,6 @@ func _on_confirm_delete() -> void:
 
 
 func _delete_directory_recursive(path: String) -> bool:
-	# Returns true if the directory at 'path' is deleted or doesn't exist.
 	if not DirAccess.dir_exists_absolute(path):
 		return true
 
@@ -151,18 +158,18 @@ func _delete_directory_recursive(path: String) -> bool:
 
 	var success := true
 	d.list_dir_begin()
-	while true:
-		var filename := d.get_next()
-		if filename == "":
-			break
-		var full := path.path_join(filename)
-		if d.current_is_dir():
-			if not _delete_directory_recursive(full):
-				success = false
-		else:
-			var err := DirAccess.remove_absolute(full)
-			if err != OK:
-				success = false
+	var filename := d.get_next()
+	while filename != "":
+		if not filename.begins_with("."):
+			var full := path.path_join(filename)
+			if d.current_is_dir():
+				if not _delete_directory_recursive(full):
+					success = false
+			else:
+				var err := DirAccess.remove_absolute(full)
+				if err != OK:
+					success = false
+		filename = d.get_next()
 	d.list_dir_end()
 
 	var err2 := DirAccess.remove_absolute(path)

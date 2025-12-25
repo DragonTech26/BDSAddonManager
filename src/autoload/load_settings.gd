@@ -6,6 +6,7 @@ var settings: Dictionary = {
 	"HIDE_DEFAULT_SERVER_PACKS": true,
 	"HIDE_TEXT_MODIFIER_SYMBOLS": true,
 	"IMPORT_AS_UNIQUE_FOLDER_NAME": true,
+	"USE_SYSTEM_TRASH_ON_DELETE": false,
 	"SUPER_SECRET_SETTING": false,
 }
 

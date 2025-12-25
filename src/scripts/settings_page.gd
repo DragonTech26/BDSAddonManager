@@ -8,11 +8,13 @@ func _ready() -> void:
 	$HBoxContainer/VBoxContainer/CheckBox1.button_pressed = LoadSettings.get_setting("HIDE_DEFAULT_SERVER_PACKS")
 	$HBoxContainer/VBoxContainer/CheckBox2.button_pressed = LoadSettings.get_setting("HIDE_TEXT_MODIFIER_SYMBOLS")
 	$HBoxContainer/VBoxContainer/CheckBox3.button_pressed = LoadSettings.get_setting("IMPORT_AS_UNIQUE_FOLDER_NAME")
+	$HBoxContainer/VBoxContainer/CheckBox4.button_pressed = LoadSettings.get_setting("USE_SYSTEM_TRASH_ON_DELETE")
 
 	# Connect signals so changes update the settings file
 	$HBoxContainer/VBoxContainer/CheckBox1.toggled.connect(_on_checkbox_toggled.bind("HIDE_DEFAULT_SERVER_PACKS"))
 	$HBoxContainer/VBoxContainer/CheckBox2.toggled.connect(_on_checkbox_toggled.bind("HIDE_TEXT_MODIFIER_SYMBOLS"))
 	$HBoxContainer/VBoxContainer/CheckBox3.toggled.connect(_on_checkbox_toggled.bind("IMPORT_AS_UNIQUE_FOLDER_NAME"))
+	$HBoxContainer/VBoxContainer/CheckBox4.toggled.connect(_on_checkbox_toggled.bind("USE_SYSTEM_TRASH_ON_DELETE"))
 
 
 func _on_checkbox_toggled(pressed: bool, key: String) -> void:
