@@ -1,8 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://cknk70xro36qb"]
+[gd_scene load_steps=6 format=3 uid="uid://cknk70xro36qb"]
 
 [ext_resource type="Texture2D" uid="uid://crvwtgx6aaqua" path="res://assets/graphics/goto.svg" id="1_68lx3"]
 [ext_resource type="Script" uid="uid://csjjg7enc1whd" path="res://src/scripts/recent_world_item.gd" id="1_twmtp"]
 [ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="2_twmtp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twmtp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j83xd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="recent_world_item" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 75)
@@ -56,6 +90,7 @@ layout_mode = 2
 tooltip_text = "Remove entry from list"
 mouse_default_cursor_shape = 2
 theme_override_colors/icon_hover_color = Color(0.7384635, 0.20232531, 0.3207173, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_twmtp")
 icon = ExtResource("2_twmtp")
 icon_alignment = 1
 
@@ -65,6 +100,7 @@ layout_mode = 2
 tooltip_text = "Edit world"
 mouse_default_cursor_shape = 2
 theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_j83xd")
 icon = ExtResource("1_68lx3")
 icon_alignment = 1
 
