@@ -7,6 +7,7 @@ var settings: Dictionary = {
 	"HIDE_TEXT_MODIFIER_SYMBOLS": true,
 	"IMPORT_AS_UNIQUE_FOLDER_NAME": true,
 	"USE_SYSTEM_TRASH_ON_DELETE": false,
+	"RECENT_WORLD_LIST_SIZE": 5,
 	"SUPER_SECRET_SETTING": false,
 }
 
@@ -31,11 +32,9 @@ func load_or_create_settings():
 				if settings.has(key): # only accept known keys
 					settings[key] = parse_value(value)
 		file.close()
-		# Merge defaults: add any missing keys
-		for key in settings.keys():
-			if settings[key] == null:
-				settings[key] = settings[key] # ensure default is set
-		save_settings() # rewrite file with merged defaults
+
+		setting_integrity_checker()
+		save_settings()
 	else:
 		print("No settings file found, creating defaults...")
 		save_settings()
@@ -71,6 +70,13 @@ func set_setting(key: String, value: Variant):
 	if settings.has(key): # only allow known keys
 		settings[key] = value
 		save_settings()
+
+
+func setting_integrity_checker() -> void:
+	# Recent world list size check
+	var value = settings["RECENT_WORLD_LIST_SIZE"]
+	if value is not int or value < 0:
+		set_setting("RECENT_WORLD_LIST_SIZE", 5)
 
 
 # Code to get setting value

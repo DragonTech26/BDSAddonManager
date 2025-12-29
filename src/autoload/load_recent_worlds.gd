@@ -1,10 +1,8 @@
 extends Node
 
 const FILE_PATH := "user://recently_opened.json"
-const MAX_RECENT := 4
 
 var recent_worlds: Array = []
-
 
 func _ready():
 	load_recent_worlds()
@@ -30,6 +28,9 @@ func load_recent_worlds() -> void:
 	else:
 		recent_worlds = []
 		save_recent_worlds()
+		return
+
+	_trim_recent_worlds()
 
 
 func save_recent_worlds() -> void:
@@ -48,11 +49,9 @@ func add_recent_world(world_name: String, world_dir: String, rp_dir: String, bp_
 		"bp_location_on_disk": bp_dir,
 	}
 
-	# Remove existing match
 	var index := -1
 	for i in range(recent_worlds.size()):
 		var item = recent_worlds[i]
-
 		if item.location_on_disk == world_dir \
 		and item.rp_location_on_disk == rp_dir \
 		and item.bp_location_on_disk == bp_dir:
@@ -62,11 +61,13 @@ func add_recent_world(world_name: String, world_dir: String, rp_dir: String, bp_
 	if index != -1:
 		recent_worlds.remove_at(index)
 
-	# Insert at top
 	recent_worlds.insert(0, entry)
 
-	# Enforce item size limit
-	if recent_worlds.size() > MAX_RECENT:
-		recent_worlds = recent_worlds.slice(0, MAX_RECENT)
-
+	_trim_recent_worlds()
 	save_recent_worlds()
+
+
+func _trim_recent_worlds() -> void:
+	var max_list_size: int = LoadSettings.get_setting("RECENT_WORLD_LIST_SIZE")
+	if recent_worlds.size() > max_list_size:
+		recent_worlds = recent_worlds.slice(0, max_list_size)
