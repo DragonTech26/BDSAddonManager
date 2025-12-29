@@ -60,9 +60,10 @@ func _unfreeze_ui() -> void:
 	behavior_pack_path.editable = true
 	behavior_pack_path.text = ""
 
-	var container: VBoxContainer = $"../../../../WorldFilesPage/VBoxContainer/RecentDropdown/Content/HBoxContainer"
+	var container: VBoxContainer = $"../../../../WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer"
+
 	for slot in container.get_children():
-		if slot.name.begins_with("Recent"):
+		if slot.has_method("set_enabled"):
 			slot.set_enabled(true)
 
 	var validate_button: Button = $"../../../../WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton"

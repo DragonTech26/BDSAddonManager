@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d16hxw7mmxo1y"]
+[gd_scene load_steps=32 format=3 uid="uid://d16hxw7mmxo1y"]
 
 [ext_resource type="Texture2D" uid="uid://tm4aji1540ln" path="res://assets/graphics/list.svg" id="1_kkvs4"]
 [ext_resource type="Script" uid="uid://di4mb8xndpu8u" path="res://src/scripts/toggle_sidebar_button.gd" id="2_32aa5"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://cs2v2xpasrnty" path="res://assets/graphics/caret.svg" id="11_p1ia5"]
 [ext_resource type="Script" uid="uid://dymngp2e585j4" path="res://src/scripts/version_label.gd" id="12_tyryd"]
 [ext_resource type="Texture2D" uid="uid://crvwtgx6aaqua" path="res://assets/graphics/goto.svg" id="13_ccybt"]
-[ext_resource type="PackedScene" uid="uid://cknk70xro36qb" path="res://src/scenes/recent_world_item.tscn" id="14_50ugh"]
 [ext_resource type="Script" uid="uid://50hmej7hache" path="res://src/scripts/folder_picker.gd" id="15_50ugh"]
 [ext_resource type="Script" uid="uid://bky1k6vw3mexl" path="res://src/scripts/resource_packs_page.gd" id="16_htxff"]
 [ext_resource type="Texture2D" uid="uid://o68a4ig6fr4" path="res://assets/graphics/icons/icon.png" id="17_lcp4o"]
@@ -529,6 +528,7 @@ icon_alignment = 1
 
 [node name="RecentDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("10_24j03")
 
 [node name="Header" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown"]
@@ -565,27 +565,26 @@ stretch_mode = 5
 [node name="Content" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown"]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content"]
-layout_mode = 2
-
-[node name="NoRecentsLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/HBoxContainer"]
+[node name="MessageLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content"]
 visible = false
 layout_mode = 2
-text = "No recent worlds...yet"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 fit_content = true
+horizontal_alignment = 1
 
-[node name="Recent1" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/HBoxContainer" instance=ExtResource("14_50ugh")]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content"]
 layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
 
-[node name="Recent2" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/HBoxContainer" instance=ExtResource("14_50ugh")]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer"]
 layout_mode = 2
-
-[node name="Recent3" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/HBoxContainer" instance=ExtResource("14_50ugh")]
-layout_mode = 2
-
-[node name="Recent4" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/HBoxContainer" instance=ExtResource("14_50ugh")]
-layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="FolderPicker" type="FileDialog" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage"]
 oversampling_override = 1.0

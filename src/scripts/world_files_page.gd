@@ -7,7 +7,7 @@ var WorldValidator = preload("res://src/scripts/world_validator.gd").new()
 @onready var resource_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer/ResourcePackLine
 @onready var behavior_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BehaviorPackLine
 @onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
-
+@onready var recent_world_item_scene: PackedScene = preload("res://src/scenes/recent_world_item.tscn")
 
 # Main functions
 func _ready():
@@ -65,9 +65,9 @@ func ValidatePaths():
 	Global.WorldBehaviorPackPath = bp_dir
 
 	GetWorldName()
-	DisableInput()
 	LoadRecentWorlds.add_recent_world(Global.WorldName, world_dir, rp_dir, bp_dir)
 	GetRecentWorldsList()
+	DisableInput()
 
 	var parser: JsonParser = JsonParser.new()
 	parser.ReadData()
@@ -109,40 +109,41 @@ func DisableInput():
 	bp_file_btn.disabled = true
 	validate_btn.disabled = true
 
-	# Disable recent-world Edit/Remove buttons
-	var container: VBoxContainer = $VBoxContainer/RecentDropdown/Content/HBoxContainer
-	for slot in container.get_children():
-		if slot.name.begins_with("Recent"):
+	# Disable recent-world buttons
+	var recent_container: VBoxContainer = $VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer
+
+	for slot in recent_container.get_children():
+		if slot.has_method("set_enabled"):
 			slot.set_enabled(false)
 
 
 func GetRecentWorldsList():
 	var rw_list: Array = LoadRecentWorlds.recent_worlds
-	var container: VBoxContainer = $VBoxContainer/RecentDropdown/Content/HBoxContainer
+	var container: VBoxContainer = $VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer
+	var label: RichTextLabel = $VBoxContainer/RecentDropdown/Content/MessageLabel
 
-	var slots: Array = []
 	for child in container.get_children():
-		if child.name.begins_with("Recent"):
-			slots.append(child)
+		child.queue_free()
 
-	for slot in slots:
-		slot.visible = false
-
-	for i in range(min(rw_list.size(), slots.size())):
+	for i in rw_list.size():
 		var data = rw_list[i]
-		var slot = slots[i]
+		var slot = recent_world_item_scene.instantiate()
 
-		slot.visible = true
+		container.add_child(slot)
 		slot.index = i
 
-		# Connect button signals
-		if not slot.edit_pressed.is_connected(_on_recent_edit_pressed):
-			slot.edit_pressed.connect(_on_recent_edit_pressed)
-		if not slot.delete_pressed.is_connected(_on_recent_delete_pressed):
-			slot.delete_pressed.connect(_on_recent_delete_pressed)
+		# Connect signals once per instance
+		slot.edit_pressed.connect(_on_recent_edit_pressed)
+		slot.delete_pressed.connect(_on_recent_delete_pressed)
 
 		slot.get_node("Background/VBoxContainer/WorldName").text = data.world_name
 		slot.get_node("Background/VBoxContainer/WorldFilePath").text = data.location_on_disk
+
+	if rw_list.size() <= 0:
+		label.text = "Nothing here...yet!"
+		label.visible = true
+	else:
+		label.visible = false
 
 
 # UI Signal functions
