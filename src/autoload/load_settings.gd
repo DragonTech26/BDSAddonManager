@@ -75,7 +75,7 @@ func set_setting(key: String, value: Variant):
 func setting_integrity_checker() -> void:
 	# Recent world list size check
 	var value = settings["RECENT_WORLD_LIST_SIZE"]
-	if value is not int or value < 0:
+	if value is not int or value < 0 or value > 999:
 		set_setting("RECENT_WORLD_LIST_SIZE", 5)
 
 
