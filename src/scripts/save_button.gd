@@ -35,9 +35,10 @@ func _on_confirm_save() -> void:
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 	if ok:
 		AlertManager.show_alert("Saved world: " + Global.WorldName, Color.GREEN)
+		Global.HasUnsavedChanges = false
 	else:
 		AlertManager.show_alert("Failed to save packs for: " + Global.WorldName, Color.CRIMSON)
-
+		Global.HasUnsavedChanges = true
 
 func _save_active_packs() -> bool:
 	# Prefer live UI state when available, otherwise fall back to data in Global.* lists.

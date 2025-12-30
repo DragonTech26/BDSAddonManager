@@ -8,3 +8,4 @@ var WorldName: String = ""
 var RPList: Array = []
 var BPList: Array = []
 var WorldLoaded: bool = false
+var HasUnsavedChanges: bool = false

@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://d16hxw7mmxo1y"]
+[gd_scene load_steps=33 format=3 uid="uid://d16hxw7mmxo1y"]
 
 [ext_resource type="Texture2D" uid="uid://tm4aji1540ln" path="res://assets/graphics/list.svg" id="1_kkvs4"]
+[ext_resource type="Script" uid="uid://6b87cp0aidwb" path="res://src/scripts/main.gd" id="1_xxm0n"]
 [ext_resource type="Script" uid="uid://di4mb8xndpu8u" path="res://src/scripts/toggle_sidebar_button.gd" id="2_32aa5"]
 [ext_resource type="Texture2D" uid="uid://dfq6dy7gwiqi0" path="res://assets/graphics/folder.svg" id="3_5dlwx"]
 [ext_resource type="PackedScene" uid="uid://b8pfo2q0u42vn" path="res://src/scenes/nav_item.tscn" id="3_o81g6"]
@@ -179,6 +180,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xxm0n")
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 layout_mode = 1

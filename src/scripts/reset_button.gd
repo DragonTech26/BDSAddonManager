@@ -32,6 +32,7 @@ func _reset_globals() -> bool:
 	Global.RPList = []
 	Global.BPList = []
 	Global.WorldLoaded = false
+	Global.HasUnsavedChanges = false
 
 	_unfreeze_ui()
 

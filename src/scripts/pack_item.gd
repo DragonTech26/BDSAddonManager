@@ -27,7 +27,9 @@ func setup(data):
 		icon.texture = data.pack_icon
 
 	# Checkbox
+	check_box.set_block_signals(true)
 	check_box.button_pressed = data.is_active
+	check_box.set_block_signals(false)
 
 	# Dependency check
 	if data.dependencies.size() > 0:
@@ -52,7 +54,9 @@ func setup(data):
 			if data.subpacks[i]["folder_name"] == data.active_subpack:
 				selected_index = i
 				break
+		dropdown.set_block_signals(true)
 		dropdown.select(selected_index)
+		dropdown.set_block_signals(false)
 	else:
 		dropdown.visible = false
 
@@ -139,6 +143,7 @@ func _on_confirm_delete() -> void:
 			_sync_global_order(container)
 			_update_buttons_for_all(container)
 		queue_free()
+		Global.HasUnsavedChanges = true
 	else:
 		if _error_dialog == null:
 			_error_dialog = AcceptDialog.new()
@@ -202,6 +207,8 @@ func _move_item(delta: int) -> void:
 	_sync_global_order(container)
 	_update_buttons_for_all(container)
 
+	Global.HasUnsavedChanges = true
+
 
 func _sync_global_order(container: Node) -> void:
 	# Rebuild the corresponding Global list according to current visual order.
@@ -260,3 +267,4 @@ func _persist_state_to_global() -> void:
 			d.is_active = bool(pack_data.is_active)
 			d.active_subpack = str(pack_data.active_subpack) if typeof(pack_data.active_subpack) == TYPE_STRING else ""
 			break
+	Global.HasUnsavedChanges = true
