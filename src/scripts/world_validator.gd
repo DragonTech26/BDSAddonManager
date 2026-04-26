@@ -32,8 +32,17 @@ func validate_all(world_dir: String, rp_dir: String, bp_dir: String) -> bool:
 
 func validate_json_file(path: String) -> bool:
 	if not FileAccess.file_exists(path):
-		print("JSON file missing:", path)
-		return false
+		print("JSON file missing, creating default: ", path)
+
+		# Create the default file and write an empty JSON array
+		var create_file := FileAccess.open(path, FileAccess.WRITE)
+		if create_file:
+			create_file.store_string("[]")
+			create_file.close()
+			return true
+		else:
+			print("Failed to create file at: ", path)
+			return false
 
 	var file := FileAccess.open(path, FileAccess.READ)
 	var text := file.get_as_text()
