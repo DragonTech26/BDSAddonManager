@@ -41,7 +41,7 @@ func validate_json_file(path: String) -> bool:
 			create_file.close()
 			return true
 		else:
-			print("Failed to create file at: ", path)
+			AlertManager.show_alert("Error: Unable to create world pack json file(s)", Color.CRIMSON)
 			return false
 
 	var file := FileAccess.open(path, FileAccess.READ)
