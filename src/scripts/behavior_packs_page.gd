@@ -31,6 +31,7 @@ func load_packs(packs):
 			"summer drop",
 			"fall drop",
 			"winter drop",
+			"vanilla voxel shapes",
 		]
 		for p in packs:
 			var n: String = str(p.name).to_lower()
