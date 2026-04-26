@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d16hxw7mmxo1y"]
+[gd_scene format=3 uid="uid://d16hxw7mmxo1y"]
 
 [ext_resource type="Texture2D" uid="uid://tm4aji1540ln" path="res://assets/graphics/list.svg" id="1_kkvs4"]
 [ext_resource type="Script" uid="uid://6b87cp0aidwb" path="res://src/scripts/main.gd" id="1_xxm0n"]
@@ -173,7 +173,7 @@ _data = {
 &"sidebar_animation": SubResource("Animation_o81g6")
 }
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1643049632]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,7 +182,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xxm0n")
 
-[node name="BackgroundColor" type="ColorRect" parent="."]
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=1335680970]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,7 +191,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12941177, 0.14901961, 0.18039216, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1246067586]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,13 +199,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sidebar" type="Panel" parent="HBoxContainer"]
+[node name="Sidebar" type="Panel" parent="HBoxContainer" unique_id=2099280035]
 clip_contents = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1fxj6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar" unique_id=446964687]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -214,19 +214,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar/VBoxContainer"]
+[node name="TopContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar/VBoxContainer" unique_id=666076683]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SidebarToggleButton" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer"]
+[node name="SidebarToggleButton" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=1733592270]
 clip_contents = true
 custom_minimum_size = Vector2(40, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("2_32aa5")
 
-[node name="Background" type="ColorRect" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton"]
+[node name="Background" type="ColorRect" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton" unique_id=1133081557]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,37 +236,37 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="List" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton"]
+[node name="List" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton" unique_id=1845472618]
 position = Vector2(34, 24)
 texture = ExtResource("1_kkvs4")
 
-[node name="WorldFiles" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" instance=ExtResource("3_o81g6")]
+[node name="WorldFiles" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=1266278618 instance=ExtResource("3_o81g6")]
 layout_mode = 2
 icon = ExtResource("3_5dlwx")
 label = "World Files"
 active = true
 page = NodePath("../../../../Body/Pages/MarginContainer/WorldFilesPage")
 
-[node name="ResourcePacks" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" instance=ExtResource("3_o81g6")]
+[node name="ResourcePacks" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=136385646 instance=ExtResource("3_o81g6")]
 layout_mode = 2
 icon = ExtResource("5_5lsyw")
 label = "Resource Packs"
 page = NodePath("../../../../Body/Pages/MarginContainer/ResourcePacksPage")
 
-[node name="BehaviorPacks" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" instance=ExtResource("3_o81g6")]
+[node name="BehaviorPacks" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=855683385 instance=ExtResource("3_o81g6")]
 layout_mode = 2
 icon = ExtResource("6_kokaf")
 label = "Behavior Packs"
 page = NodePath("../../../../Body/Pages/MarginContainer/BehaviorPacksPage")
 
-[node name="Import" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer"]
+[node name="Import" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=565270825]
 clip_contents = true
 custom_minimum_size = Vector2(40, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("7_n75dp")
 
-[node name="Background" type="ColorRect" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import"]
+[node name="Background" type="ColorRect" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import" unique_id=245103862]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -276,11 +276,11 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="Plus" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import"]
+[node name="Plus" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import" unique_id=1302022991]
 position = Vector2(36, 27)
 texture = ExtResource("7_qsm7c")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import" unique_id=1135624518]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -294,29 +294,29 @@ text = "Import Packs"
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="FileDialog" type="FileDialog" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import"]
+[node name="FileDialog" type="FileDialog" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import" unique_id=1356069795]
 title = "Open File(s)"
 file_mode = 1
 access = 2
 use_native_dialog = true
 
-[node name="BottomContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar/VBoxContainer"]
+[node name="BottomContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar/VBoxContainer" unique_id=926288939]
 layout_mode = 2
 
-[node name="Settings" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer" instance=ExtResource("3_o81g6")]
+[node name="Settings" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer" unique_id=5061772 instance=ExtResource("3_o81g6")]
 layout_mode = 2
 icon = ExtResource("7_lp058")
 label = "Settings"
 page = NodePath("../../../../Body/Pages/MarginContainer/SettingsPage")
 
-[node name="Save" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer"]
+[node name="Save" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer" unique_id=1179888551]
 clip_contents = true
 custom_minimum_size = Vector2(40, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("8_kokaf")
 
-[node name="Background" type="ColorRect" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save"]
+[node name="Background" type="ColorRect" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" unique_id=1524359220]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -326,11 +326,11 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="FloppyDisk" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save"]
+[node name="FloppyDisk" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" unique_id=972086958]
 position = Vector2(36, 27)
 texture = ExtResource("8_24j03")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" unique_id=862985738]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -344,7 +344,7 @@ text = "Save"
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="VersionLabel" type="Label" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer"]
+[node name="VersionLabel" type="Label" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer" unique_id=1763912230]
 layout_mode = 2
 text = "
 0.0.0
@@ -354,25 +354,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("12_tyryd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Sidebar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Sidebar" unique_id=777276684]
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_2lg1k")
-}
+libraries/ = SubResource("AnimationLibrary_2lg1k")
 
-[node name="Body" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Body" type="VBoxContainer" parent="HBoxContainer" unique_id=1292258727]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Topbar" type="HBoxContainer" parent="HBoxContainer/Body"]
+[node name="Topbar" type="HBoxContainer" parent="HBoxContainer/Body" unique_id=36822560]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Titlebar" type="Control" parent="HBoxContainer/Body/Topbar"]
+[node name="Titlebar" type="Control" parent="HBoxContainer/Body/Topbar" unique_id=402444736]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Body/Topbar/Titlebar"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Body/Topbar/Titlebar" unique_id=2142552067]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -381,7 +379,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.14901961, 0.16862746, 0.19607843, 1)
 
-[node name="HeaderLabel" type="RichTextLabel" parent="HBoxContainer/Body/Topbar/Titlebar"]
+[node name="HeaderLabel" type="RichTextLabel" parent="HBoxContainer/Body/Topbar/Titlebar" unique_id=154638862]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -392,11 +390,11 @@ text = "BDS ADDON MANAGER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Pages" type="Control" parent="HBoxContainer/Body"]
+[node name="Pages" type="Control" parent="HBoxContainer/Body" unique_id=28186045]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Body/Pages"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Body/Pages" unique_id=22718083]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -406,11 +404,11 @@ grow_vertical = 2
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="WorldFilesPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer"]
+[node name="WorldFilesPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=1978013202]
 layout_mode = 2
 script = ExtResource("10_50ugh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" unique_id=1111799470]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -419,10 +417,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer" unique_id=1036868515]
 layout_mode = 2
 
-[node name="WorldFolderLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer"]
+[node name="WorldFolderLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer" unique_id=1714810061]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -430,7 +428,7 @@ placeholder_text = "Select world folder..."
 clear_button_enabled = true
 caret_blink = true
 
-[node name="WorldFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer" groups=["folder_buttons"]]
+[node name="WorldFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer" unique_id=656078714 groups=["folder_buttons"]]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 tooltip_text = "Open file picker"
@@ -439,7 +437,7 @@ theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.9176470
 icon = ExtResource("3_5dlwx")
 icon_alignment = 1
 
-[node name="ValidateButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer"]
+[node name="ValidateButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer" unique_id=1851128182]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 tooltip_text = "Load world"
@@ -448,26 +446,26 @@ theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.9176470
 icon = ExtResource("13_ccybt")
 icon_alignment = 1
 
-[node name="AdvancedDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer"]
+[node name="AdvancedDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer" unique_id=271257046]
 layout_mode = 2
 script = ExtResource("10_24j03")
 
-[node name="Header" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown"]
+[node name="Header" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown" unique_id=1720062150]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Header"]
+[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Header" unique_id=1780790645]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Advanced"
 
-[node name="ArrowButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Header"]
+[node name="ArrowButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Header" unique_id=1559663132]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Header/ArrowButton"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Header/ArrowButton" unique_id=2058068534]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -483,14 +481,14 @@ grow_vertical = 2
 texture = ExtResource("11_p1ia5")
 stretch_mode = 5
 
-[node name="Content" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown"]
+[node name="Content" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown" unique_id=1222737964]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1423406887]
 layout_mode = 2
 
-[node name="ResourcePackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer"]
+[node name="ResourcePackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer" unique_id=1487620305]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -498,7 +496,7 @@ placeholder_text = "Select resource pack folder..."
 clear_button_enabled = true
 caret_blink = true
 
-[node name="RPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer" groups=["folder_buttons"]]
+[node name="RPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer" unique_id=1991721068 groups=["folder_buttons"]]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -508,10 +506,10 @@ theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.9176470
 icon = ExtResource("3_5dlwx")
 icon_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1785917042]
 layout_mode = 2
 
-[node name="BehaviorPackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2"]
+[node name="BehaviorPackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2" unique_id=1994084052]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -519,7 +517,7 @@ placeholder_text = "Select behavior pack folder..."
 clear_button_enabled = true
 caret_blink = true
 
-[node name="BPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2" groups=["folder_buttons"]]
+[node name="BPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2" unique_id=1285063475 groups=["folder_buttons"]]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 tooltip_text = "Open file picker"
@@ -528,27 +526,27 @@ theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.9176470
 icon = ExtResource("3_5dlwx")
 icon_alignment = 1
 
-[node name="RecentDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer"]
+[node name="RecentDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer" unique_id=2082676400]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_24j03")
 
-[node name="Header" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown"]
+[node name="Header" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown" unique_id=425494549]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Header"]
+[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Header" unique_id=129085723]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Recently Opened Worlds"
 
-[node name="ArrowButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Header"]
+[node name="ArrowButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Header" unique_id=318841568]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Header/ArrowButton"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Header/ArrowButton" unique_id=1910556536]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -564,12 +562,12 @@ grow_vertical = 2
 texture = ExtResource("11_p1ia5")
 stretch_mode = 5
 
-[node name="Content" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown"]
+[node name="Content" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown" unique_id=1038085772]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MessageLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content"]
+[node name="MessageLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content" unique_id=1387528041]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -577,18 +575,18 @@ size_flags_vertical = 3
 fit_content = true
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content" unique_id=1637261516]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer" unique_id=738207444]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="FolderPicker" type="FileDialog" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage"]
+[node name="FolderPicker" type="FileDialog" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" unique_id=1848461023]
 oversampling_override = 1.0
 title = "Open a Directory"
 file_mode = 2
@@ -596,12 +594,12 @@ access = 2
 use_native_dialog = true
 script = ExtResource("15_50ugh")
 
-[node name="ResourcePacksPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer"]
+[node name="ResourcePacksPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=659469836]
 visible = false
 layout_mode = 2
 script = ExtResource("16_htxff")
 
-[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage"]
+[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" unique_id=304578500]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -616,7 +614,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Select a world first!"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" unique_id=273640173]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -624,17 +622,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage/ScrollContainer" unique_id=548192940]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="BehaviorPacksPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer"]
+[node name="BehaviorPacksPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=2028866768]
 visible = false
 layout_mode = 2
 script = ExtResource("17_v252j")
 
-[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage"]
+[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" unique_id=342521720]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -649,7 +647,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Select a world first!"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" unique_id=265904246]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -657,17 +655,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage/ScrollContainer" unique_id=738390523]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="SettingsPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer"]
+[node name="SettingsPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=1462159522]
 visible = false
 layout_mode = 2
 script = ExtResource("10_lp058")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" unique_id=96893607]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -675,45 +673,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer" unique_id=761234400]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="CheckBox1" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer"]
+[node name="CheckBox1" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=1602649273]
 layout_mode = 2
 tooltip_text = "Note: may hide user packs!"
 theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
 text = "Hide vanilla packs"
 
-[node name="CheckBox2" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer"]
+[node name="CheckBox2" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=781462841]
 layout_mode = 2
 theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
 text = "Hide '§' text modifiers"
 
-[node name="CheckBox3" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer"]
+[node name="CheckBox3" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=905970707]
 layout_mode = 2
 tooltip_text = "Adds import date to pack folder name."
 theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
 text = "Avoid pack import conflicts"
 
-[node name="CheckBox4" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer"]
+[node name="CheckBox4" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=1280193545]
 layout_mode = 2
 theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
 text = "Prefer system trash on delete"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer" unique_id=238469139]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2" unique_id=961301601]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1112902115]
 custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2/HBoxContainer/ScrollContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2/HBoxContainer/ScrollContainer" unique_id=1720649281]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tool that makes managing addons easier for a Minecraft: Bedrock Edition server.
@@ -732,54 +730,54 @@ How to use this tool:
 fit_content = true
 scroll_active = false
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer" unique_id=260191150]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=741536815]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("17_lcp4o")
 stretch_mode = 5
 
-[node name="ProjectLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="ProjectLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=1496282541]
 layout_mode = 2
 text = "Project Site 🡥"
 uri = "https://github.com/DragonTech26/BDSAddonManager/tree/v2"
 
-[node name="BDSLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="BDSLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=2129682811]
 layout_mode = 2
 text = "Server Download 🡥"
 uri = "https://www.minecraft.net/en-us/download/server/bedrock"
 
-[node name="DocsLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="DocsLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=180354912]
 layout_mode = 2
 text = "Documentation 🡥"
 uri = "https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockserver/getting-started?view=minecraft-bedrock-stable"
 
-[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=1304071009]
 layout_mode = 2
 text = "-"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResetButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="ResetButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=133383009]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Switch world"
 script = ExtResource("22_j04uq")
 
-[node name="OpenWorldButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="OpenWorldButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=1614637905]
 layout_mode = 2
 text = "Open world folder"
 script = ExtResource("24_xxm0n")
 
-[node name="SecretButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3"]
+[node name="SecretButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=107099438]
 visible = false
 layout_mode = 2
 text = "???"
 script = ExtResource("24_tx8mq")
 
-[node name="AlertBox" type="Control" parent="HBoxContainer/Body/Pages"]
+[node name="AlertBox" type="Control" parent="HBoxContainer/Body/Pages" unique_id=115967580]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -789,7 +787,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("18_yk6rd")
 
-[node name="MessagePanel" type="Panel" parent="HBoxContainer/Body/Pages/AlertBox"]
+[node name="MessagePanel" type="Panel" parent="HBoxContainer/Body/Pages/AlertBox" unique_id=722713303]
 visible = false
 custom_minimum_size = Vector2(550, 50)
 layout_mode = 1
@@ -806,7 +804,7 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/AlertBox/MessagePanel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/AlertBox/MessagePanel" unique_id=172182349]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -819,7 +817,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="Panel" parent="HBoxContainer/Body/Pages/AlertBox/MessagePanel"]
+[node name="ProgressBar" type="Panel" parent="HBoxContainer/Body/Pages/AlertBox/MessagePanel" unique_id=684810172]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 1
 anchors_preset = 12
@@ -830,11 +828,9 @@ offset_top = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Body/Pages/AlertBox"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Body/Pages/AlertBox" unique_id=1039692591]
 root_node = NodePath("../../../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_2lg1k")
-}
+libraries/ = SubResource("AnimationLibrary_2lg1k")
 
 [connection signal="gui_input" from="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton" to="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton" method="_on_gui_input"]
 [connection signal="gui_input" from="HBoxContainer/Sidebar/VBoxContainer/TopContainer/ResourcePacks" to="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" method="_on_resource_packs_gui_input"]

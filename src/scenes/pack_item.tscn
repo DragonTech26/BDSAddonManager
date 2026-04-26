@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqy501w7qksn3"]
+[gd_scene format=3 uid="uid://bqy501w7qksn3"]
 
 [ext_resource type="Texture2D" uid="uid://bw4pw55p2addk" path="res://assets/graphics/placeholder.svg" id="1_0j157"]
 [ext_resource type="Script" uid="uid://ckvjj3prd0vj3" path="res://src/scripts/pack_item.gd" id="1_5hvgd"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="4_4jlgp"]
 [ext_resource type="Texture2D" uid="uid://cs2v2xpasrnty" path="res://assets/graphics/caret.svg" id="4_kn27u"]
 
-[node name="PackItem" type="PanelContainer"]
+[node name="PackItem" type="PanelContainer" unique_id=479773634]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,31 +16,31 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_5hvgd")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1153569076]
 layout_mode = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="Background" type="ColorRect" parent="MarginContainer"]
+[node name="Background" type="ColorRect" parent="MarginContainer" unique_id=1386913035]
 custom_minimum_size = Vector2(800, 75)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.10980392, 0.11764706, 0.13333334, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1688696635]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=819626569]
 layout_mode = 2
 
-[node name="UpButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="UpButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=756618439]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/UpButton"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/UpButton" unique_id=685646808]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,11 +51,11 @@ mouse_default_cursor_shape = 2
 texture = ExtResource("4_kn27u")
 flip_v = true
 
-[node name="DownButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="DownButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2090816755]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/DownButton"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/DownButton" unique_id=201021431]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,14 +65,14 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 texture = ExtResource("4_kn27u")
 
-[node name="PackIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+[node name="PackIcon" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1778321137]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_default_cursor_shape = 16
 texture = ExtResource("1_0j157")
 expand_mode = 3
 
-[node name="VersionLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+[node name="VersionLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=615492378]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.69411767, 0.7058824, 0.72156864, 1)
@@ -82,7 +82,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NameLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+[node name="NameLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=622504367]
 custom_minimum_size = Vector2(250, 16)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -90,7 +90,7 @@ size_flags_vertical = 4
 text = "Resource/Behavior Pack Name"
 fit_content = true
 
-[node name="DependencyInfo" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+[node name="DependencyInfo" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=386730492]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 tooltip_text = "This pack requires a dependency to work properly!"
@@ -99,7 +99,7 @@ texture = ExtResource("4_3vdsl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SubpackDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer"]
+[node name="SubpackDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer" unique_id=1422337698]
 custom_minimum_size = Vector2(300, 45)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -109,7 +109,7 @@ text_overrun_behavior = 3
 clip_text = true
 fit_to_longest_item = false
 
-[node name="CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer" unique_id=1752764625]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -119,7 +119,7 @@ text = "enabled?"
 icon_alignment = 1
 expand_icon = true
 
-[node name="DeleteButton" type="Button" parent="MarginContainer/HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1766330339]
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_default_cursor_shape = 2

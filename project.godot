@@ -14,11 +14,15 @@ config/name="BDS Addon Manager"
 config/description="Manage addons for your Bedrock Dedicated Servers"
 config/version="2.1.0"
 run/main_scene="uid://d16hxw7mmxo1y"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 run/low_processor_mode=true
 boot_splash/show_image=false
 config/icon="uid://o68a4ig6fr4"
 config/windows_native_icon="res://assets/graphics/icons/windows_icon.ico"
+
+[audio]
+
+driver/driver="Dummy"
 
 [autoload]
 
@@ -36,7 +40,7 @@ window/energy_saving/keep_screen_on=false
 
 [dotnet]
 
-project/assembly_name="New Game Project"
+project/assembly_name="BDS Addon Manager"
 
 [rendering]
 

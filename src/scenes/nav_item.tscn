@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8pfo2q0u42vn"]
+[gd_scene format=3 uid="uid://b8pfo2q0u42vn"]
 
 [ext_resource type="Script" uid="uid://1pm53ewg6n0" path="res://src/scripts/navitem.gd" id="1_qm38q"]
 [ext_resource type="Texture2D" uid="uid://bw4pw55p2addk" path="res://assets/graphics/placeholder.svg" id="2_hnebq"]
 
-[node name="NavItem" type="Control" groups=["navitem"]]
+[node name="NavItem" type="Control" unique_id=70983469 groups=["navitem"]]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 3
 anchors_preset = 0
@@ -11,7 +11,7 @@ offset_bottom = 40.0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_qm38q")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1371992124]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=643189243]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,11 +36,11 @@ text = "Placeholder"
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="icon" type="Sprite2D" parent="."]
+[node name="icon" type="Sprite2D" parent="." unique_id=2010384230]
 position = Vector2(35, 25)
 texture = ExtResource("2_hnebq")
 
-[node name="active" type="ColorRect" parent="."]
+[node name="active" type="ColorRect" parent="." unique_id=90128207]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 1
 anchors_preset = 9
