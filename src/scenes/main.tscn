@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://d4hpglcxthjwh" path="res://src/scripts/reset_button.gd" id="22_j04uq"]
 [ext_resource type="Script" uid="uid://c757p0bpnvkr7" path="res://src/scripts/secret_button.gd" id="24_tx8mq"]
 [ext_resource type="Script" uid="uid://8u8rtxv7t5r0" path="res://src/scripts/open_world_button.gd" id="24_xxm0n"]
+[ext_resource type="Script" uid="uid://dhs2h0id5xqvn" path="res://src/scenes/open_config_button.gd" id="25_2sd1y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fxj6"]
 bg_color = Color(0.21176471, 0.23921569, 0.2901961, 1)
@@ -771,6 +772,11 @@ layout_mode = 2
 text = "Open world folder"
 script = ExtResource("24_xxm0n")
 
+[node name="OpenConfigButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=2053507739]
+layout_mode = 2
+text = "Open config folder"
+script = ExtResource("25_2sd1y")
+
 [node name="SecretButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=107099438]
 visible = false
 layout_mode = 2
@@ -850,4 +856,5 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/ResetButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/ResetButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenWorldButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenConfigButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/SecretButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/SecretButton" method="_on_pressed"]
