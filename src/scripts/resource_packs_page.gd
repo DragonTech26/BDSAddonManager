@@ -16,11 +16,8 @@ func load_packs(packs):
 	var show_packs = packs
 	if LoadSettings.get_setting("HIDE_DEFAULT_SERVER_PACKS"):
 		var filtered: Array = []
-		var hidden_prefixes: Array = [
-			"resourcepack.",
-			"@minecraft",
-			"experimental",
-		]
+		var hidden_prefixes: Array[String] = HiddenPackPrefixes.get_resource_pack_prefixes()
+
 		for p in packs:
 			var n: String = str(p.name).to_lower()
 			var should_hide := false

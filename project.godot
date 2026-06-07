@@ -31,6 +31,7 @@ LoadSettings="*res://src/autoload/load_settings.gd"
 Global="*res://src/autoload/global.gd"
 LoadRecentWorlds="*res://src/autoload/load_recent_worlds.gd"
 AlertManager="*res://src/autoload/alert_manager.gd"
+HiddenPackPrefixes="*uid://dvur8wlpd5vm4"
 
 [display]
 
@@ -46,3 +47,4 @@ project/assembly_name="BDS Addon Manager"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+shader_compiler/shader_cache/enabled=false
