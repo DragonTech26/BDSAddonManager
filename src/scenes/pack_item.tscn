@@ -128,6 +128,7 @@ icon = ExtResource("4_4jlgp")
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/UpButton" to="." method="_on_up_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/PackIcon" to="." method="_on_pack_icon_gui_input"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/SubpackDropdown" to="." method="_on_subpack_dropdown_item_selected"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]

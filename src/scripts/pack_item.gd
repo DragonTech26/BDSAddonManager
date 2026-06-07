@@ -191,6 +191,17 @@ func _on_down_button_pressed() -> void:
 	_move_item(1)
 
 
+func _on_pack_icon_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		var base_path := ""
+		if str(pack_data.type) == "behavior":
+			base_path = Global.WorldBehaviorPackPath
+		else:
+			base_path = Global.WorldResourcePackPath
+		var target_dir := base_path.path_join(str(pack_data.pack_folder))
+		OS.shell_open(target_dir)
+
+
 func _move_item(delta: int) -> void:
 	var container := get_parent()
 	if container == null:
