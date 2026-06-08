@@ -146,4 +146,5 @@ func _write_json_array(path: String, data: Array) -> bool:
 		return false
 	f.store_string(json_text)
 	f.close()
+	print("[INFO] Successfully wrote new world pack json files")
 	return true

@@ -41,6 +41,7 @@ func _refresh_pack_pages() -> void:
 	# Re-parse manifests to update Global.RPList and Global.BPList
 	var parser := JsonParser.new()
 	parser.ReadData()
+	print("[INFO] New pack(s) imported. Global lists refreshed")
 
 	# Refresh Resource Packs page
 	var rp_page: Node = $"../../../../Body/Pages/MarginContainer/ResourcePacksPage"

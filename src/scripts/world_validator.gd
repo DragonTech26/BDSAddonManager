@@ -27,12 +27,15 @@ func validate_all(world_dir: String, rp_dir: String, bp_dir: String) -> bool:
 
 	if not validate_json_file(world_dir.path_join("world_behavior_packs.json")):
 		return false
+	print("[INFO] World directory: " + world_dir)
+	print("[INFO] Resource pack directory: " + rp_dir)
+	print("[INFO] Behavior pack directory: " + bp_dir)
 	return true
 
 
 func validate_json_file(path: String) -> bool:
 	if not FileAccess.file_exists(path):
-		print("JSON file missing, creating default: ", path)
+		print("[WARN] JSON file missing, creating default: ", path)
 
 		# Create the default file and write an empty JSON array
 		var create_file := FileAccess.open(path, FileAccess.WRITE)
@@ -52,7 +55,7 @@ func validate_json_file(path: String) -> bool:
 	var err := json.parse(text)
 
 	if err != OK:
-		print("Invalid JSON in", path, "Line:", json.get_error_line())
+		print("[WARN] Invalid JSON in", path, "Line:", json.get_error_line())
 		AlertManager.show_alert("Invalid JSON in: " + path.get_file(), Color.CRIMSON)
 		return false
 	return true

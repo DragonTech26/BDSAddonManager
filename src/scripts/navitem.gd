@@ -37,3 +37,4 @@ func _on_gui_input(event: InputEvent):
 			for item in navitems:
 				item.set_active(false)
 			set_active(true)
+			print("[INFO] Selected page: " + str(page))

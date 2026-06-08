@@ -70,3 +70,4 @@ func _unfreeze_ui() -> void:
 	var validate_button: Button = $"../../../../WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton"
 	validate_button.icon = ResourceLoader.load("res://assets/graphics/goto.svg")
 	validate_button.modulate = Color.WHITE
+	print("[INFO] World selection inputs have been enabled")

@@ -13,14 +13,14 @@ var settings: Dictionary = {
 
 
 func _ready():
-	print("Local directory: " + OS.get_data_dir())
+	print("[INFO] Program data directory: " + ProjectSettings.globalize_path("user://"))
 	load_or_create_settings()
 
 
 func load_or_create_settings():
 	var file: FileAccess = FileAccess.open(SETTINGS_FILE, FileAccess.READ)
 	if file:
-		print("Settings file found, loading...")
+		print("[INFO] Settings file found, loading...")
 		while not file.eof_reached():
 			var line: String = file.get_line().strip_edges()
 			if line == "" or line.begins_with("#"):
@@ -31,12 +31,13 @@ func load_or_create_settings():
 				var value: String = parts[1].strip_edges()
 				if settings.has(key): # only accept known keys
 					settings[key] = parse_value(value)
+					print("[INFO] Setting " + key + " is " + value)
 		file.close()
 
 		setting_integrity_checker()
 		save_settings()
 	else:
-		print("No settings file found, creating defaults...")
+		print("[INFO] No settings file found, creating defaults...")
 		save_settings()
 
 
@@ -69,6 +70,7 @@ func get_setting(key: String) -> Variant:
 func set_setting(key: String, value: Variant):
 	if settings.has(key): # only allow known keys
 		settings[key] = value
+		print("[INFO] Setting '" + key + "' changed to: " + str(value))
 		save_settings()
 
 

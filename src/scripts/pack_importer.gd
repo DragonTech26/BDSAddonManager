@@ -15,19 +15,19 @@ func _process_single_file(path: String) -> void:
 
 	# Step 1b: Make sure the file extension is valid for direct import
 	if not _is_valid_extension(path):
-		print("PackImporter: Invalid extension for ", path)
+		print("[WARN] PackImporter: Invalid extension for ", path)
 		return
 
 	# Step 2: Unzip them in a temp folder
 	var temp_path: String = _unzip_to_temp(path)
 	if temp_path.is_empty():
-		print("PackImporter: Failed to unzip ", path)
+		print("[WARN] PackImporter: Failed to unzip ", path)
 		return
 
 	# Step 3: Find the manifest.json file
 	var manifest_path: String = _find_manifest_in_path(temp_path)
 	if manifest_path.is_empty():
-		print("PackImporter: No manifest found in ", path)
+		print("[WARN] PackImporter: No manifest found in ", path)
 		_cleanup_temp(temp_path)
 		return
 
@@ -47,13 +47,13 @@ func _process_mcaddon(file_path: String) -> void:
 	# Unzip the .mcaddon into a temp directory
 	var temp_root := _unzip_to_temp(file_path)
 	if temp_root.is_empty():
-		print("PackImporter: Failed to unzip mcaddon: ", file_path)
+		print("[WARN] PackImporter: Failed to unzip mcaddon: ", file_path)
 		return
 
 	# Scan the extracted content for files or folders
 	var dir := DirAccess.open(temp_root)
 	if not dir:
-		print("PackImporter: Could not open extracted mcaddon directory")
+		print("[WARN] PackImporter: Could not open extracted mcaddon directory")
 		_cleanup_temp(temp_root)
 		return
 
@@ -82,7 +82,7 @@ func _process_mcaddon(file_path: String) -> void:
 		item = dir.get_next()
 
 	if not found_any:
-		print("PackImporter: No valid mcpacks or pack folders inside mcaddon")
+		print("[WARN] PackImporter: No valid mcpacks or pack folders inside mcaddon")
 
 	_cleanup_temp(temp_root)
 
@@ -147,24 +147,24 @@ func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basenam
 	var content: String = FileAccess.get_file_as_string(manifest_path)
 	var json: JSON = JSON.new()
 	if json.parse(content) != OK:
-		print("PackImporter: JSON parse error for ", manifest_path)
+		print("[WARN] PackImporter: JSON parse error for ", manifest_path)
 		return
 
 	var data = json.data
 	if not (data is Dictionary) or not data.has("modules"):
-		print("PackImporter: Invalid manifest structure")
+		print("[WARN] PackImporter: Invalid manifest structure")
 		return
 
 	var pack_id := ""
 	if data.header.has("uuid"):
 		pack_id = str(data.header.uuid)
 	else:
-		print("PackImporter: Manifest has no UUID")
+		print("[WARN] PackImporter: Manifest has no UUID")
 		return
 
 	# Check for existing packs
 	if _uuid_exists(pack_id):
-		print("PackImporter: Duplicate UUID found:", pack_id, "Skipping import.")
+		print("[INFO] PackImporter: Duplicate UUID found:", pack_id, "Skipping import.")
 		AlertManager.show_alert("Duplicate pack(s) detected. Skipping.", Color.YELLOW)
 		return
 
@@ -185,7 +185,7 @@ func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basenam
 	elif pack_type == "data" or pack_type == "script":
 		target_root = Global.WorldBehaviorPackPath
 	else:
-		print("PackImporter: Ignored unknown pack type: ", pack_type)
+		print("[WARN] PackImporter: Ignored unknown pack type: ", pack_type)
 		return
 
 	# Determine the folder name to copy
@@ -206,7 +206,7 @@ func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basenam
 	var final_destination: String = target_root.path_join(final_name)
 
 	_copy_recursive(source_pack_folder, final_destination)
-	print("PackImporter: Imported ", pack_folder_name, " to ", final_destination)
+	print("[INFO] PackImporter: Imported ", pack_folder_name, " to ", final_destination)
 
 
 func _uuid_exists(pack_id: String) -> bool:
@@ -254,11 +254,11 @@ func _cleanup_temp(path: String) -> void:
 				var full_path := path.path_join(file_name)
 				if DirAccess.dir_exists_absolute(full_path):
 					_cleanup_temp(full_path) # recurse into subdir
-					print("delete dir:", full_path)
+					print("[INFO] Removed temp directory:", full_path)
 				else:
 					DirAccess.remove_absolute(full_path) # remove file
-					print("delete file:", full_path)
+					print("[INFO] Removed temp file:", full_path)
 			file_name = dir.get_next()
 		dir.list_dir_end()
 		DirAccess.remove_absolute(path) # finally remove the directory itself
-		print("removed folder:", path)
+		print("[INFO] Removed temp folder:", path)

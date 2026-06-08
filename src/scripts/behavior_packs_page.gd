@@ -8,7 +8,7 @@ var PackItemScene: PackedScene = preload("res://src/scenes/pack_item.tscn")
 
 
 func load_packs(packs):
-	print("load_packs called. count = ", packs.size())
+	print("[INFO] Behavior pack count (includes hidden): ", packs.size())
 	for c in list_container.get_children():
 		c.queue_free()
 

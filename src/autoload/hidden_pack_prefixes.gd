@@ -61,7 +61,7 @@ func get_prefixes(section_name: String) -> Array[String]:
 	var prefixes: Array[String] = []
 	var file := FileAccess.open(PREFIXES_FILE, FileAccess.READ)
 	if file == null:
-		push_warning("Could not read hidden prefixes file: " + PREFIXES_FILE)
+		print("[WARN] Could not read hidden prefixes file: " + PREFIXES_FILE)
 		return prefixes
 
 	var current_section := ""
@@ -90,7 +90,7 @@ func _read_prefix_file() -> Dictionary:
 
 	var file := FileAccess.open(PREFIXES_FILE, FileAccess.READ)
 	if file == null:
-		push_warning("Could not read hidden prefixes file: " + PREFIXES_FILE)
+		print("[WARN] Could not read hidden prefixes file: " + PREFIXES_FILE)
 		return sections
 
 	var current_section := ""
@@ -144,7 +144,7 @@ func _sync_default_prefixes(sections: Dictionary) -> Dictionary:
 func _save_prefix_file(sections: Dictionary) -> void:
 	var file := FileAccess.open(PREFIXES_FILE, FileAccess.WRITE)
 	if file == null:
-		push_warning("Could not write hidden prefixes file: " + PREFIXES_FILE)
+		print("[WARN] Could not write hidden prefixes file: " + PREFIXES_FILE)
 		return
 
 	for message_line in FILE_MESSAGE:

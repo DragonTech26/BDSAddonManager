@@ -60,8 +60,10 @@ func add_recent_world(world_name: String, world_dir: String, rp_dir: String, bp_
 
 	if index != -1:
 		recent_worlds.remove_at(index)
+		print("[INFO] Removed world: " + world_name + " from recent list")
 
 	recent_worlds.insert(0, entry)
+	print("[INFO] Added recent world: " + world_name + " to list")
 
 	_trim_recent_worlds()
 	save_recent_worlds()

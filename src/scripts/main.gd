@@ -7,6 +7,8 @@ var is_editor: bool = false
 func _ready() -> void:
 	if OS.is_debug_build():
 		is_editor = true
+		print("[DEV] Is debug build: " + str(is_editor))
+		print("[DEV] Program version: " + ProjectSettings.get_setting("application/config/version"))
 
 # This currently has no effect in the editor, must use release build.
 func _notification(what) -> void:
@@ -39,4 +41,5 @@ func _show_quit_dialog():
 
 
 func _on_confirm_quit():
+	print("[INFO] World closed without saving changes")
 	get_tree().quit()

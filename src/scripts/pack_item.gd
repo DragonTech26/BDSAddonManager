@@ -81,6 +81,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 		return
 	pack_data.is_active = toggled_on
 	_persist_state_to_global()
+	print("[INFO] Pack '%s' has been toggled %s" % [pack_data.name, "ON" if toggled_on else "OFF"])
 
 
 func _on_subpack_dropdown_item_selected(index: int) -> void:
@@ -94,10 +95,13 @@ func _on_subpack_dropdown_item_selected(index: int) -> void:
 			sel_folder = str(sp.folder_name)
 	pack_data.active_subpack = sel_folder
 	_persist_state_to_global()
+	print("[INFO] Subpack changed to '" + sel_folder + "' for pack '" + pack_data.name +"'")
 
 
 func _on_delete_button_pressed():
 	# Show a confirmation dialog before deleting from disk
+	if pack_data != null:
+		print("[ALERT] Requesting delete for pack '%s' (Folder: %s)" % [pack_data.name, pack_data.pack_folder])
 	if _delete_dialog == null:
 		_delete_dialog = ConfirmationDialog.new()
 		_delete_dialog.title = "Delete pack?"
@@ -113,6 +117,7 @@ func _on_delete_button_pressed():
 
 
 func _on_confirm_delete() -> void:
+	print("[ALERT] Confirmed delete for pack '%s'" % pack_data.name)
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
 	await get_tree().process_frame
 
@@ -124,19 +129,26 @@ func _on_confirm_delete() -> void:
 
 	var target_dir := base_path.path_join(str(pack_data.pack_folder))
 	var success := false
+	print("[ALERT] Target directory: %s" % target_dir)
 
 	# Try system trash
 	if LoadSettings.get_setting("USE_SYSTEM_TRASH_ON_DELETE"):
+		print("[ALERT] Attempting move to system trash...")
 		if OS.move_to_trash(target_dir) == OK:
+			print("[ALERT] Successfully moved to trash.")
 			success = true
+		else:
+			print("[ALERT] Move to trash failed. Falling back to alternative system")
 
 	# Manual Recursion (Slower Fallback)
 	if not success:
+		print("[ALERT] Attempting recursive deletion...")
 		success = _delete_directory_recursive(target_dir)
 
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 
 	if success:
+		print("[ALERT] Successfully deleted pack '%s'" % pack_data.name)
 		var container := get_parent()
 		if container != null:
 			container.remove_child(self)
@@ -145,6 +157,7 @@ func _on_confirm_delete() -> void:
 		queue_free()
 		Global.HasUnsavedChanges = true
 	else:
+		print("[ALERT] FAILED to delete '%s'" % target_dir)
 		if _error_dialog == null:
 			_error_dialog = AcceptDialog.new()
 			_error_dialog.title = "Delete failed"
@@ -154,6 +167,7 @@ func _on_confirm_delete() -> void:
 
 
 func _delete_directory_recursive(path: String) -> bool:
+	print("[ALERT] Entering directory: %s" % path)
 	if not DirAccess.dir_exists_absolute(path):
 		return true
 
@@ -171,14 +185,18 @@ func _delete_directory_recursive(path: String) -> bool:
 				if not _delete_directory_recursive(full):
 					success = false
 			else:
+				print("[ALERT] Removing file: %s" % full)
 				var err := DirAccess.remove_absolute(full)
 				if err != OK:
+					print("[ALERT] Failed removing file: %s" % full)
 					success = false
 		filename = d.get_next()
 	d.list_dir_end()
 
+	print("[ALERT] Removing directory: %s" % path)
 	var err2 := DirAccess.remove_absolute(path)
 	if err2 != OK:
+		print("[ALERT] Failed removing directory: %s" % path)
 		success = false
 	return success
 
@@ -200,6 +218,7 @@ func _on_pack_icon_gui_input(event: InputEvent) -> void:
 			base_path = Global.WorldResourcePackPath
 		var target_dir := base_path.path_join(str(pack_data.pack_folder))
 		OS.shell_open(target_dir)
+		print("[INFO] Opened file manager at: " + target_dir)
 
 
 func _move_item(delta: int) -> void:
@@ -213,6 +232,9 @@ func _move_item(delta: int) -> void:
 
 	if to_idx < 0 or to_idx > last_idx:
 		return
+
+	var pack_type := str(pack_data.type).capitalize()
+	print("[INFO] Moving %s pack '%s' from index %d to %d" % [pack_type, pack_data.name, from_idx, to_idx])
 
 	container.move_child(self, to_idx)
 	_sync_global_order(container)
@@ -231,6 +253,8 @@ func _sync_global_order(container: Node) -> void:
 	if pack_data != null:
 		list_type = str(pack_data.type)
 
+	#print("[INFO] Rebuilding global order for type: %s" % list_type)
+
 	for c in container.get_children():
 		if c.has_method("get_pack_data"):
 			var d = c.get_pack_data()
@@ -242,6 +266,8 @@ func _sync_global_order(container: Node) -> void:
 	else:
 		# Default/fallback to resource packs
 		Global.RPList = new_order
+
+	#print("[INFO] Global order sync complete.")
 
 
 func _update_buttons_for_all(container: Node) -> void:

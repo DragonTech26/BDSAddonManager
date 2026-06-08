@@ -19,7 +19,7 @@ func GetAdvancedPaths(root_path: String) -> void:
 		return
 	# Go to server root directory
 	var working_dir: String = DirAccess.open(root_path).get_current_dir().get_base_dir().get_base_dir()
-	print("Working directory: " + working_dir)
+	print("[INFO] Working directory: " + working_dir)
 	if working_dir == "":
 		return
 	# Build expected RP/BP paths
@@ -87,6 +87,7 @@ func GetWorldName() -> void:
 	var file: FileAccess = FileAccess.open(name_file, FileAccess.READ)
 	if file == null:
 		Global.WorldName = "Unknown"
+		print("[WARN] Unable to read world name")
 		return
 
 	var line: String = file.get_line()
@@ -115,6 +116,8 @@ func DisableInput():
 	for slot in recent_container.get_children():
 		if slot.has_method("set_enabled"):
 			slot.set_enabled(false)
+
+	print("[INFO] World selection inputs have been disabled")
 
 
 func GetRecentWorldsList():
