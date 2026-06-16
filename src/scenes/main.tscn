@@ -488,10 +488,10 @@ stretch_mode = 5
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1423406887]
+[node name="RPHBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1423406887]
 layout_mode = 2
 
-[node name="ResourcePackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer" unique_id=1487620305]
+[node name="ResourcePackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer" unique_id=1487620305]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -499,7 +499,7 @@ placeholder_text = "Select resource pack folder..."
 clear_button_enabled = true
 caret_blink = true
 
-[node name="RPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer" unique_id=1991721068 groups=["folder_buttons"]]
+[node name="RPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer" unique_id=1991721068 groups=["folder_buttons"]]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -509,10 +509,10 @@ theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.9176470
 icon = ExtResource("3_5dlwx")
 icon_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1785917042]
+[node name="BPHBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1785917042]
 layout_mode = 2
 
-[node name="BehaviorPackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2" unique_id=1994084052]
+[node name="BehaviorPackLine" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer" unique_id=1994084052]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -520,7 +520,7 @@ placeholder_text = "Select behavior pack folder..."
 clear_button_enabled = true
 caret_blink = true
 
-[node name="BPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2" unique_id=1285063475 groups=["folder_buttons"]]
+[node name="BPFolderButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer" unique_id=1285063475 groups=["folder_buttons"]]
 custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 tooltip_text = "Open file picker"
@@ -1106,8 +1106,8 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_world_folder_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_validate_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_pressed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" to="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" to="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" method="_on_visibility_changed"]

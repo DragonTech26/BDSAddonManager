@@ -4,8 +4,8 @@ var WorldValidator = preload("res://src/scripts/world_validator.gd").new()
 
 @onready var folder_picker: FileDialog = $FolderPicker
 @onready var world_path: LineEdit = $VBoxContainer/HBoxContainer/WorldFolderLine
-@onready var resource_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer/ResourcePackLine
-@onready var behavior_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BehaviorPackLine
+@onready var resource_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/ResourcePackLine
+@onready var behavior_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BehaviorPackLine
 @onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
 @onready var recent_world_item_scene: PackedScene = preload("res://src/scenes/recent_world_item.tscn")
 
@@ -97,8 +97,8 @@ func GetWorldName() -> void:
 
 func DisableInput():
 	var world_file_btn: Button = $VBoxContainer/HBoxContainer/WorldFolderButton
-	var rp_file_btn: Button = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer/RPFolderButton
-	var bp_file_btn: Button = $VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BPFolderButton
+	var rp_file_btn: Button = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton
+	var bp_file_btn: Button = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton
 	var validate_btn: Button = $VBoxContainer/HBoxContainer/ValidateButton
 
 	world_path.editable = false

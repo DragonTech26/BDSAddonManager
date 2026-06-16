@@ -40,14 +40,14 @@ func _reset_globals() -> bool:
 
 
 func _unfreeze_ui() -> void:
-	var world_file_btn: Button = $"../../../../WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton"
-	var rp_file_btn: Button = $"../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer/RPFolderButton"
-	var bp_file_btn: Button = $"../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BPFolderButton"
-	var validate_btn: Button = $"../../../../WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton"
+	var world_file_btn: Button = $"../../../../../../../../WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton"
+	var rp_file_btn: Button = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton"
+	var bp_file_btn: Button = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton"
+	var validate_btn: Button = $"../../../../../../../../WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton"
 
-	var world_path: LineEdit = $"../../../../WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderLine"
-	var resource_pack_path: LineEdit = $"../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer/ResourcePackLine"
-	var behavior_pack_path: LineEdit = $"../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/HBoxContainer2/BehaviorPackLine"
+	var world_path: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderLine"
+	var resource_pack_path: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/ResourcePackLine"
+	var behavior_pack_path: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BehaviorPackLine"
 
 	world_file_btn.disabled = false
 	rp_file_btn.disabled = false
@@ -61,13 +61,13 @@ func _unfreeze_ui() -> void:
 	behavior_pack_path.editable = true
 	behavior_pack_path.text = ""
 
-	var container: VBoxContainer = $"../../../../WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer"
+	var container: VBoxContainer = $"../../../../../../../../WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer"
 
 	for slot in container.get_children():
 		if slot.has_method("set_enabled"):
 			slot.set_enabled(true)
 
-	var validate_button: Button = $"../../../../WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton"
+	var validate_button: Button = $"../../../../../../../../WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton"
 	validate_button.icon = ResourceLoader.load("res://assets/graphics/goto.svg")
 	validate_button.modulate = Color.WHITE
 	print("[INFO] World selection inputs have been enabled")
