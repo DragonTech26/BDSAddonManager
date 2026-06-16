@@ -24,9 +24,11 @@
 [ext_resource type="Script" uid="uid://dbr51ol8hrmju" path="res://src/scripts/behavior_packs_page.gd" id="17_v252j"]
 [ext_resource type="Script" uid="uid://doik1rxquc8ry" path="res://src/scripts/alert_box.gd" id="18_yk6rd"]
 [ext_resource type="Script" uid="uid://d4hpglcxthjwh" path="res://src/scripts/reset_button.gd" id="22_j04uq"]
-[ext_resource type="Script" uid="uid://c757p0bpnvkr7" path="res://src/scripts/secret_button.gd" id="24_tx8mq"]
 [ext_resource type="Script" uid="uid://8u8rtxv7t5r0" path="res://src/scripts/open_world_button.gd" id="24_xxm0n"]
-[ext_resource type="Script" uid="uid://dhs2h0id5xqvn" path="res://src/scenes/open_config_button.gd" id="25_2sd1y"]
+[ext_resource type="Script" uid="uid://dhs2h0id5xqvn" path="res://src/scripts/open_config_button.gd" id="25_2sd1y"]
+[ext_resource type="Script" uid="uid://b1ygxfnk33b4n" path="res://src/scripts/help_button.gd" id="27_am227"]
+[ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="28_7opv2"]
+[ext_resource type="Script" uid="uid://ccwbf806n0ps4" path="res://src/scripts/about_screen.gd" id="28_h8ax2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fxj6"]
 bg_color = Color(0.21176471, 0.23921569, 0.2901961, 1)
@@ -661,12 +663,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="SettingsPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=1462159522]
+[node name="SettingsPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=1377403491]
 visible = false
 layout_mode = 2
 script = ExtResource("10_lp058")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" unique_id=96893607]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" unique_id=75140362]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -674,114 +676,369 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer" unique_id=761234400]
-custom_minimum_size = Vector2(300, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1707191732]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LinkHeader" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer" unique_id=514125263]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="CheckBox1" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=1602649273]
-layout_mode = 2
-tooltip_text = "Note: may hide user packs!"
-theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-text = "Hide vanilla packs"
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/LinkHeader" unique_id=362556463]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -195.5
+offset_right = 195.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="CheckBox2" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=781462841]
-layout_mode = 2
-theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-text = "Hide '§' text modifiers"
-
-[node name="CheckBox3" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=905970707]
-layout_mode = 2
-tooltip_text = "Adds import date to pack folder name."
-theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-text = "Avoid pack import conflicts"
-
-[node name="CheckBox4" type="CheckBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer" unique_id=1280193545]
-layout_mode = 2
-theme_override_colors/checkbox_checked_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-text = "Prefer system trash on delete"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer" unique_id=238469139]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2" unique_id=961301601]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1112902115]
-custom_minimum_size = Vector2(0, 580)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer2/HBoxContainer/ScrollContainer" unique_id=1720649281]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Tool that makes managing addons easier for a Minecraft: Bedrock Edition server.
-
-Do not use this tool while server is running!
-Modifying an existing world may result in unexpected behavior. Always make a backup before editing world files.
-
-Use the Import Packs button on the sidebar to upload .mcpack, .mcaddon, and .zip files to the selected world.
-
-How to use this tool:
-1. Select the world folder (the one containing the 'level.dat' file).
-2. Click the load world button.
-3. Using the sidebar, navigate to the resource and behavior pack screens.
-4. Use the arrows to change pack order. Items on top will take presidence over lower packs. Use the dropdown to select subpacks (if applicable). Use the checkbox to enable/disable packs. Deleting a pack will remove it from your world and disk.
-5. Click the save button to apply changes."
-fit_content = true
-scroll_active = false
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer" unique_id=260191150]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=741536815]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture = ExtResource("17_lcp4o")
-stretch_mode = 5
-
-[node name="ProjectLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=1496282541]
+[node name="ProjectLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/LinkHeader/HBoxContainer" unique_id=803987554]
 layout_mode = 2
 text = "Project Site 🡥"
 uri = "https://github.com/DragonTech26/BDSAddonManager/tree/v2"
 
-[node name="BDSLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=2129682811]
+[node name="BDSLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/LinkHeader/HBoxContainer" unique_id=901140405]
 layout_mode = 2
 text = "Server Download 🡥"
 uri = "https://www.minecraft.net/en-us/download/server/bedrock"
 
-[node name="DocsLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=180354912]
+[node name="DocsLinkButton" type="LinkButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/LinkHeader/HBoxContainer" unique_id=1494035657]
 layout_mode = 2
 text = "Documentation 🡥"
 uri = "https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockserver/getting-started?view=minecraft-bedrock-stable"
 
-[node name="Label" type="Label" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=1304071009]
+[node name="PageContent" type="GridContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer" unique_id=1230294653]
 layout_mode = 2
-text = "-"
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+columns = 2
 
-[node name="ResetButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=133383009]
+[node name="LeftSide" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent" unique_id=1473200941]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="ProgramSettingsPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide" unique_id=1043083345]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel" unique_id=2040786318]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SectionHeader" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=517363593]
+layout_mode = 2
+text = "Program Settings"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HideDefaultPacks" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=201122710]
+layout_mode = 2
+text = "Hide vanilla packs"
+fit_content = true
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideDefaultPacks" unique_id=1072835856]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -469.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HideDefaultPacksDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=917178356]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.7254902, 0.7254902, 0.7254902, 1)
+theme_override_font_sizes/normal_font_size = 12
+text = "Hides default server packs"
+fit_content = true
+
+[node name="HideTextModifiers" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=1155777201]
+layout_mode = 2
+text = "Hide color formatting"
+fit_content = true
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideTextModifiers" unique_id=1716265088]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -469.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HideTextModifiersDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=69654257]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+theme_override_font_sizes/normal_font_size = 12
+text = "Hide '§' text modifiers from pack names"
+fit_content = true
+
+[node name="RecentWorlds" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=505212860]
+layout_mode = 2
+text = "Recent worlds"
+fit_content = true
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/RecentWorlds" unique_id=215820396]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -86.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 999.0
+rounded = true
+
+[node name="RecentWorldsDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=1471473387]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+theme_override_font_sizes/normal_font_size = 12
+text = "How many saves show up on world selection screen. Set to 0 to disable. (Takes effect on restart)"
+fit_content = true
+
+[node name="FileManagementPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide" unique_id=916259638]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel" unique_id=628806096]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SectionHeader" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1998306792]
+layout_mode = 2
+text = "File Management"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="AvoidConflicts" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1241407911]
+layout_mode = 2
+text = "Avoid pack import conflicts"
+fit_content = true
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer/AvoidConflicts" unique_id=574014644]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -469.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AvoidConflictsDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1651876055]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+theme_override_font_sizes/normal_font_size = 12
+text = "Adds a timestamp to imported folder name"
+fit_content = true
+
+[node name="UseSystemTrash" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1743790704]
+layout_mode = 2
+text = "Prefer system trash on delete"
+fit_content = true
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer/UseSystemTrash" unique_id=1779694361]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -469.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="UseSystemTrashDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1435601939]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+theme_override_font_sizes/normal_font_size = 12
+text = "Try to use the local system trash instead of deleting files immediately "
+fit_content = true
+
+[node name="InfoPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide" unique_id=1500493287]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/InfoPanel" unique_id=1870835561]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="Logo" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/InfoPanel/HBoxContainer" unique_id=471693653]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("17_lcp4o")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="InfoLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/InfoPanel/HBoxContainer" unique_id=2120843836]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 14
+text = "BDS Addon Manager
+©2024-present by contributors
+Do not run this program while server is running!"
+fit_content = true
+
+[node name="RightSide" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent" unique_id=776059422]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide" unique_id=825247962]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionsPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=1045992175]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ActionsPanel" unique_id=44254249]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = -11.5
+offset_right = 234.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quick Actions"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=1855308245]
+layout_mode = 2
+columns = 2
+
+[node name="ResetButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer" unique_id=1236490337]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
 mouse_default_cursor_shape = 2
 text = "Switch world"
 script = ExtResource("22_j04uq")
 
-[node name="OpenWorldButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=1614637905]
+[node name="OpenWorldButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer" unique_id=816130195]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
 text = "Open world folder"
 script = ExtResource("24_xxm0n")
 
-[node name="OpenConfigButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=2053507739]
+[node name="OpenConfigButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer" unique_id=1410943950]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
 text = "Open config folder"
 script = ExtResource("25_2sd1y")
 
-[node name="SecretButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3" unique_id=107099438]
+[node name="AboutButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer" unique_id=384182053]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+text = "How to use"
+script = ExtResource("27_am227")
+
+[node name="AboutScreen" type="ColorRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1971234530]
 visible = false
 layout_mode = 2
-text = "???"
-script = ExtResource("24_tx8mq")
+color = Color(0.12941177, 0.14901961, 0.18039216, 1)
+script = ExtResource("28_h8ax2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" unique_id=430692057]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HelpText" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen/ScrollContainer" unique_id=1997959156]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Warning: Do not use this tool while server is running! Modifying an existing world may result in unexpected behavior. Always make a backup before editing world files!
+
+Selecting a world:
+1. Select the world folder (the one containing the 'level.dat' file).
+2. Click the load world button.
+3. Software will automatically detect file path validity. If an error occurs, please verify the file path(s).
+
+Managing existing packs
+1. Select the applicable tab from the sidebar.
+2. Use the arrow buttons to change pack priority. Items on top will take presidence over lower packs.
+3. If a pack contains subpacks, use the dropdown menu to select which subpack is applied.
+4. Use the checkbox to enable/disable active packs.
+5. Deleting a pack will remove it from your world and disk. This may take some time. Do not close the software while deletion is in progress.
+6. Click the save button and confirm to apply changes.
+
+Importing a pack:
+1. Select the Import Packs button on the sidebar to open the file picker.
+2. Valid pack formats include: .mcpack, .mcaddon, and .zip archives.
+3. Depending on pack size, this may take some time. Do not close the software while pack import is in progress.
+
+
+"
+fit_content = true
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" unique_id=979882205]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("28_7opv2")
 
 [node name="AlertBox" type="Control" parent="HBoxContainer/Body/Pages" unique_id=115967580]
 layout_mode = 1
@@ -854,7 +1111,8 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" to="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" to="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" method="_on_visibility_changed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/ResetButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/ResetButton" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenWorldButton" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/OpenConfigButton" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/SecretButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/HBoxContainer/VBoxContainer3/SecretButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/ResetButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/ResetButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen/TextureButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" method="_on_texture_button_pressed"]

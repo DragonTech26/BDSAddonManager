@@ -8,7 +8,6 @@ var settings: Dictionary = {
 	"IMPORT_AS_UNIQUE_FOLDER_NAME": true,
 	"USE_SYSTEM_TRASH_ON_DELETE": false,
 	"RECENT_WORLD_LIST_SIZE": 5,
-	"SUPER_SECRET_SETTING": false,
 }
 
 
