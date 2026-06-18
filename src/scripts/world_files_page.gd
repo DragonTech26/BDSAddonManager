@@ -143,7 +143,10 @@ func GetRecentWorldsList():
 		slot.get_node("Background/VBoxContainer/WorldFilePath").text = data.location_on_disk
 
 	if rw_list.size() <= 0:
-		label.text = "Nothing here...yet!"
+		var rw_list_size = LoadSettings.get_setting("RECENT_WORLD_LIST_SIZE")
+		if rw_list_size == 0:
+			label.text = "Recent worlds list has been disabled"
+		else: label.text = "Nothing here...yet!"
 		label.visible = true
 	else:
 		label.visible = false

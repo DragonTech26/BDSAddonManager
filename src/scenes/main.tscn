@@ -575,6 +575,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text = "RECENT_WORLD_MESSAGE"
 fit_content = true
 horizontal_alignment = 1
 
