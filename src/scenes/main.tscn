@@ -203,8 +203,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sidebar" type="Panel" parent="HBoxContainer" unique_id=2099280035]
-clip_contents = true
 custom_minimum_size = Vector2(70, 0)
+clip_contents = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1fxj6")
 
@@ -223,8 +223,8 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SidebarToggleButton" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=1733592270]
-clip_contents = true
 custom_minimum_size = Vector2(40, 50)
+clip_contents = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("2_32aa5")
@@ -263,8 +263,8 @@ label = "Behavior Packs"
 page = NodePath("../../../../Body/Pages/MarginContainer/BehaviorPacksPage")
 
 [node name="Import" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=565270825]
-clip_contents = true
 custom_minimum_size = Vector2(40, 50)
+clip_contents = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("7_n75dp")
@@ -313,8 +313,8 @@ label = "Settings"
 page = NodePath("../../../../Body/Pages/MarginContainer/SettingsPage")
 
 [node name="Save" type="Control" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer" unique_id=1179888551]
-clip_contents = true
 custom_minimum_size = Vector2(40, 50)
+clip_contents = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("8_kokaf")
