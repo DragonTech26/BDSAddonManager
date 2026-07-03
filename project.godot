@@ -32,6 +32,7 @@ Global="*res://src/autoload/global.gd"
 LoadRecentWorlds="*res://src/autoload/load_recent_worlds.gd"
 AlertManager="*res://src/autoload/alert_manager.gd"
 HiddenPackPrefixes="*uid://dvur8wlpd5vm4"
+CheckServerPing="*uid://cpk6ylp46wout"
 
 [display]
 
@@ -42,6 +43,11 @@ window/energy_saving/keep_screen_on=false
 [dotnet]
 
 project/assembly_name="BDS Addon Manager"
+
+[physics]
+
+2d/physics_engine="Dummy"
+3d/physics_engine="Dummy"
 
 [rendering]
 

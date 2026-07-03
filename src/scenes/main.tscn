@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://8u8rtxv7t5r0" path="res://src/scripts/open_world_button.gd" id="24_xxm0n"]
 [ext_resource type="Script" uid="uid://dhs2h0id5xqvn" path="res://src/scripts/open_config_button.gd" id="25_2sd1y"]
 [ext_resource type="Script" uid="uid://b1ygxfnk33b4n" path="res://src/scripts/help_button.gd" id="27_am227"]
+[ext_resource type="Script" uid="uid://jx5f1lbnbiou" path="res://src/scripts/ping_button.gd" id="27_h8ax2"]
 [ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="28_7opv2"]
 [ext_resource type="Script" uid="uid://ccwbf806n0ps4" path="res://src/scripts/about_screen.gd" id="28_h8ax2"]
 
@@ -987,6 +988,11 @@ size_flags_vertical = 7
 text = "How to use"
 script = ExtResource("27_am227")
 
+[node name="PingButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=1653295222]
+layout_mode = 2
+text = "Server Ping Test (127.0.0.1:19132)"
+script = ExtResource("27_h8ax2")
+
 [node name="AboutScreen" type="ColorRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1971234530]
 visible = false
 layout_mode = 2
@@ -1116,4 +1122,5 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/PingButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/PingButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen/TextureButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" method="_on_texture_button_pressed"]
