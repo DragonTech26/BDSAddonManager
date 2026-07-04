@@ -17,13 +17,19 @@ func _on_gui_input(event: InputEvent) -> void:
 			if Global.WorldPath == "" or Global.WorldLoaded == false:
 				AlertManager.show_alert("No world selected. Choose a world first.", Color.YELLOW)
 				return
-			# Lazy-create confirmation dialog
+
+			CheckServerPing.ping_bedrock_server(Global.ServerIP, Global.ServerPort)
+
 			if _confirm_dialog == null:
 				_confirm_dialog = ConfirmationDialog.new()
 				_confirm_dialog.title = "Save changes?"
 				add_child(_confirm_dialog)
 				_confirm_dialog.confirmed.connect(_on_confirm_save)
-			_confirm_dialog.dialog_text = "Apply active packs to this world?\nThis will overwrite the currently active packs."
+
+			if Global.ServerPing == false:
+				_confirm_dialog.dialog_text = "Apply active packs to this world?\nThis will overwrite the currently active packs."
+			else:
+				_confirm_dialog.dialog_text = "Apply active packs to this world?\nThis will overwrite the currently active packs.\nWarning: Server is online! Here be dragons!"
 			_confirm_dialog.popup_centered()
 
 

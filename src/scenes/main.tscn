@@ -530,6 +530,32 @@ theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.9176470
 icon = ExtResource("3_5dlwx")
 icon_alignment = 1
 
+[node name="ServerAddressHBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=67680605]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="IPLineEdit" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer" unique_id=1590103587]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "(Optional) Local server IP"
+clear_button_enabled = true
+caret_blink = true
+
+[node name="PortLineEdit" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer" unique_id=252732308]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Port"
+clear_button_enabled = true
+caret_blink = true
+
+[node name="PingButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer" unique_id=526672799]
+visible = false
+custom_minimum_size = Vector2(60, 50)
+layout_mode = 2
+icon = ExtResource("13_ccybt")
+icon_alignment = 1
+script = ExtResource("27_h8ax2")
+
 [node name="RecentDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer" unique_id=2082676400]
 layout_mode = 2
 size_flags_vertical = 3
@@ -988,10 +1014,73 @@ size_flags_vertical = 7
 text = "How to use"
 script = ExtResource("27_am227")
 
-[node name="PingButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=1653295222]
+[node name="ServerConnectionInfoPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=1209227794]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-text = "Server Ping Test (127.0.0.1:19132)"
-script = ExtResource("27_h8ax2")
+
+[node name="NoWorldLoadedLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel" unique_id=1651188142]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "No world loaded!"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel" unique_id=1732009590]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=1705134337]
+layout_mode = 2
+text = "Server Information"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="WorldNameLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=1293805402]
+layout_mode = 2
+text = "Name: World Name - Status"
+fit_content = true
+scroll_active = false
+
+[node name="IPLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=2084756097]
+layout_mode = 2
+text = "IP address: 127.0.0.1"
+fit_content = true
+scroll_active = false
+
+[node name="GamemodeLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=722453879]
+layout_mode = 2
+text = "Gamemode: Survival"
+fit_content = true
+scroll_active = false
+
+[node name="GameVersionLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=693623876]
+layout_mode = 2
+text = "Game Version: 0.00.000"
+fit_content = true
+scroll_active = false
+
+[node name="RefreshButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel" unique_id=1225717199]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_bottom = 44.0
+grow_horizontal = 0
+text = "⟳"
+icon_alignment = 1
 
 [node name="AboutScreen" type="ColorRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1971234530]
 visible = false
@@ -1115,6 +1204,7 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_validate_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PingButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PingButton" method="_on_pressed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" to="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" to="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" method="_on_visibility_changed"]
@@ -1122,5 +1212,4 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/PingButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/PingButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen/TextureButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" method="_on_texture_button_pressed"]

@@ -1,10 +1,14 @@
 extends Node
 
 func ping_bedrock_server(ip: String, port: int):
+	if ip.is_empty() || port == 0:
+		return
+
 	var udp = PacketPeerUDP.new()
 
 	if udp.bind(0) != OK:
 		print("Failed to bind UDP socket.")
+		Global.ServerPing = false
 		return
 	udp.connect_to_host(ip, port)
 
@@ -37,11 +41,14 @@ func ping_bedrock_server(ip: String, port: int):
 			# Check if it's an Unconnected Ping (ID: 0x1C)
 			if reply.size() > 0 and reply[0] == 0x1C:
 				print("Success! Bedrock server is ALIVE.")
+				Global.ServerPing = true
 
 				if reply.size() > 35:
 					var server_info_bytes = reply.slice(35)
 					var server_info_string = server_info_bytes.get_string_from_utf8()
 					print("Server Data: ", server_info_string)
+					Global.ServerPing = true
+					Global.ServerPingData = server_info_string
 
 				udp.close()
 				return
@@ -51,5 +58,6 @@ func ping_bedrock_server(ip: String, port: int):
 
 	print("Failed! Server timed out (Offline or Firewall blocking UDP).")
 	udp.close()
+	Global.ServerPing = false
 
 # https://wiki.bedrock.dev/servers/raknet

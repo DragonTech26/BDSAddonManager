@@ -33,9 +33,15 @@ func _reset_globals() -> bool:
 	Global.BPList = []
 	Global.WorldLoaded = false
 	Global.HasUnsavedChanges = false
+	Global.ServerPing = false
+	Global.ServerPingData = ""
+	Global.ServerIP = ""
+	Global.ServerPort = 0
+
+	var settings_page = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+	settings_page.GetServerConnectionInfo()
 
 	_unfreeze_ui()
-
 	return true
 
 
@@ -48,6 +54,8 @@ func _unfreeze_ui() -> void:
 	var world_path: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderLine"
 	var resource_pack_path: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/ResourcePackLine"
 	var behavior_pack_path: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BehaviorPackLine"
+	var server_ip: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/IPLineEdit"
+	var server_port: LineEdit = $"../../../../../../../../WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PortLineEdit"
 
 	world_file_btn.disabled = false
 	rp_file_btn.disabled = false
@@ -60,6 +68,10 @@ func _unfreeze_ui() -> void:
 	resource_pack_path.text = ""
 	behavior_pack_path.editable = true
 	behavior_pack_path.text = ""
+	server_ip.editable = true
+	server_ip.text = ""
+	server_port.editable = true
+	server_port.text = ""
 
 	var container: VBoxContainer = $"../../../../../../../../WorldFilesPage/VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer"
 

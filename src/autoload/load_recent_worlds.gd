@@ -41,12 +41,14 @@ func save_recent_worlds() -> void:
 	file.close()
 
 
-func add_recent_world(world_name: String, world_dir: String, rp_dir: String, bp_dir: String):
+func add_recent_world(world_name: String, world_dir: String, rp_dir: String, bp_dir: String, server_ip: String, server_port: String):
 	var entry: Dictionary[Variant, Variant] = {
 		"world_name": world_name,
 		"location_on_disk": world_dir,
 		"rp_location_on_disk": rp_dir,
 		"bp_location_on_disk": bp_dir,
+		"server_ip_on_disk": server_ip,
+		"server_port_on_disk": server_port,
 	}
 
 	var index := -1

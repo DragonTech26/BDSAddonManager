@@ -6,6 +6,8 @@ var WorldValidator = preload("res://src/scripts/world_validator.gd").new()
 @onready var world_path: LineEdit = $VBoxContainer/HBoxContainer/WorldFolderLine
 @onready var resource_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/ResourcePackLine
 @onready var behavior_pack_path: LineEdit = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BehaviorPackLine
+@onready var server_ip: LineEdit = $VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/IPLineEdit
+@onready var server_port: LineEdit = $VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PortLineEdit
 @onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
 @onready var recent_world_item_scene: PackedScene = preload("res://src/scenes/recent_world_item.tscn")
 
@@ -37,6 +39,36 @@ func GetAdvancedPaths(root_path: String) -> void:
 		$VBoxContainer/AdvancedDropdown/Content.visible = true
 
 
+func ValidateIP() -> void:
+	var target_ip: String = server_ip.text.strip_edges()
+	var port_text: String = server_port.text.strip_edges()
+
+	# Check for empty fields
+	if target_ip.is_empty():
+		print("[Info] No IP address provided Skipping network check.")
+		return
+	if port_text.is_empty():
+		print("[Info] No port provided. Skipping network check.")
+		return
+
+	# Port Validation
+	if not port_text.is_valid_int():
+		AlertManager.show_alert("Invalid Port: Must contain only numbers!", Color.RED)
+		return
+
+	var target_port = port_text.to_int()
+	if target_port < 1 or target_port > 65535:
+		AlertManager.show_alert("Invalid Port: Must be between 1 and 65535!", Color.RED)
+		return
+
+	# IP Validation
+	if not target_ip.is_valid_ip_address():
+		AlertManager.show_alert("Invalid format! Enter a valid IP (e.g. 127.0.0.1).", Color.RED)
+		return
+
+	CheckServerPing.ping_bedrock_server(target_ip, target_port)
+
+
 func ValidatePaths():
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
 	await get_tree().process_frame
@@ -44,6 +76,8 @@ func ValidatePaths():
 	var world_dir: String = world_path.text.strip_edges()
 	var rp_dir: String = resource_pack_path.text.strip_edges()
 	var bp_dir: String = behavior_pack_path.text.strip_edges()
+	var ip_address: String = server_ip.text.strip_edges()
+	var port: String = server_port.text.strip_edges()
 
 	# If user pasted only the world path, try auto-detect first
 	if world_dir != "" and (rp_dir == "" or bp_dir == ""):
@@ -63,9 +97,11 @@ func ValidatePaths():
 	Global.WorldPath = world_dir
 	Global.WorldResourcePackPath = rp_dir
 	Global.WorldBehaviorPackPath = bp_dir
+	Global.ServerIP = ip_address
+	Global.ServerPort = int(port)
 
 	GetWorldName()
-	LoadRecentWorlds.add_recent_world(Global.WorldName, world_dir, rp_dir, bp_dir)
+	LoadRecentWorlds.add_recent_world(Global.WorldName, world_dir, rp_dir, bp_dir, ip_address, port)
 	GetRecentWorldsList()
 	DisableInput()
 
@@ -104,6 +140,8 @@ func DisableInput():
 	world_path.editable = false
 	resource_pack_path.editable = false
 	behavior_pack_path.editable = false
+	server_ip.editable = false
+	server_port.editable = false
 
 	world_file_btn.disabled = true
 	rp_file_btn.disabled = true
@@ -168,14 +206,18 @@ func _on_bp_folder_button_pressed():
 
 
 func _on_validate_button_pressed():
+	ValidateIP()
 	ValidatePaths()
 
 
 func _on_recent_edit_pressed(index: int):
 	var data = LoadRecentWorlds.recent_worlds[index]
-	world_path.text = data.location_on_disk
-	resource_pack_path.text = data.rp_location_on_disk
-	behavior_pack_path.text = data.bp_location_on_disk
+	world_path.text = data.get("location_on_disk", "")
+	resource_pack_path.text = data.get("rp_location_on_disk", "")
+	behavior_pack_path.text = data.get("bp_location_on_disk", "")
+	server_ip.text = data.get("server_ip_on_disk", "")
+	server_port.text = data.get("server_port_on_disk", "")
+	ValidateIP()
 	ValidatePaths()
 
 
