@@ -30,7 +30,7 @@ func load_or_create_settings():
 				var value: String = parts[1].strip_edges()
 				if settings.has(key): # only accept known keys
 					settings[key] = parse_value(value)
-					print("[INFO] Setting " + key + " is " + value)
+					print("[SETTINGS] Key " + key + " is " + value)
 		file.close()
 
 		setting_integrity_checker()
@@ -69,7 +69,7 @@ func get_setting(key: String) -> Variant:
 func set_setting(key: String, value: Variant):
 	if settings.has(key): # only allow known keys
 		settings[key] = value
-		print("[INFO] Setting '" + key + "' changed to: " + str(value))
+		print("[SETTINGS] Key '" + key + "' changed to: " + str(value))
 		save_settings()
 
 
