@@ -27,7 +27,6 @@
 [ext_resource type="Script" uid="uid://8u8rtxv7t5r0" path="res://src/scripts/open_world_button.gd" id="24_xxm0n"]
 [ext_resource type="Script" uid="uid://dhs2h0id5xqvn" path="res://src/scripts/open_config_button.gd" id="25_2sd1y"]
 [ext_resource type="Script" uid="uid://b1ygxfnk33b4n" path="res://src/scripts/help_button.gd" id="27_am227"]
-[ext_resource type="Script" uid="uid://jx5f1lbnbiou" path="res://src/scripts/ping_button.gd" id="27_h8ax2"]
 [ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="28_7opv2"]
 [ext_resource type="Script" uid="uid://ccwbf806n0ps4" path="res://src/scripts/about_screen.gd" id="28_h8ax2"]
 
@@ -547,14 +546,6 @@ layout_mode = 2
 placeholder_text = "Port"
 clear_button_enabled = true
 caret_blink = true
-
-[node name="PingButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer" unique_id=526672799]
-visible = false
-custom_minimum_size = Vector2(60, 50)
-layout_mode = 2
-icon = ExtResource("13_ccybt")
-icon_alignment = 1
-script = ExtResource("27_h8ax2")
 
 [node name="RecentDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer" unique_id=2082676400]
 layout_mode = 2
@@ -1204,7 +1195,6 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_validate_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PingButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PingButton" method="_on_pressed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" to="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" to="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage" method="_on_visibility_changed"]
