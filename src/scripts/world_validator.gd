@@ -1,5 +1,6 @@
 extends Node
 
+
 func validate_all(world_dir: String, rp_dir: String, bp_dir: String) -> bool:
 	# 1) Empty fields
 	if world_dir == "" or rp_dir == "" or bp_dir == "":

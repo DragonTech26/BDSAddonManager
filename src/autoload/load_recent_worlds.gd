@@ -4,6 +4,7 @@ const FILE_PATH := "user://recently_opened.json"
 
 var recent_worlds: Array = []
 
+
 func _ready():
 	load_recent_worlds()
 
@@ -55,8 +56,8 @@ func add_recent_world(world_name: String, world_dir: String, rp_dir: String, bp_
 	for i in range(recent_worlds.size()):
 		var item = recent_worlds[i]
 		if item.location_on_disk == world_dir \
-		and item.rp_location_on_disk == rp_dir \
-		and item.bp_location_on_disk == bp_dir:
+				and item.rp_location_on_disk == rp_dir \
+				and item.bp_location_on_disk == bp_dir:
 			index = i
 			break
 

@@ -10,6 +10,7 @@ func _ready() -> void:
 		print("[DEV] Is debug build: " + str(is_editor))
 		print("[DEV] Program version: " + ProjectSettings.get_setting("application/config/version"))
 
+
 # This currently has no effect in the editor, must use release build.
 func _notification(what) -> void:
 	if what != NOTIFICATION_WM_CLOSE_REQUEST || is_editor:

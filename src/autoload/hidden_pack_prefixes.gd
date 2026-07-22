@@ -162,7 +162,7 @@ func _save_prefix_file(sections: Dictionary) -> void:
 
 
 func _get_empty_sections() -> Dictionary:
-	var sections := {}
+	var sections := { }
 
 	for section_name in DEFAULT_PREFIXES.keys():
 		sections[section_name] = []

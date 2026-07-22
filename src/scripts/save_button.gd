@@ -46,6 +46,7 @@ func _on_confirm_save() -> void:
 		AlertManager.show_alert("Failed to save packs for: " + Global.WorldName, Color.CRIMSON)
 		Global.HasUnsavedChanges = true
 
+
 func _save_active_packs() -> bool:
 	# Prefer live UI state when available, otherwise fall back to data in Global.* lists.
 	var rp_container_path := "../../../../Body/Pages/MarginContainer/ResourcePacksPage/ScrollContainer/VBoxContainer"

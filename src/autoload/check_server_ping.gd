@@ -1,5 +1,6 @@
 extends Node
 
+
 func ping_bedrock_server(ip: String, port: int):
 	if ip.is_empty() || port == 0:
 		return

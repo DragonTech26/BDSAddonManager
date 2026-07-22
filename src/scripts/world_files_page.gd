@@ -11,7 +11,7 @@ var WorldValidator = preload("res://src/scripts/world_validator.gd").new()
 @onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
 @onready var recent_world_item_scene: PackedScene = preload("res://src/scenes/recent_world_item.tscn")
 
-# Main functions
+
 func _ready():
 	GetRecentWorldsList()
 

@@ -95,7 +95,7 @@ func _on_subpack_dropdown_item_selected(index: int) -> void:
 			sel_folder = str(sp.folder_name)
 	pack_data.active_subpack = sel_folder
 	_persist_state_to_global()
-	print("[INFO] Subpack changed to '" + sel_folder + "' for pack '" + pack_data.name +"'")
+	print("[INFO] Subpack changed to '" + sel_folder + "' for pack '" + pack_data.name + "'")
 
 
 func _on_delete_button_pressed():
@@ -254,7 +254,6 @@ func _sync_global_order(container: Node) -> void:
 		list_type = str(pack_data.type)
 
 	#print("[INFO] Rebuilding global order for type: %s" % list_type)
-
 	for c in container.get_children():
 		if c.has_method("get_pack_data"):
 			var d = c.get_pack_data()
