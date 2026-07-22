@@ -1,6 +1,8 @@
 extends Control
 
 @onready var titlebar: RichTextLabel = $"../../../Topbar/Titlebar/HeaderLabel"
+@onready var world_files_page: Control = %WorldFilesPage
+@onready var reset_button: Button = %ResetButton
 @onready var about_screen: ColorRect = $"../SettingsPage/MarginContainer/AboutScreen"
 @onready var check_hide_default_packs: CheckButton = $"../SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideDefaultPacks/CheckButton"
 @onready var check_hide_modifier_symbols: CheckButton = $"../SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideTextModifiers/CheckButton"
@@ -27,6 +29,7 @@ func _ready() -> void:
 	check_unique_folder_name.toggled.connect(_on_checkbox_toggled.bind("IMPORT_AS_UNIQUE_FOLDER_NAME"))
 	check_system_trash.toggled.connect(_on_checkbox_toggled.bind("USE_SYSTEM_TRASH_ON_DELETE"))
 	recent_world_num.value_changed.connect(_on_world_list_size_changed.bind("RECENT_WORLD_LIST_SIZE"))
+	reset_button.reset_confirmed.connect(_on_reset_confirmed)
 
 
 func _on_checkbox_toggled(pressed: bool, key: String) -> void:
@@ -83,3 +86,28 @@ func GetServerConnectionInfo() -> void:
 			ip_label.text = "Address: " + Global.ServerIP + ":" + str(Global.ServerPort)
 
 	world_name_label.text = display_name
+
+
+func _on_reset_confirmed() -> void:
+	if _reset_globals():
+		world_files_page.ResetSelectionUI()
+		GetServerConnectionInfo()
+		AlertManager.show_alert("Successfully unloaded world.", Color.GREEN)
+	else:
+		AlertManager.show_alert("An unexpected error has occured.", Color.CRIMSON)
+
+
+func _reset_globals() -> bool:
+	Global.WorldPath = ""
+	Global.WorldResourcePackPath = ""
+	Global.WorldBehaviorPackPath = ""
+	Global.WorldName = ""
+	Global.RPList = []
+	Global.BPList = []
+	Global.WorldLoaded = false
+	Global.HasUnsavedChanges = false
+	Global.ServerPing = false
+	Global.ServerPingData = ""
+	Global.ServerIP = ""
+	Global.ServerPort = 0
+	return true

@@ -158,6 +158,45 @@ func DisableInput():
 	print("[INFO] World selection inputs have been disabled")
 
 
+func ResetSelectionUI() -> void:
+	var world_file_btn: Button = $VBoxContainer/HBoxContainer/WorldFolderButton
+	var rp_file_btn: Button = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton
+	var bp_file_btn: Button = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton
+	var validate_btn: Button = $VBoxContainer/HBoxContainer/ValidateButton
+
+	var world_path_edit: LineEdit = $VBoxContainer/HBoxContainer/WorldFolderLine
+	var resource_pack_path_edit: LineEdit = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/ResourcePackLine
+	var behavior_pack_path_edit: LineEdit = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BehaviorPackLine
+	var server_ip_edit: LineEdit = $VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/IPLineEdit
+	var server_port_edit: LineEdit = $VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer/PortLineEdit
+
+	world_file_btn.disabled = false
+	rp_file_btn.disabled = false
+	bp_file_btn.disabled = false
+	validate_btn.disabled = false
+
+	world_path_edit.editable = true
+	world_path_edit.text = ""
+	resource_pack_path_edit.editable = true
+	resource_pack_path_edit.text = ""
+	behavior_pack_path_edit.editable = true
+	behavior_pack_path_edit.text = ""
+	server_ip_edit.editable = true
+	server_ip_edit.text = ""
+	server_port_edit.editable = true
+	server_port_edit.text = ""
+
+	var container: VBoxContainer = $VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer
+
+	for slot in container.get_children():
+		if slot.has_method("set_enabled"):
+			slot.set_enabled(true)
+
+	validate_btn.icon = ResourceLoader.load("res://assets/graphics/goto.svg")
+	validate_btn.modulate = Color.WHITE
+	print("[INFO] World selection inputs have been reset")
+
+
 func GetRecentWorldsList():
 	var rw_list: Array = LoadRecentWorlds.recent_worlds
 	var container: VBoxContainer = $VBoxContainer/RecentDropdown/Content/ScrollContainer/VBoxContainer

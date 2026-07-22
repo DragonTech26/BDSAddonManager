@@ -408,6 +408,7 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="WorldFilesPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=1978013202]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("10_50ugh")
 
@@ -683,6 +684,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
 [node name="SettingsPage" type="Control" parent="HBoxContainer/Body/Pages/MarginContainer" unique_id=1377403491]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 script = ExtResource("10_lp058")
@@ -973,6 +975,7 @@ layout_mode = 2
 columns = 2
 
 [node name="ResetButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer" unique_id=1236490337]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 7
