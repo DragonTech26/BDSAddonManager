@@ -6,4 +6,4 @@ extends Button
 
 func _on_pressed() -> void:
 	about_screen.visible = true
-	titlebar.text = "About"
+	titlebar.text = "Help"
