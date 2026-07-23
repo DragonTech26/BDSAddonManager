@@ -1042,24 +1042,28 @@ horizontal_alignment = 1
 
 [node name="WorldNameLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=1293805402]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 15
 text = "Name: World Name - Status"
 fit_content = true
 scroll_active = false
 
 [node name="IPLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=2084756097]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 15
 text = "IP address: 127.0.0.1"
 fit_content = true
 scroll_active = false
 
 [node name="GamemodeLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=722453879]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 15
 text = "Gamemode: Survival"
 fit_content = true
 scroll_active = false
 
 [node name="GameVersionLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=693623876]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 15
 text = "Game Version: 0.00.000"
 fit_content = true
 scroll_active = false
