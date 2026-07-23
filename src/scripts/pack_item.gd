@@ -216,7 +216,14 @@ func _on_pack_icon_gui_input(event: InputEvent) -> void:
 			base_path = Global.WorldBehaviorPackPath
 		else:
 			base_path = Global.WorldResourcePackPath
+
 		var target_dir := base_path.path_join(str(pack_data.pack_folder))
+		if OS.get_name() == "Windows":
+			if target_dir.begins_with("//"):
+				target_dir = "\\\\" + target_dir.substr(2).replace("/", "\\")
+			else:
+				target_dir = target_dir.replace("/", "\\")
+
 		OS.shell_open(target_dir)
 		print("[INFO] Opened file manager at: " + target_dir)
 
