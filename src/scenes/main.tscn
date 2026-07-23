@@ -28,7 +28,7 @@
 [ext_resource type="Script" uid="uid://dhs2h0id5xqvn" path="res://src/scripts/open_config_button.gd" id="25_2sd1y"]
 [ext_resource type="Script" uid="uid://b1ygxfnk33b4n" path="res://src/scripts/help_button.gd" id="27_am227"]
 [ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="28_7opv2"]
-[ext_resource type="Script" uid="uid://ccwbf806n0ps4" path="res://src/scripts/about_screen.gd" id="28_h8ax2"]
+[ext_resource type="Script" uid="uid://ccwbf806n0ps4" path="res://src/scripts/help_screen.gd" id="28_h8ax2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fxj6"]
 bg_color = Color(0.21176471, 0.23921569, 0.2901961, 1)
@@ -1076,13 +1076,13 @@ grow_horizontal = 0
 text = "⟳"
 icon_alignment = 1
 
-[node name="AboutScreen" type="ColorRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1971234530]
+[node name="HelpScreen" type="ColorRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1971234530]
 visible = false
 layout_mode = 2
 color = Color(0.12941177, 0.14901961, 0.18039216, 1)
 script = ExtResource("28_h8ax2")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" unique_id=430692057]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" unique_id=430692057]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1091,7 +1091,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HelpText" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen/ScrollContainer" unique_id=1997959156]
+[node name="HelpText" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen/ScrollContainer" unique_id=1997959156]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1119,7 +1119,7 @@ Importing a pack:
 "
 fit_content = true
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" unique_id=979882205]
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" unique_id=979882205]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1205,4 +1205,4 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen/TextureButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/AboutScreen" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen/TextureButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" method="_on_texture_button_pressed"]

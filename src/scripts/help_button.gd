@@ -1,6 +1,6 @@
 extends Button
 
-@onready var about_screen: ColorRect = $"../../../../../../AboutScreen"
+@onready var about_screen: ColorRect = $"../../../../../../HelpScreen"
 @onready var titlebar: RichTextLabel = $"../../../../../../../../../../Topbar/Titlebar/HeaderLabel"
 
 
