@@ -93,7 +93,7 @@ fit_content = true
 [node name="DependencyInfo" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=386730492]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-tooltip_text = "This pack requires a dependency to work properly!"
+tooltip_text = "This pack may require a dependency to work properly!"
 mouse_default_cursor_shape = 16
 texture = ExtResource("4_3vdsl")
 expand_mode = 1
