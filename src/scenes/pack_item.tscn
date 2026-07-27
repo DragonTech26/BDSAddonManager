@@ -24,7 +24,7 @@ theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
 [node name="Background" type="ColorRect" parent="MarginContainer" unique_id=1386913035]
-custom_minimum_size = Vector2(800, 75)
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -32,6 +32,7 @@ color = Color(0.10980392, 0.11764706, 0.13333334, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1688696635]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=819626569]
 layout_mode = 2
@@ -73,22 +74,25 @@ texture = ExtResource("1_0j157")
 expand_mode = 3
 
 [node name="VersionLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=615492378]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.69411767, 0.7058824, 0.72156864, 1)
 theme_override_font_sizes/normal_font_size = 12
 text = "v00.00.00"
+fit_content = true
+scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NameLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=622504367]
-custom_minimum_size = Vector2(250, 16)
+custom_minimum_size = Vector2(140, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Resource/Behavior Pack Name"
 fit_content = true
+scroll_active = false
 
 [node name="DependencyInfo" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=386730492]
 custom_minimum_size = Vector2(25, 25)
@@ -100,9 +104,9 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="SubpackDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer" unique_id=1422337698]
-custom_minimum_size = Vector2(300, 45)
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 text_overrun_behavior = 3
@@ -110,7 +114,7 @@ clip_text = true
 fit_to_longest_item = false
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer" unique_id=1752764625]
-custom_minimum_size = Vector2(45, 45)
+custom_minimum_size = Vector2(36, 45)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
