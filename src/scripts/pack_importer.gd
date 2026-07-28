@@ -206,7 +206,7 @@ func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basenam
 	var final_destination: String = target_root.path_join(final_name)
 
 	_copy_recursive(source_pack_folder, final_destination)
-	print("[INFO] PackImporter: Imported ", pack_folder_name, " to ", final_destination)
+	print("[FILE] PackImporter: Imported ", pack_folder_name, " to ", final_destination)
 
 
 func _uuid_exists(pack_id: String) -> bool:
@@ -254,11 +254,11 @@ func _cleanup_temp(path: String) -> void:
 				var full_path := path.path_join(file_name)
 				if DirAccess.dir_exists_absolute(full_path):
 					_cleanup_temp(full_path) # recurse into subdir
-					print("[INFO] Removed temp directory:", full_path)
+					print("[FILE] Removed temp directory:", full_path)
 				else:
 					DirAccess.remove_absolute(full_path) # remove file
-					print("[INFO] Removed temp file:", full_path)
+					print("[FILE] Removed temp file:", full_path)
 			file_name = dir.get_next()
 		dir.list_dir_end()
 		DirAccess.remove_absolute(path) # finally remove the directory itself
-		print("[INFO] Removed temp folder:", path)
+		print("[FILE] Removed temp folder:", path)

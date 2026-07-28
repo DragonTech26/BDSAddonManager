@@ -7,8 +7,8 @@ var is_editor: bool = false
 func _ready() -> void:
 	if OS.is_debug_build():
 		is_editor = true
-		print("[DEV] Is debug build: " + str(is_editor))
-		print("[DEV] Program version: " + ProjectSettings.get_setting("application/config/version"))
+		print("[DEBUG] Is debug build: " + str(is_editor))
+		print("[DEBUG] Program version: " + ProjectSettings.get_setting("application/config/version"))
 
 
 # This currently has no effect in the editor, must use release build.

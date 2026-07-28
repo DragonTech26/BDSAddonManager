@@ -8,7 +8,7 @@ func ping_bedrock_server(ip: String, port: int):
 	var udp = PacketPeerUDP.new()
 
 	if udp.bind(0) != OK:
-		print("Failed to bind UDP socket.")
+		print("[NETWORK] Failed to bind UDP socket. Aborting network check.")
 		Global.ServerPing = false
 		return
 	udp.connect_to_host(ip, port)
@@ -30,7 +30,7 @@ func ping_bedrock_server(ip: String, port: int):
 	for i in range(8):
 		packet.append(0x00)
 
-	print("Sending UDP Ping to Bedrock server at ", ip, ":", port)
+	print("[NETWORK] Sending UDP Ping to Bedrock server at ", ip, ":", port)
 	udp.put_packet(packet)
 
 	# Wait for a response (Timeout after 3 seconds)
@@ -41,13 +41,13 @@ func ping_bedrock_server(ip: String, port: int):
 
 			# Check if it's an Unconnected Ping (ID: 0x1C)
 			if reply.size() > 0 and reply[0] == 0x1C:
-				print("Success! Bedrock server is ALIVE.")
+				print("[NETWORK] Success! Bedrock server is ALIVE.")
 				Global.ServerPing = true
 
 				if reply.size() > 35:
 					var server_info_bytes = reply.slice(35)
 					var server_info_string = server_info_bytes.get_string_from_utf8()
-					print("Server Data: ", server_info_string)
+					print("[NETWORK] Server Data: ", server_info_string)
 					Global.ServerPing = true
 					Global.ServerPingData = server_info_string
 
@@ -57,7 +57,7 @@ func ping_bedrock_server(ip: String, port: int):
 		await get_tree().create_timer(0.05).timeout
 		timeout -= 0.05
 
-	print("Failed! Server timed out (Offline or Firewall blocking UDP).")
+	print("[NETWORK] Failed! Server timed out (Offline or Firewall blocking UDP).")
 	udp.close()
 	Global.ServerPing = false
 

@@ -45,10 +45,10 @@ func ValidateIP() -> void:
 
 	# Check for empty fields
 	if target_ip.is_empty():
-		print("[Info] No IP address provided Skipping network check.")
+		print("[NETWORK] No IP address provided. Skipping network check.")
 		return
 	if port_text.is_empty():
-		print("[Info] No port provided. Skipping network check.")
+		print("[NETWORK] No port provided. Skipping network check.")
 		return
 
 	# Port Validation
