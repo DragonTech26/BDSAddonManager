@@ -1,0 +1,68 @@
+name: Build & Attach Release
+
+on:
+  release:
+    types: [published]
+
+env:
+  GODOT_VERSION: "4.7.1-stable"
+  EXECUTABLE_NAME: "BDS Addon Manager"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Program Repository
+        uses: actions/checkout@v5
+
+      - name: Extract Clean Version Number
+        id: get_version
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Download Official Godot CLI Headless
+        run: |
+          GODOT_ZIP="Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+          curl -LO "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/${GODOT_ZIP}"
+          unzip "${GODOT_ZIP}"
+          sudo mv "Godot_v${GODOT_VERSION}_linux.x86_64" /usr/local/bin/godot
+          sudo chmod +x /usr/local/bin/godot
+
+      - name: Download & Install Official Export Templates
+        run: |
+          TEMPLATES_ZIP="Godot_v${GODOT_VERSION}_export_templates.tpz"
+          curl -LO "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/${TEMPLATES_ZIP}"
+          
+          GODOT_TEMPLATE_VER="${GODOT_VERSION//-/.}"
+          TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${GODOT_TEMPLATE_VER}"
+          mkdir -p "$TEMPLATE_DIR"
+          
+          unzip "${TEMPLATES_ZIP}" -d /tmp/godot_templates
+          mv /tmp/godot_templates/templates/* "$TEMPLATE_DIR/"
+          rm -rf /tmp/godot_templates "${TEMPLATES_ZIP}"
+
+      - name: Export Release Binaries
+        run: |
+          mkdir -p build/linux build/windows
+          
+          # Godot reads export_presets.cfg automatically from the repo root
+          godot --headless --export-release "Linux" "build/linux/${{ env.EXECUTABLE_NAME }}"
+          godot --headless --export-release "Windows Desktop" "build/windows/${{ env.EXECUTABLE_NAME }}.exe"
+
+      - name: Compress Outputs into Versioned Archives
+        run: |
+          cd build/linux && zip -r "../../Linux-${{ env.VERSION }}.zip" . && cd ../..
+          cd build/windows && zip -r "../../Windows-${{ env.VERSION }}.zip" . && cd ../..
+
+      - name: Attach Archives to GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            Linux-${{ env.VERSION }}.zip
+            Windows-${{ env.VERSION }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
