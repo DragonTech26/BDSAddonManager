@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 var confirm_dialog: ConfirmationDialog
 var is_editor: bool = false
@@ -9,6 +9,10 @@ func _ready() -> void:
 		is_editor = true
 		print("[DEBUG] Is debug build: " + str(is_editor))
 		print("[DEBUG] Program version: " + ProjectSettings.get_setting("application/config/version"))
+
+	theme = Themes.get_active_theme()
+	Themes.theme_changed.connect(_on_theme_changed)
+	Themes.apply_to(self)
 
 
 # This currently has no effect in the editor, must use release build.
@@ -44,3 +48,8 @@ func _show_quit_dialog():
 func _on_confirm_quit():
 	print("[INFO] World closed without saving changes")
 	get_tree().quit()
+
+
+func _on_theme_changed(_theme_name: String) -> void:
+	theme = Themes.get_active_theme()
+	Themes.apply_to(self)

@@ -165,7 +165,7 @@ func _parse_and_distribute(manifest_path: String, temp_root: String, zip_basenam
 	# Check for existing packs
 	if _uuid_exists(pack_id):
 		print("[INFO] PackImporter: Duplicate UUID found:", pack_id, "Skipping import.")
-		AlertManager.show_alert("Duplicate pack(s) detected. Skipping.", Color.YELLOW)
+		AlertManager.show_alert("Duplicate pack(s) detected. Skipping.", Themes.get_active_palette().warning)
 		return
 
 	var modules = data.modules

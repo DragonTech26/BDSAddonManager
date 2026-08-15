@@ -12,4 +12,4 @@ func _on_pressed() -> void:
 		OS.shell_open(target_dir)
 		print("[INFO] Opened world folder at: " + target_dir)
 	else:
-		AlertManager.show_alert("No world selected. Choose a world first.", Color.YELLOW)
+		AlertManager.show_alert("No world selected. Choose a world first.", Themes.get_active_palette().warning)

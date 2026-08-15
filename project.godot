@@ -33,6 +33,7 @@ LoadRecentWorlds="*res://src/autoload/load_recent_worlds.gd"
 AlertManager="*res://src/autoload/alert_manager.gd"
 HiddenPackPrefixes="*uid://dvur8wlpd5vm4"
 CheckServerPing="*uid://cpk6ylp46wout"
+Themes="*res://src/autoload/themes.gd"
 
 [display]
 

@@ -239,8 +239,8 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="List" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton" unique_id=1845472618]
-position = Vector2(34, 24)
+[node name="Icon" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/SidebarToggleButton" unique_id=1845472618]
+position = Vector2(36, 24)
 texture = ExtResource("1_kkvs4")
 
 [node name="WorldFiles" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer" unique_id=1266278618 instance=ExtResource("3_o81g6")]
@@ -279,7 +279,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="Plus" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import" unique_id=1302022991]
+[node name="Icon" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/TopContainer/Import" unique_id=1302022991]
 position = Vector2(36, 27)
 texture = ExtResource("7_qsm7c")
 
@@ -329,7 +329,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21176471, 0.23921569, 0.2901961, 1)
 
-[node name="FloppyDisk" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" unique_id=972086958]
+[node name="Icon" type="Sprite2D" parent="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" unique_id=972086958]
 position = Vector2(36, 27)
 texture = ExtResource("8_24j03")
 
@@ -428,7 +428,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Select world folder..."
+placeholder_text = " Select world folder..."
 clear_button_enabled = true
 caret_blink = true
 
@@ -437,18 +437,32 @@ custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 tooltip_text = "Open file picker"
 mouse_default_cursor_shape = 2
-theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-icon = ExtResource("3_5dlwx")
-icon_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton" unique_id=1800126043]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5dlwx")
+stretch_mode = 3
 
 [node name="ValidateButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer" unique_id=1851128182]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 tooltip_text = "Load world"
 mouse_default_cursor_shape = 2
-theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-icon = ExtResource("13_ccybt")
-icon_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" unique_id=282492651]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_ccybt")
+stretch_mode = 3
 
 [node name="AdvancedDropdown" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer" unique_id=271257046]
 layout_mode = 2
@@ -496,7 +510,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Select resource pack folder..."
+placeholder_text = " Select resource pack folder..."
 clear_button_enabled = true
 caret_blink = true
 
@@ -506,9 +520,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Open file picker"
 mouse_default_cursor_shape = 2
-theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-icon = ExtResource("3_5dlwx")
-icon_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" unique_id=1304657896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5dlwx")
+stretch_mode = 3
 
 [node name="BPHBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=1785917042]
 layout_mode = 2
@@ -517,7 +538,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Select behavior pack folder..."
+placeholder_text = " Select behavior pack folder..."
 clear_button_enabled = true
 caret_blink = true
 
@@ -526,9 +547,16 @@ custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 tooltip_text = "Open file picker"
 mouse_default_cursor_shape = 2
-theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
-icon = ExtResource("3_5dlwx")
-icon_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" unique_id=141655704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5dlwx")
+stretch_mode = 3
 
 [node name="ServerAddressHBoxContainer" type="HBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content" unique_id=67680605]
 custom_minimum_size = Vector2(0, 50)
@@ -537,14 +565,14 @@ layout_mode = 2
 [node name="IPLineEdit" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer" unique_id=1590103587]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "(Optional) Local server IP"
+placeholder_text = " (Optional) Local server IP"
 clear_button_enabled = true
 caret_blink = true
 
 [node name="PortLineEdit" type="LineEdit" parent="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/ServerAddressHBoxContainer" unique_id=252732308]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-placeholder_text = "Port"
+placeholder_text = " Port"
 clear_button_enabled = true
 caret_blink = true
 
@@ -762,8 +790,9 @@ fit_content = true
 horizontal_alignment = 1
 
 [node name="HideDefaultPacks" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=201122710]
+clip_contents = false
 layout_mode = 2
-text = "Hide vanilla packs"
+text = " Hide vanilla packs"
 fit_content = true
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideDefaultPacks" unique_id=1072835856]
@@ -778,17 +807,20 @@ offset_top = -15.5
 offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-5, 0)
+mouse_default_cursor_shape = 2
 
 [node name="HideDefaultPacksDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=917178356]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.7254902, 0.7254902, 0.7254902, 1)
 theme_override_font_sizes/normal_font_size = 12
-text = "Hides default server packs"
+text = " Hides default server packs"
 fit_content = true
 
 [node name="HideTextModifiers" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=1155777201]
+clip_contents = false
 layout_mode = 2
-text = "Hide color formatting"
+text = " Hide color formatting"
 fit_content = true
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideTextModifiers" unique_id=1716265088]
@@ -803,17 +835,20 @@ offset_top = -15.5
 offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-5, 0)
+mouse_default_cursor_shape = 2
 
 [node name="HideTextModifiersDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=69654257]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 theme_override_font_sizes/normal_font_size = 12
-text = "Hide '§' text modifiers from pack names"
+text = " Hide '§' text modifiers from pack names"
 fit_content = true
 
 [node name="RecentWorlds" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=505212860]
+clip_contents = false
 layout_mode = 2
-text = "Recent worlds"
+text = " Recent worlds"
 fit_content = true
 
 [node name="SpinBox" type="SpinBox" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/RecentWorlds" unique_id=215820396]
@@ -825,7 +860,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -86.5
 offset_top = -15.5
-offset_bottom = 15.5
+offset_bottom = 16.5
 grow_horizontal = 0
 grow_vertical = 2
 max_value = 999.0
@@ -833,9 +868,9 @@ rounded = true
 
 [node name="RecentWorldsDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=1471473387]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 theme_override_font_sizes/normal_font_size = 12
-text = "How many saves show up on world selection screen. Set to 0 to disable. (Takes effect on restart)"
+text = " How many saves show up on world selection screen. Set to 0 to disable. 
+ (Takes effect on restart)"
 fit_content = true
 
 [node name="FileManagementPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide" unique_id=916259638]
@@ -857,8 +892,9 @@ fit_content = true
 horizontal_alignment = 1
 
 [node name="AvoidConflicts" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1241407911]
+clip_contents = false
 layout_mode = 2
-text = "Avoid pack import conflicts"
+text = " Avoid pack import conflicts"
 fit_content = true
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer/AvoidConflicts" unique_id=574014644]
@@ -873,17 +909,20 @@ offset_top = -15.5
 offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-5, 0)
+mouse_default_cursor_shape = 2
 
 [node name="AvoidConflictsDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1651876055]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 theme_override_font_sizes/normal_font_size = 12
-text = "Adds a timestamp to imported folder name"
+text = " Adds a timestamp to imported folder name"
 fit_content = true
 
 [node name="UseSystemTrash" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1743790704]
+clip_contents = false
 layout_mode = 2
-text = "Prefer system trash on delete"
+text = " Prefer system trash on delete"
 fit_content = true
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer/UseSystemTrash" unique_id=1779694361]
@@ -898,12 +937,14 @@ offset_top = -15.5
 offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-5, 0)
+mouse_default_cursor_shape = 2
 
 [node name="UseSystemTrashDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/FileManagementPanel/VBoxContainer" unique_id=1435601939]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 theme_override_font_sizes/normal_font_size = 12
-text = "Try to use the local system trash instead of deleting files immediately "
+text = " Try to use the local system trash instead of deleting files immediately "
 fit_content = true
 
 [node name="InfoPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide" unique_id=1500493287]
@@ -919,13 +960,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/separation = 8
+theme_override_constants/separation = 20
 
 [node name="Logo" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/InfoPanel/HBoxContainer" unique_id=471693653]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
 texture = ExtResource("17_lcp4o")
 expand_mode = 1
 stretch_mode = 4
@@ -989,6 +1031,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
+mouse_default_cursor_shape = 2
 text = "Open world folder"
 script = ExtResource("24_xxm0n")
 
@@ -997,6 +1040,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
+mouse_default_cursor_shape = 2
 text = "Open config folder"
 script = ExtResource("25_2sd1y")
 
@@ -1005,8 +1049,48 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
+mouse_default_cursor_shape = 2
 text = "How to use"
 script = ExtResource("27_am227")
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=540887057]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/Panel" unique_id=1551341336]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Theme" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/Panel/VBoxContainer" unique_id=1038888006]
+clip_contents = false
+layout_mode = 2
+text = " Theme"
+fit_content = true
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/Panel/VBoxContainer/Theme" unique_id=239438850]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -5.5
+offset_right = -4.0
+offset_bottom = 26.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="ThemeDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/Panel/VBoxContainer" unique_id=402529010]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = " Switch the interface color palette"
+fit_content = true
 
 [node name="ServerConnectionInfoPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer" unique_id=1209227794]
 custom_minimum_size = Vector2(0, 150)
@@ -1068,18 +1152,6 @@ text = "Game Version: 0.00.000"
 fit_content = true
 scroll_active = false
 
-[node name="RefreshButton" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel" unique_id=1225717199]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -44.0
-offset_bottom = 44.0
-grow_horizontal = 0
-text = "⟳"
-icon_alignment = 1
-
 [node name="HelpScreen" type="ColorRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer" unique_id=1971234530]
 visible = false
 layout_mode = 2
@@ -1099,7 +1171,8 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Warning: Do not use this tool while server is running! Modifying an existing world may result in unexpected behavior. Always make a backup before editing world files!
+text = "Warning: Do not use this tool while server is running! 
+Modifying an existing world may result in unexpected behavior. Always make a backup before editing world files!
 
 Selecting a world:
 1. Select the world folder (the one containing the 'level.dat' file).
@@ -1123,16 +1196,22 @@ Importing a pack:
 "
 fit_content = true
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" unique_id=979882205]
+[node name="Button" type="Button" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" unique_id=297530893]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
+offset_left = -8.0
+offset_bottom = 8.0
 grow_horizontal = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("28_7opv2")
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen/Button" unique_id=1046907296]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("28_7opv2")
 
 [node name="AlertBox" type="Control" parent="HBoxContainer/Body/Pages" unique_id=115967580]
 layout_mode = 1
@@ -1198,9 +1277,17 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="mouse_entered" from="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" to="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" to="HBoxContainer/Sidebar/VBoxContainer/BottomContainer/Save" method="_on_mouse_exited"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_world_folder_button_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_world_folder_button_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/WorldFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_world_folder_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_validate_button_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_validate_button_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/HBoxContainer/ValidateButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_validate_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_rp_folder_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage/VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton" to="HBoxContainer/Body/Pages/MarginContainer/WorldFilesPage" method="_on_bp_folder_button_pressed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" to="HBoxContainer/Body/Pages/MarginContainer/ResourcePacksPage" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" to="HBoxContainer/Body/Pages/MarginContainer/BehaviorPacksPage" method="_on_visibility_changed"]
@@ -1209,4 +1296,4 @@ libraries/ = SubResource("AnimationLibrary_2lg1k")
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenWorldButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/OpenConfigButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/GridContainer/AboutButton" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen/TextureButton" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen/Button" to="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/HelpScreen" method="_on_button_pressed"]

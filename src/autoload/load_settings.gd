@@ -8,6 +8,7 @@ var settings: Dictionary = {
 	"IMPORT_AS_UNIQUE_FOLDER_NAME": true,
 	"USE_SYSTEM_TRASH_ON_DELETE": true,
 	"RECENT_WORLD_LIST_SIZE": 5,
+	"THEME": "classic",
 }
 
 
@@ -78,6 +79,10 @@ func setting_integrity_checker() -> void:
 	var value = settings["RECENT_WORLD_LIST_SIZE"]
 	if value is not int or value < 0 or value > 999:
 		set_setting("RECENT_WORLD_LIST_SIZE", 5)
+
+	var theme_value: String = str(settings["THEME"]).to_lower()
+	if theme_value not in ["classic", "dark", "light"]:
+		set_setting("THEME", "classic")
 
 
 # Code to get setting value

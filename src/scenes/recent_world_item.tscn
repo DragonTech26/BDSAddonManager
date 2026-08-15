@@ -89,20 +89,38 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 tooltip_text = "Remove entry from list"
 mouse_default_cursor_shape = 2
-theme_override_colors/icon_hover_color = Color(0.7384635, 0.20232531, 0.3207173, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_twmtp")
-icon = ExtResource("2_twmtp")
-icon_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RemoveButton" unique_id=1665919474]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_twmtp")
+stretch_mode = 3
 
 [node name="EditButton" type="Button" parent="." unique_id=1590417206]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 tooltip_text = "Edit world"
 mouse_default_cursor_shape = 2
-theme_override_colors/icon_hover_color = Color(0.41568628, 0.68235296, 0.91764706, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_j83xd")
-icon = ExtResource("1_68lx3")
-icon_alignment = 1
 
+[node name="Icon" type="TextureRect" parent="EditButton" unique_id=428804348]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_68lx3")
+stretch_mode = 3
+
+[connection signal="mouse_entered" from="RemoveButton" to="." method="_on_remove_button_mouse_entered"]
+[connection signal="mouse_exited" from="RemoveButton" to="." method="_on_remove_button_mouse_exited"]
 [connection signal="pressed" from="RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="mouse_entered" from="EditButton" to="." method="_on_edit_button_mouse_entered"]
+[connection signal="mouse_exited" from="EditButton" to="." method="_on_edit_button_mouse_exited"]
 [connection signal="pressed" from="EditButton" to="." method="_on_edit_button_pressed"]

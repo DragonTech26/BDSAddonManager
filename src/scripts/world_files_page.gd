@@ -53,17 +53,17 @@ func ValidateIP() -> void:
 
 	# Port Validation
 	if not port_text.is_valid_int():
-		AlertManager.show_alert("Invalid Port: Must contain only numbers!", Color.RED)
+		AlertManager.show_alert("Invalid Port: Must contain only numbers!", Themes.get_active_palette().danger)
 		return
 
 	var target_port = port_text.to_int()
 	if target_port < 1 or target_port > 65535:
-		AlertManager.show_alert("Invalid Port: Must be between 1 and 65535!", Color.RED)
+		AlertManager.show_alert("Invalid Port: Must be between 1 and 65535!", Themes.get_active_palette().danger)
 		return
 
 	# IP Validation
 	if not target_ip.is_valid_ip_address():
-		AlertManager.show_alert("Invalid format! Enter a valid IP (e.g. 127.0.0.1).", Color.RED)
+		AlertManager.show_alert("Invalid format! Enter a valid IP (e.g. 127.0.0.1).", Themes.get_active_palette().danger)
 		return
 
 	CheckServerPing.ping_bedrock_server(target_ip, target_port)
@@ -89,9 +89,8 @@ func ValidatePaths():
 		return false
 
 	# Change icon to show valid paths
-	var validate_button: Button = $VBoxContainer/HBoxContainer/ValidateButton
-	validate_button.icon = ResourceLoader.load("res://assets/graphics/check.svg")
-	validate_button.modulate = Color.GREEN
+	var validate_icon: TextureRect = $VBoxContainer/HBoxContainer/ValidateButton/Icon
+	validate_icon.texture = ResourceLoader.load("res://assets/graphics/check.svg")
 
 	# Set global variables
 	Global.WorldPath = world_dir
@@ -105,11 +104,13 @@ func ValidatePaths():
 	GetRecentWorldsList()
 	DisableInput()
 
+	validate_icon.modulate = Themes.get_active_palette().success
+
 	var parser: JsonParser = JsonParser.new()
 	parser.ReadData()
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 	Global.WorldLoaded = true
-	AlertManager.show_alert("Successfully loaded world: " + Global.WorldName, Color.GREEN)
+	AlertManager.show_alert("Successfully loaded world: " + Global.WorldName, Themes.get_active_palette().success)
 
 
 func GetWorldName() -> void:
@@ -155,6 +156,7 @@ func DisableInput():
 		if slot.has_method("set_enabled"):
 			slot.set_enabled(false)
 
+	Themes.apply_to(self)
 	print("[INFO] World selection inputs have been disabled")
 
 
@@ -192,8 +194,10 @@ func ResetSelectionUI() -> void:
 		if slot.has_method("set_enabled"):
 			slot.set_enabled(true)
 
-	validate_btn.icon = ResourceLoader.load("res://assets/graphics/goto.svg")
-	validate_btn.modulate = Color.WHITE
+	var validate_icon: TextureRect = $VBoxContainer/HBoxContainer/ValidateButton/Icon
+	validate_icon.texture = ResourceLoader.load("res://assets/graphics/goto.svg")
+	validate_icon.modulate = Themes.get_active_palette().icon_color_override
+	Themes.apply_to(self)
 	print("[INFO] World selection inputs have been reset")
 
 
@@ -216,8 +220,8 @@ func GetRecentWorldsList():
 		slot.edit_pressed.connect(_on_recent_edit_pressed)
 		slot.delete_pressed.connect(_on_recent_delete_pressed)
 
-		slot.get_node("Background/VBoxContainer/WorldName").text = data.world_name
-		slot.get_node("Background/VBoxContainer/WorldFilePath").text = data.location_on_disk
+		slot.get_node("Background/VBoxContainer/WorldName").text = " " + data.world_name
+		slot.get_node("Background/VBoxContainer/WorldFilePath").text = " " + data.location_on_disk
 
 	if rw_list.size() <= 0:
 		var rw_list_size = LoadSettings.get_setting("RECENT_WORLD_LIST_SIZE")
@@ -247,6 +251,55 @@ func _on_bp_folder_button_pressed():
 func _on_validate_button_pressed():
 	ValidateIP()
 	ValidatePaths()
+
+
+func _on_world_folder_button_mouse_entered() -> void:
+	var btn: Button = $VBoxContainer/HBoxContainer/WorldFolderButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_hover_color
+
+
+func _on_world_folder_button_mouse_exited() -> void:
+	var btn: Button = $VBoxContainer/HBoxContainer/WorldFolderButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_color_override
+
+
+func _on_rp_folder_button_mouse_entered() -> void:
+	var btn: Button = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_hover_color
+
+
+func _on_rp_folder_button_mouse_exited() -> void:
+	var btn: Button = $VBoxContainer/AdvancedDropdown/Content/RPHBoxContainer/RPFolderButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_color_override
+
+
+func _on_bp_folder_button_mouse_entered() -> void:
+	var btn: Button = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_hover_color
+
+
+func _on_bp_folder_button_mouse_exited() -> void:
+	var btn: Button = $VBoxContainer/AdvancedDropdown/Content/BPHBoxContainer/BPFolderButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_color_override
+
+
+func _on_validate_button_mouse_entered() -> void:
+	var btn: Button = $VBoxContainer/HBoxContainer/ValidateButton
+	if not btn.disabled:
+		btn.get_node("Icon").modulate = Themes.get_active_palette().icon_hover_color
+
+
+func _on_validate_button_mouse_exited() -> void:
+	var btn: Button = $VBoxContainer/HBoxContainer/ValidateButton
+	if not btn.disabled:
+		var palette := Themes.get_active_palette()
+		btn.get_node("Icon").modulate = palette.success if Global.WorldLoaded else palette.icon_color_override
 
 
 func _on_recent_edit_pressed(index: int):

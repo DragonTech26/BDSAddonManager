@@ -15,7 +15,7 @@ func _on_pressed() -> void:
 		_confirm_dialog.dialog_text = "Do you want to unload world: " + Global.WorldName + "?\nAny unsaved changes will be lost."
 		_confirm_dialog.popup_centered()
 	else:
-		AlertManager.show_alert("No world selected. Choose a world first.", Color.YELLOW)
+		AlertManager.show_alert("No world selected. Choose a world first.", Themes.get_active_palette().warning)
 
 
 func _on_confirm() -> void:

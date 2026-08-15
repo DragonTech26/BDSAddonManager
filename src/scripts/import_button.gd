@@ -3,12 +3,18 @@ extends Control
 var PackImporter = preload("res://src/scripts/pack_importer.gd").new()
 
 @onready var file_picker: FileDialog = $FileDialog
+@onready var background: ColorRect = $Background
+
+var _hovered: bool = false
 
 
 func _ready() -> void:
 	file_picker.filters = PackedStringArray(["*.mcpack ; MCPack files", "*.mcaddon ; MCAddon files", "*.zip ; Zip archives"])
 	file_picker.files_selected.connect(_on_files_selected)
 	file_picker.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	Themes.theme_changed.connect(_on_theme_changed)
+	set_meta("hovered", false)
+	_apply_theme()
 
 
 func _on_files_selected(paths: PackedStringArray) -> void:
@@ -21,11 +27,15 @@ func _on_files_selected(paths: PackedStringArray) -> void:
 
 
 func _on_mouse_entered() -> void:
-	$Background.color = Color("#3B4A5B")
+	_hovered = true
+	set_meta("hovered", true)
+	_apply_theme()
 
 
 func _on_mouse_exited() -> void:
-	$Background.color = Color("#363D4A")
+	_hovered = false
+	set_meta("hovered", false)
+	_apply_theme()
 
 
 func _on_gui_input(event: InputEvent) -> void:
@@ -34,7 +44,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if Global.WorldLoaded:
 				file_picker.popup_centered()
 			else:
-				AlertManager.show_alert("No world selected. Choose a world first.", Color.YELLOW)
+				AlertManager.show_alert("No world selected. Choose a world first.", Themes.get_active_palette().warning)
 
 
 func _refresh_pack_pages() -> void:
@@ -52,3 +62,14 @@ func _refresh_pack_pages() -> void:
 	var bp_page: Node = $"../../../../Body/Pages/MarginContainer/BehaviorPacksPage"
 	if bp_page and bp_page.has_method("load_packs"):
 		bp_page.load_packs(Global.BPList)
+
+
+func _on_theme_changed(_theme_name: String) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	var palette = Themes.get_active_palette()
+	if palette == null:
+		return
+	background.color = palette.sidebar_hover_bg if _hovered else palette.sidebar_bg

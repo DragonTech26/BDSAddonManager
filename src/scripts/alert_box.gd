@@ -14,13 +14,13 @@ func show_alert(message: String, color: Color):
 	label.text = message
 	panel.modulate = color
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color.WHITE
+	sb.bg_color = Themes.get_active_palette().accent
 	progress_bar.add_theme_stylebox_override("panel", sb)
 	anim.stop()
 	anim.play("alert_animation")
 
 
-# Success: Color.GREEN
-# Warning: Color.YELLOW
-# Error: Color.CRIMSON
-#AlertManager.show_alert("Hello", Color.GREEN)
+# Success: Themes.get_active_palette().success
+# Warning: Themes.get_active_palette().warning
+# Error: Themes.get_active_palette().danger
+#AlertManager.show_alert("Hello", Themes.get_active_palette().success)

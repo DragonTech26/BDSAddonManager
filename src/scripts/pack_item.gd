@@ -3,6 +3,7 @@ extends PanelContainer
 var pack_data
 var _delete_dialog: ConfirmationDialog
 var _error_dialog: AcceptDialog
+var _theme_connected: bool = false
 
 @onready var up_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/UpButton
 @onready var down_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/DownButton
@@ -13,6 +14,15 @@ var _error_dialog: AcceptDialog
 @onready var dropdown: OptionButton = $MarginContainer/HBoxContainer/SubpackDropdown
 @onready var delete_btn: Button = $MarginContainer/HBoxContainer/DeleteButton
 @onready var dependency_alert: TextureRect = $MarginContainer/HBoxContainer/DependencyInfo
+
+
+func _ready() -> void:
+	add_to_group("pack_item_panel")
+	delete_btn.add_to_group("danger_button")
+	if not _theme_connected:
+		Themes.theme_changed.connect(_on_theme_changed)
+		_theme_connected = true
+	call_deferred("apply_theme")
 
 
 func setup(data):
@@ -45,7 +55,7 @@ func setup(data):
 			var s = data.subpacks[i]
 			var full_name: String = s.name
 			var truncated: String = _truncate_text(full_name, 32) # limit display to 32 chars
-			dropdown.add_item(truncated)
+			dropdown.add_item(" " + truncated)
 			dropdown.set_item_tooltip(i, full_name) # full name on hover
 
 		# Calculate selected index based on active_subpack
@@ -63,10 +73,15 @@ func setup(data):
 	# Initialize button enabled/disabled based on position
 	# Defer so it runs after all items are added to the container
 	call_deferred("_update_buttons_state")
+	call_deferred("apply_theme")
 
 
 func get_pack_data():
 	return pack_data
+
+
+func apply_theme() -> void:
+	Themes.apply_to(self)
 
 
 func _truncate_text(text: String, max_chars: int) -> String:
@@ -209,6 +224,37 @@ func _on_down_button_pressed() -> void:
 	_move_item(1)
 
 
+func _on_theme_changed(_theme_name: String) -> void:
+	apply_theme()
+
+
+func _on_delete_button_mouse_entered() -> void:
+	$MarginContainer/HBoxContainer/DeleteButton/Icon.modulate = Themes.get_active_palette().danger
+
+
+func _on_delete_button_mouse_exited() -> void:
+	$MarginContainer/HBoxContainer/DeleteButton/Icon.modulate = Themes.get_active_palette().icon_color_override
+
+func _on_up_button_mouse_entered() -> void:
+	if not up_button.disabled:
+		up_button.get_node("Icon").modulate = Themes.get_active_palette().icon_hover_color
+
+
+func _on_up_button_mouse_exited() -> void:
+	if not up_button.disabled:
+		up_button.get_node("Icon").modulate = Themes.get_active_palette().icon_color_override
+
+
+func _on_down_button_mouse_entered() -> void:
+	if not down_button.disabled:
+		down_button.get_node("Icon").modulate = Themes.get_active_palette().icon_hover_color
+
+
+func _on_down_button_mouse_exited() -> void:
+	if not down_button.disabled:
+		down_button.get_node("Icon").modulate = Themes.get_active_palette().icon_color_override
+
+
 func _on_pack_icon_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var base_path := ""
@@ -292,7 +338,7 @@ func _update_buttons_state() -> void:
 	var last_idx := container.get_child_count() - 1
 	up_button.disabled = idx <= 0
 	down_button.disabled = idx >= last_idx
-
+	apply_theme()
 
 # Persist current pack_data.is_active and pack_data.active_subpack into the proper Global list
 func _persist_state_to_global() -> void:

@@ -2,20 +2,34 @@ extends Control
 
 var _confirm_dialog: ConfirmationDialog
 
+@onready var background: ColorRect = $Background
+
+var _hovered: bool = false
+
+
+func _ready() -> void:
+	Themes.theme_changed.connect(_on_theme_changed)
+	set_meta("hovered", false)
+	_apply_theme()
+
 
 func _on_mouse_entered() -> void:
-	$Background.color = "#3B4A5B"
+	_hovered = true
+	set_meta("hovered", true)
+	_apply_theme()
 
 
 func _on_mouse_exited() -> void:
-	$Background.color = "#363D4A"
+	_hovered = false
+	set_meta("hovered", false)
+	_apply_theme()
 
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if Global.WorldPath == "" or Global.WorldLoaded == false:
-				AlertManager.show_alert("No world selected. Choose a world first.", Color.YELLOW)
+				AlertManager.show_alert("No world selected. Choose a world first.", Themes.get_active_palette().warning)
 				return
 
 			CheckServerPing.ping_bedrock_server(Global.ServerIP, Global.ServerPort)
@@ -40,10 +54,10 @@ func _on_confirm_save() -> void:
 	var ok := _save_active_packs()
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 	if ok:
-		AlertManager.show_alert("Saved world: " + Global.WorldName, Color.GREEN)
+		AlertManager.show_alert("Saved world: " + Global.WorldName, Themes.get_active_palette().success)
 		Global.HasUnsavedChanges = false
 	else:
-		AlertManager.show_alert("Failed to save packs for: " + Global.WorldName, Color.CRIMSON)
+		AlertManager.show_alert("Failed to save packs for: " + Global.WorldName, Themes.get_active_palette().danger)
 		Global.HasUnsavedChanges = true
 
 
@@ -155,3 +169,14 @@ func _write_json_array(path: String, data: Array) -> bool:
 	f.close()
 	print("[INFO] Successfully wrote new world pack json files")
 	return true
+
+
+func _on_theme_changed(_theme_name: String) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	var palette = Themes.get_active_palette()
+	if palette == null:
+		return
+	background.color = palette.sidebar_hover_bg if _hovered else palette.sidebar_bg
