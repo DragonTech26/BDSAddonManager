@@ -1,7 +1,8 @@
 extends PanelContainer
 
+const DialogBoxScene = preload("res://src/scenes/dialog_box.tscn")
+
 var pack_data
-var _delete_dialog: ConfirmationDialog
 var _error_dialog: AcceptDialog
 var _theme_connected: bool = false
 
@@ -18,7 +19,6 @@ var _theme_connected: bool = false
 
 func _ready() -> void:
 	add_to_group("pack_item_panel")
-	delete_btn.add_to_group("danger_button")
 	if not _theme_connected:
 		Themes.theme_changed.connect(_on_theme_changed)
 		_theme_connected = true
@@ -113,22 +113,26 @@ func _on_subpack_dropdown_item_selected(index: int) -> void:
 	print("[INFO] Subpack changed to '" + sel_folder + "' for pack '" + pack_data.name + "'")
 
 
-func _on_delete_button_pressed():
+func _on_delete_button_pressed() -> void:
 	# Show a confirmation dialog before deleting from disk
-	if pack_data != null:
-		print("[ALERT] Requesting delete for pack '%s' (Folder: %s)" % [pack_data.name, pack_data.pack_folder])
-	if _delete_dialog == null:
-		_delete_dialog = ConfirmationDialog.new()
-		_delete_dialog.title = "Delete pack?"
-		add_child(_delete_dialog)
-		_delete_dialog.confirmed.connect(_on_confirm_delete)
+	if pack_data == null:
+		return
 
+	print("[ALERT] Requesting delete for pack '%s' (Folder: %s)" % [pack_data.name, pack_data.pack_folder])
+
+	var message: String
 	if LoadSettings.get_setting("USE_SYSTEM_TRASH_ON_DELETE"):
-		_delete_dialog.dialog_text = "Are you sure you want to delete\n'%s'?" % str(pack_data.name)
+		message = "Are you sure you want to delete\n'%s'?" % str(pack_data.name)
 	else:
-		_delete_dialog.dialog_text = "Are you sure you want to permanently delete\n'%s' from file system?" % str(pack_data.name)
+		message = "Are you sure you want to permanently delete\n'%s' from file system?" % str(pack_data.name)
 
-	_delete_dialog.popup_centered()
+	var dialog := DialogBoxScene.instantiate()
+	get_tree().current_scene.add_child(dialog)
+	dialog.setup("Delete pack?", message, "Delete", "Cancel")
+
+	var result: DialogBox.Result = await dialog.finished
+	if result == DialogBox.Result.ACCEPT:
+		_on_confirm_delete()
 
 
 func _on_confirm_delete() -> void:

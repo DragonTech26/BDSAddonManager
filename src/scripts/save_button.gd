@@ -1,10 +1,10 @@
 extends Control
 
-var _confirm_dialog: ConfirmationDialog
-
-@onready var background: ColorRect = $Background
+const DialogBoxScene = preload("res://src/scenes/dialog_box.tscn")
 
 var _hovered: bool = false
+
+@onready var background: ColorRect = $Background
 
 
 func _ready() -> void:
@@ -34,17 +34,21 @@ func _on_gui_input(event: InputEvent) -> void:
 
 			CheckServerPing.ping_bedrock_server(Global.ServerIP, Global.ServerPort)
 
-			if _confirm_dialog == null:
-				_confirm_dialog = ConfirmationDialog.new()
-				_confirm_dialog.title = "Save changes?"
-				add_child(_confirm_dialog)
-				_confirm_dialog.confirmed.connect(_on_confirm_save)
-
+			var dialog := DialogBoxScene.instantiate()
+			get_tree().current_scene.add_child(dialog)
 			if Global.ServerPing == false:
-				_confirm_dialog.dialog_text = "Apply active packs to this world?\nThis will overwrite the currently active packs."
+				dialog.setup("Save changes?", "Apply active packs to this world?\nThis will overwrite the currently active packs.", "Save", "Cancel")
 			else:
-				_confirm_dialog.dialog_text = "Apply active packs to this world?\nThis will overwrite the currently active packs.\nWarning: Server is online! Here be dragons!"
-			_confirm_dialog.popup_centered()
+				dialog.setup("Save changes?", "Apply active packs to this world?\nThis will overwrite the currently active packs.\nWarning: Server is online! Here be dragons!", "Save", "Cancel")
+
+			var result: DialogBox.Result = await dialog.finished
+			match result:
+				DialogBox.Result.ACCEPT:
+					_on_confirm_save()
+				DialogBox.Result.CANCEL:
+					print("[INFO] User cancelled save")
+				DialogBox.Result.CLOSED:
+					print("[INFO] User cancelled save")
 
 
 func _on_confirm_save() -> void:

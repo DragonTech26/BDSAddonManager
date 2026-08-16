@@ -90,6 +90,9 @@ class ThemeBoxes:
 	var popup_hover: StyleBoxFlat
 	var popup_separator: StyleBoxFlat
 
+	# Dialogs
+	var title_bar: StyleBoxFlat
+
 	# Misc
 	var transparent: StyleBoxFlat
 
@@ -138,6 +141,9 @@ func _build_boxes(palette: ThemePalette) -> ThemeBoxes:
 	boxes.popup = _make_box(palette.dropdown_bg, palette.outline, 4, 1, 4)
 	boxes.popup_hover = _make_box(palette.panel.lerp(palette.accent, 0.08), palette.accent_hover, 4, 1, 4)
 	boxes.popup_separator = _make_box(palette.outline, palette.outline, 0, 0, 0)
+
+	# Dialogs
+	boxes.title_bar = _make_titlebar_box(palette.sidebar_bg, palette.outline)
 
 	# Misc
 	boxes.transparent = _make_transparent_box()
@@ -548,6 +554,20 @@ func _make_underline_box(background: Color, underline_color: Color) -> StyleBoxF
 	return box
 
 
+func _make_titlebar_box(background: Color, border: Color) -> StyleBoxFlat:
+	var box := StyleBoxFlat.new()
+	box.bg_color = background
+	box.border_width_bottom = 1
+	box.border_color = border
+	box.corner_radius_top_left = 4
+	box.corner_radius_top_right = 4
+	box.content_margin_left = 10
+	box.content_margin_top = 6
+	box.content_margin_right = 6
+	box.content_margin_bottom = 6
+	return box
+
+
 func _apply_runtime_overrides(root: Node, palette: ThemePalette) -> void:
 	if root is Control:
 		(root as Control).theme = _active_theme
@@ -600,6 +620,8 @@ func _apply_control_overrides(control: Control, palette: ThemePalette, boxes: Th
 		var panel_box: StyleBoxFlat = boxes.panel
 		if control.name == "Sidebar":
 			panel_box = boxes.sidebar_panel
+		elif control.name == "TitleBar":
+			panel_box = boxes.title_bar
 		elif control.is_in_group("pack_item_panel"):
 			panel_box = boxes.pack_item
 		control.add_theme_stylebox_override("panel", panel_box)

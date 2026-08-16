@@ -1,6 +1,7 @@
 extends Control
 
-var confirm_dialog: ConfirmationDialog
+const DialogBoxScene = preload("res://src/scenes/dialog_box.tscn")
+
 var is_editor: bool = false
 
 
@@ -23,26 +24,17 @@ func _notification(what) -> void:
 	if Global.HasUnsavedChanges:
 		get_tree().set_auto_accept_quit(false)
 		_show_quit_dialog()
-		confirm_dialog.get_cancel_button().grab_focus()
 	else:
 		get_tree().set_auto_accept_quit(true)
 
 
 func _show_quit_dialog():
-	if confirm_dialog == null:
-		confirm_dialog = ConfirmationDialog.new()
-		confirm_dialog.title = "Close Without Saving?"
-		confirm_dialog.dialog_text = "World '" + Global.WorldName + "' has unsaved changes, close without saving?"
-		confirm_dialog.always_on_top = true
-		confirm_dialog.exclusive = true
-		confirm_dialog.confirmed.connect(_on_confirm_quit)
-		add_child(confirm_dialog)
-
-		var exit_button := confirm_dialog.get_ok_button()
-		exit_button.modulate = Color.CRIMSON
-		exit_button.text = "Don't Save"
-
-	confirm_dialog.popup_centered()
+	var dialog := DialogBoxScene.instantiate()
+	get_tree().current_scene.add_child(dialog)
+	dialog.setup("Close without saving?", "World '" + Global.WorldName + "' has unsaved changes! Are you sure you want to exit?", "Don't Save", "Cancel")
+	var result: DialogBox.Result = await dialog.finished
+	if result == DialogBox.Result.ACCEPT:
+		_on_confirm_quit()
 
 
 func _on_confirm_quit():

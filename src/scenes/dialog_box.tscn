@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://bmp2r44von1wy"]
+
+[ext_resource type="Script" uid="uid://dk868pc1jfmm1" path="res://src/scripts/dialog_box.gd" id="1_ji17n"]
+[ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="1_r4leh"]
+
+[node name="DialogBox" type="Control" unique_id=1907422659]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ji17n")
+
+[node name="Blocker" type="ColorRect" parent="." unique_id=2041887201]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="PanelPopup" type="Panel" parent="." unique_id=909753824]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelPopup" unique_id=1024949725]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TitleBar" type="PanelContainer" parent="PanelPopup/VBoxContainer" unique_id=1700543664]
+layout_mode = 2
+
+[node name="TitleBarHBox" type="HBoxContainer" parent="PanelPopup/VBoxContainer/TitleBar" unique_id=1294389383]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelPopup/VBoxContainer/TitleBar/TitleBarHBox" unique_id=50965772]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " Message Title"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="PanelPopup/VBoxContainer/TitleBar/TitleBarHBox" unique_id=421783038]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_next = NodePath("../../../ButtonMargin/ButtonRow/AcceptButton")
+focus_previous = NodePath("../../../ButtonMargin/ButtonRow/CancelButton")
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="Icon" type="TextureRect" parent="PanelPopup/VBoxContainer/TitleBar/TitleBarHBox/CloseButton" unique_id=1893931159]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_r4leh")
+stretch_mode = 3
+
+[node name="ContentMargin" type="MarginContainer" parent="PanelPopup/VBoxContainer" unique_id=519787280]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Message" type="RichTextLabel" parent="PanelPopup/VBoxContainer/ContentMargin" unique_id=1767951503]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+fit_content = true
+scroll_active = false
+
+[node name="ButtonMargin" type="MarginContainer" parent="PanelPopup/VBoxContainer" unique_id=1845082556]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ButtonRow" type="HBoxContainer" parent="PanelPopup/VBoxContainer/ButtonMargin" unique_id=863484972]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="AcceptButton" type="Button" parent="PanelPopup/VBoxContainer/ButtonMargin/ButtonRow" unique_id=314673794]
+custom_minimum_size = Vector2(90, 32)
+layout_mode = 2
+focus_next = NodePath("../CancelButton")
+focus_previous = NodePath("../../../TitleBar/TitleBarHBox/CloseButton")
+mouse_default_cursor_shape = 2
+text = "Accept"
+
+[node name="CancelButton" type="Button" parent="PanelPopup/VBoxContainer/ButtonMargin/ButtonRow" unique_id=1339011271]
+custom_minimum_size = Vector2(90, 32)
+layout_mode = 2
+focus_next = NodePath("../../../TitleBar/TitleBarHBox/CloseButton")
+focus_previous = NodePath("../AcceptButton")
+mouse_default_cursor_shape = 2
+text = "Cancel"
+
+[connection signal="mouse_entered" from="PanelPopup/VBoxContainer/TitleBar/TitleBarHBox/CloseButton" to="." method="_on_close_button_mouse_entered"]
+[connection signal="mouse_exited" from="PanelPopup/VBoxContainer/TitleBar/TitleBarHBox/CloseButton" to="." method="_on_close_button_mouse_exited"]
