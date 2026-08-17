@@ -2,18 +2,17 @@ extends Button
 
 signal reset_confirmed
 
-var _confirm_dialog: ConfirmationDialog
+const DialogBoxScene = preload("res://src/scenes/dialog_box.tscn")
 
 
 func _on_pressed() -> void:
 	if Global.WorldLoaded:
-		if _confirm_dialog == null:
-			_confirm_dialog = ConfirmationDialog.new()
-			_confirm_dialog.title = "Unload world?"
-			add_child(_confirm_dialog)
-			_confirm_dialog.confirmed.connect(_on_confirm)
-		_confirm_dialog.dialog_text = "Do you want to unload world: " + Global.WorldName + "?\nAny unsaved changes will be lost."
-		_confirm_dialog.popup_centered()
+		var dialog := DialogBoxScene.instantiate()
+		get_tree().current_scene.add_child(dialog)
+		dialog.setup("Unload world?", "Do you want to unload world: " + Global.WorldName + "?\nAny unsaved changes will be lost!", "OK", "Cancel")
+		var result: DialogBox.Result = await dialog.finished
+		if result == DialogBox.Result.ACCEPT:
+			_on_confirm()
 	else:
 		AlertManager.show_alert("No world selected. Choose a world first.", Themes.get_active_palette().warning)
 
