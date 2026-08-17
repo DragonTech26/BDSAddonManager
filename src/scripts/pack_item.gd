@@ -30,7 +30,7 @@ func setup(data):
 
 	name_label.text = data.name
 	pack_version_label.text = "v" + String(".").join(data.version)
-	icon.tooltip_text = data.description
+	name_label.tooltip_text = data.description
 
 	# Use pre-loaded icon from manifest data
 	if data.pack_icon != null:
@@ -238,6 +238,7 @@ func _on_delete_button_mouse_entered() -> void:
 
 func _on_delete_button_mouse_exited() -> void:
 	$MarginContainer/HBoxContainer/DeleteButton/Icon.modulate = Themes.get_active_palette().icon_color_override
+
 
 func _on_up_button_mouse_entered() -> void:
 	if not up_button.disabled:
