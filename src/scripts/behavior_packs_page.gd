@@ -10,6 +10,7 @@ var PackItemScene: PackedScene = preload("res://src/scenes/pack_item.tscn")
 func load_packs(packs):
 	print("[INFO] Behavior pack count (includes hidden): ", packs.size())
 	for c in list_container.get_children():
+		list_container.remove_child(c)
 		c.queue_free()
 
 	# Optionally hide default server packs
