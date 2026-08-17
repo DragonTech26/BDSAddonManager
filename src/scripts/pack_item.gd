@@ -30,7 +30,7 @@ func setup(data):
 
 	name_label.text = data.name
 	pack_version_label.text = "v" + String(".").join(data.version)
-	name_label.tooltip_text = data.description
+	name_label.tooltip_text = _wrap_text(data.description)
 
 	# Use pre-loaded icon from manifest data
 	if data.pack_icon != null:
@@ -56,7 +56,7 @@ func setup(data):
 			var full_name: String = s.name
 			var truncated: String = _truncate_text(full_name, 32) # limit display to 32 chars
 			dropdown.add_item(" " + truncated)
-			dropdown.set_item_tooltip(i, full_name) # full name on hover
+			dropdown.set_item_tooltip(i, _wrap_text(full_name)) # full name on hover
 
 		# Calculate selected index based on active_subpack
 		var selected_index: int = 0
@@ -88,6 +88,26 @@ func _truncate_text(text: String, max_chars: int) -> String:
 	if text.length() > max_chars:
 		return text.substr(0, max_chars) + "..."
 	return text
+
+
+func _wrap_text(text: String, max_chars_per_line: int = 60) -> String:
+	var words := text.split(" ")
+	var wrapped := ""
+	var line_length := 0
+
+	for word in words:
+		# +1 accounts for the space that would precede this word on the current line
+		if line_length > 0 and line_length + 1 + word.length() > max_chars_per_line:
+			wrapped += "\n"
+			line_length = 0
+		elif line_length > 0:
+			wrapped += " "
+			line_length += 1
+
+		wrapped += word
+		line_length += word.length()
+
+	return wrapped
 
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
