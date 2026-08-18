@@ -446,6 +446,11 @@ func _create_theme(palette: ThemePalette, boxes: ThemeBoxes) -> Theme:
 		theme.set_stylebox("panel", type_name, boxes.panel)
 	theme.set_stylebox("panel", "RichTextLabel", boxes.transparent)
 
+	# Tooltip
+	theme.set_stylebox("panel", "TooltipPanel", boxes.popup)
+	theme.set_color("font_color", "TooltipLabel", palette.primary_text)
+	theme.set_font_size("font_size", "TooltipLabel", 14)
+
 	# Shared base styleboxes per widget state
 	for state in ["normal", "hover", "pressed", "hover_pressed"]:
 		theme.set_stylebox(state, "Button", boxes.button_normal)
