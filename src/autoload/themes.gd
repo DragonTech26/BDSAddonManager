@@ -320,7 +320,7 @@ func _create_dark_palette() -> ThemePalette:
 
 	# Icons
 	palette.icon_color_override = Color.html("#FFFFFF")
-	palette.icon_hover_color = Color.html("#FFFFFF")
+	palette.icon_hover_color = palette.accent_hover
 	palette.icon_pressed_color = palette.accent_pressed
 
 	return palette
@@ -334,12 +334,12 @@ func _create_light_palette() -> ThemePalette:
 	palette.window_bg = Color.html("#F4F5F9")
 	palette.panel = Color.html("#FCFCFC")
 	palette.pack_item_bg = palette.panel
-	palette.outline = Color.html("#F2F2F4")
+	palette.outline = Color.html("#D6DCE3")
 
 	# Sidebar
 	palette.sidebar_bg = Color.html("#FCFCFC")
-	palette.sidebar_hover_bg = Color.html("#EAEDFC")
-	palette.sidebar_indicator = Color.html("#4460EF")
+	palette.sidebar_hover_bg = Color.html("#BAD0F9")
+	palette.sidebar_indicator = Color.html("#246BFE")
 
 	# Text
 	palette.primary_text = Color.html("#000000")
@@ -348,16 +348,16 @@ func _create_light_palette() -> ThemePalette:
 
 	# Text inputs
 	palette.input_underline = Color.html("#A9B7C8")
-	palette.input_disabled_bg = Color.html("#D3D8DF")
+	palette.input_disabled_bg = Color.html("#E4E7EB")
 
 	# Accent & semantic colors
 	palette.accent = Color.html("#000000")
-	palette.accent_hover = Color.html("#8cc0f0")
+	palette.accent_hover = Color.html("#6D9CFF")
 	palette.accent_pressed = Color.html("#4c90d4")
 	palette.focus = palette.accent
-	palette.danger = Color.html("#bc344f")
-	palette.warning = Color.html("#F4F700")
-	palette.success = Color.html("#36D15A")
+	palette.danger = Color.html("#EC6060")
+	palette.warning = Color.html("#EBEA97")
+	palette.success = Color.html("#A6EED4")
 
 	# Dropdowns
 	palette.dropdown_bg = palette.panel.lerp(palette.primary_text, 0.06)
@@ -366,15 +366,15 @@ func _create_light_palette() -> ThemePalette:
 
 	# Buttons
 	palette.button_hover_bg = palette.panel.lerp(palette.accent, 0.10)
-	palette.button_hover_outline = palette.sidebar_indicator
-	palette.button_hover_text_color = palette.primary_text
+	palette.button_hover_outline = palette.accent_hover
+	palette.button_hover_text_color = palette.accent_hover
 	palette.button_pressed_bg = palette.panel.lerp(palette.accent_pressed, 0.14)
 	palette.button_pressed_outline = palette.accent_pressed
 	palette.button_pressed_text_color = palette.accent_pressed
 
 	# Icons
-	palette.icon_color_override = Color.html("#4D4D4D")
-	palette.icon_hover_color = palette.accent_hover
+	palette.icon_color_override = Color.html("#0B111C")
+	palette.icon_hover_color = palette.sidebar_indicator
 	palette.icon_pressed_color = palette.accent_pressed
 
 	return palette
