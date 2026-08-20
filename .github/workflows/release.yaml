@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  GODOT_VERSION: "4.7.1-stable"
+  GODOT_VERSION: "4.7.2-stable"
   EXECUTABLE_NAME: "BDS Addon Manager"
 
 permissions:
