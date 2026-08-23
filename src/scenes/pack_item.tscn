@@ -41,6 +41,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/UpButton" unique_id=685646808]
 layout_mode = 1
@@ -56,6 +57,7 @@ flip_v = true
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/DownButton" unique_id=201021431]
 layout_mode = 1
@@ -128,6 +130,7 @@ custom_minimum_size = Vector2(44, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer/DeleteButton" unique_id=1709044931]
 layout_mode = 1
