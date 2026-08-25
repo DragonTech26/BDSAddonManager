@@ -232,7 +232,7 @@ func _create_classic_palette() -> ThemePalette:
 	palette.outline = Color.html("#1C1E22") # panel/button/dropdown border
 
 	# Titlebar
-	palette.titlebar_bg = palette.window_bg # header color
+	palette.titlebar_bg = Color.html("#262B32") # header color
 
 	# Sidebar
 	palette.sidebar_bg = Color.html("#363D4A") # sidebar
