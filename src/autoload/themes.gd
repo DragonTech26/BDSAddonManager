@@ -16,6 +16,9 @@ class ThemePalette:
 	var pack_item_bg: Color
 	var outline: Color
 
+	# Titlebar
+	var titlebar_bg: Color
+
 	# Sidebar
 	var sidebar_bg: Color
 	var sidebar_hover_bg: Color
@@ -228,6 +231,9 @@ func _create_classic_palette() -> ThemePalette:
 	palette.pack_item_bg = palette.panel # pack item color
 	palette.outline = Color.html("#1C1E22") # panel/button/dropdown border
 
+	# Titlebar
+	palette.titlebar_bg = palette.window_bg # header color
+
 	# Sidebar
 	palette.sidebar_bg = Color.html("#363D4A") # sidebar
 	palette.sidebar_hover_bg = Color.html("#3b4a5b") # sidebar button hover
@@ -282,6 +288,9 @@ func _create_dark_palette() -> ThemePalette:
 	palette.pack_item_bg = palette.panel
 	palette.outline = Color.html("#222226")
 
+	# Titlebar
+	palette.titlebar_bg = palette.window_bg
+
 	# Sidebar
 	palette.sidebar_bg = Color.html("#28282C")
 	palette.sidebar_hover_bg = Color.html("#37363B")
@@ -335,6 +344,9 @@ func _create_light_palette() -> ThemePalette:
 	palette.panel = Color.html("#FCFCFC")
 	palette.pack_item_bg = palette.panel
 	palette.outline = Color.html("#D6DCE3")
+
+	# Titlebar
+	palette.titlebar_bg = palette.window_bg
 
 	# Sidebar
 	palette.sidebar_bg = Color.html("#FCFCFC")
@@ -664,7 +676,7 @@ func _apply_color_rect_override(rect: ColorRect, palette: ThemePalette) -> void:
 	elif rect.name == "HelpScreen":
 		rect.color = palette.window_bg
 	elif rect.name == "ColorRect" and _has_ancestor_named(rect, "Titlebar"):
-		rect.color = palette.window_bg
+		rect.color = palette.titlebar_bg
 	elif rect.name == "Background":
 		if _has_ancestor_in_group(rect, "recent_world_item_panel"):
 			rect.color = palette.panel
