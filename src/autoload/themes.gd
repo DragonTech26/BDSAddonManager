@@ -229,7 +229,7 @@ func _create_classic_palette() -> ThemePalette:
 	palette.window_bg = Color.html("#21262E") # main window
 	palette.panel = Color.html("#1C1E22") # panels
 	palette.pack_item_bg = palette.panel # pack item color
-	palette.outline = Color.html("#1C1E22") # panel/button/dropdown border
+	palette.outline = palette.panel # panel/button/dropdown border
 
 	# Titlebar
 	palette.titlebar_bg = Color.html("#262B32") # header color
@@ -249,10 +249,10 @@ func _create_classic_palette() -> ThemePalette:
 	palette.input_disabled_bg = Color.html("#2A2E35") # textbox disabled / checkbox unchecked
 
 	# Accent & semantic colors
-	palette.accent = Color.html("#FFFFFF") # link buttons / progress bar
+	palette.accent = palette.primary_text # link buttons / progress bar
 	palette.accent_hover = Color.html("#8cc0f0") # link buttons hover
 	palette.accent_pressed = Color.html("#4c90d4") # button click highlight
-	palette.focus = Color.html("#FFFFFF") # keyboard selection outline
+	palette.focus = palette.accent # keyboard selection outline
 	palette.danger = Color.html("#bc3452") # red alert / delete button
 	palette.warning = Color.html("#F4F700") # yellow alert
 	palette.success = Color.html("#00F700") # green alert / check
@@ -267,11 +267,11 @@ func _create_classic_palette() -> ThemePalette:
 	palette.button_hover_outline = palette.button_hover_bg # button hover outline
 	palette.button_hover_text_color = palette.accent_hover # button label color on hover
 	palette.button_pressed_bg = Color.html("#000000") # button background color while pressed
-	palette.button_pressed_outline = palette.button_pressed_bg# button border color while pressed
+	palette.button_pressed_outline = palette.button_pressed_bg # button border color while pressed
 	palette.button_pressed_text_color = palette.primary_text # button label color while pressed
 
 	# Icons
-	palette.icon_color_override = Color.html("#FFFFFF") # icon color modulation
+	palette.icon_color_override = palette.primary_text # icon color modulation
 	palette.icon_hover_color = palette.sidebar_indicator # child icon color on hover
 	palette.icon_pressed_color = palette.accent_pressed # child icon color while pressed
 
@@ -349,7 +349,7 @@ func _create_light_palette() -> ThemePalette:
 	palette.titlebar_bg = Color.html("#F3F3F3")
 
 	# Sidebar
-	palette.sidebar_bg = Color.html("#F3F3F3")
+	palette.sidebar_bg = palette.titlebar_bg
 	palette.sidebar_hover_bg = Color.html("#EAEAEA")
 	palette.sidebar_indicator = Color.html("#7A00E4")
 
