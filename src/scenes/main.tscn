@@ -769,7 +769,6 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 8
 
 [node name="ProgramSettingsPanel" type="Panel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide" unique_id=1043083345]
 custom_minimum_size = Vector2(0, 200)
@@ -1127,28 +1126,28 @@ horizontal_alignment = 1
 [node name="WorldNameLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=1293805402]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 15
-text = "Name: World Name - Status"
+text = " Name: World Name - Status"
 fit_content = true
 scroll_active = false
 
 [node name="IPLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=2084756097]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 15
-text = "IP address: 127.0.0.1"
+text = " IP address: 127.0.0.1"
 fit_content = true
 scroll_active = false
 
 [node name="GamemodeLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=722453879]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 15
-text = "Gamemode: Survival"
+text = " Gamemode: Survival"
 fit_content = true
 scroll_active = false
 
 [node name="GameVersionLabel" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/RightSide/VBoxContainer/ServerConnectionInfoPanel/VBoxContainer" unique_id=693623876]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 15
-text = "Game Version: 0.00.000"
+text = " Game Version: 0.00.000"
 fit_content = true
 scroll_active = false
 
