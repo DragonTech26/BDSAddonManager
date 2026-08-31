@@ -54,6 +54,7 @@ class ThemePalette:
 	var button_pressed_bg: Color
 	var button_pressed_outline: Color
 	var button_pressed_text_color: Color
+	var checkbox_modulate: Color
 
 	# Icons
 	var icon_color_override: Color
@@ -269,6 +270,7 @@ func _create_classic_palette() -> ThemePalette:
 	palette.button_pressed_bg = Color.html("#000000") # button background color while pressed
 	palette.button_pressed_outline = palette.button_pressed_bg # button border color while pressed
 	palette.button_pressed_text_color = palette.primary_text # button label color while pressed
+	palette.checkbox_modulate = palette.primary_text # Checkbox background color
 
 	# Icons
 	palette.icon_color_override = palette.primary_text # icon color modulation
@@ -326,6 +328,7 @@ func _create_dark_palette() -> ThemePalette:
 	palette.button_pressed_bg = palette.panel.lerp(palette.accent_pressed, 0.14)
 	palette.button_pressed_outline = palette.button_pressed_bg
 	palette.button_pressed_text_color = palette.accent_pressed
+	palette.checkbox_modulate = palette.primary_text
 
 	# Icons
 	palette.icon_color_override = palette.primary_text
@@ -383,6 +386,7 @@ func _create_light_palette() -> ThemePalette:
 	palette.button_pressed_bg = palette.panel.lerp(palette.accent_pressed, 0.14)
 	palette.button_pressed_outline = palette.button_pressed_bg
 	palette.button_pressed_text_color = palette.accent_pressed
+	palette.checkbox_modulate = Color.html("#AC77DA")
 
 	# Icons
 	palette.icon_color_override = Color.html("#0B111C")
@@ -615,6 +619,7 @@ func _apply_control_overrides(control: Control, palette: ThemePalette, boxes: Th
 		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled", "disabled_pressed"]:
 			control.add_theme_stylebox_override(state, boxes.checkbox_transparent)
 		control.add_theme_stylebox_override("focus", boxes.focus)
+		control.self_modulate = palette.checkbox_modulate
 	elif control is OptionButton:
 		control.add_theme_stylebox_override("normal", boxes.dropdown_normal)
 		control.add_theme_stylebox_override("hover", boxes.dropdown_hover)
