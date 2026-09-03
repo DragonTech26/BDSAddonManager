@@ -36,6 +36,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=819626569]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="UpButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=756618439]
 custom_minimum_size = Vector2(45, 45)
@@ -69,15 +70,17 @@ grow_vertical = 2
 texture = ExtResource("4_kn27u")
 
 [node name="PackIcon" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1778321137]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 texture = ExtResource("1_0j157")
 expand_mode = 3
 
 [node name="VersionLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=615492378]
-custom_minimum_size = Vector2(48, 0)
+custom_minimum_size = Vector2(48, 45)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 12
 text = "v00.00.00"
 fit_content = true
@@ -87,7 +90,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NameLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=622504367]
-custom_minimum_size = Vector2(140, 16)
+custom_minimum_size = Vector2(140, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -95,10 +98,12 @@ mouse_default_cursor_shape = 16
 text = "Resource/Behavior Pack Name"
 fit_content = true
 scroll_active = false
+vertical_alignment = 1
 
 [node name="DependencyInfo" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=386730492]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "This pack may require a dependency to work properly!"
 mouse_default_cursor_shape = 16
 texture = ExtResource("4_3vdsl")
@@ -116,19 +121,32 @@ clip_text = true
 fit_to_longest_item = false
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer" unique_id=1752764625]
-custom_minimum_size = Vector2(36, 45)
+custom_minimum_size = Vector2(100, 45)
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-text = "enabled?"
 icon_alignment = 1
 expand_icon = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/CheckBox" unique_id=754161679]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(24, -1)
+mouse_filter = 2
+text = "enabled?"
+vertical_alignment = 1
+
 [node name="DeleteButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1766330339]
-custom_minimum_size = Vector2(44, 0)
+custom_minimum_size = Vector2(44, 45)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 flat = true
 
