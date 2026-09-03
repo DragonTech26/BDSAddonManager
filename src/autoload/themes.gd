@@ -310,9 +310,9 @@ func _create_dark_palette() -> ThemePalette:
 	# Accent & semantic colors
 	palette.accent = palette.primary_text
 	palette.accent_hover = palette.sidebar_indicator
-	palette.accent_pressed = Color.html("#00CD18")
+	palette.accent_pressed = palette.primary_text
 	palette.focus = palette.accent
-	palette.danger = Color.html("#bc344f")
+	palette.danger = Color.html("#C91E1E")
 	palette.warning = Color.html("#F4F700")
 	palette.success = Color.html("#00F700")
 
@@ -328,7 +328,7 @@ func _create_dark_palette() -> ThemePalette:
 	palette.button_pressed_bg = palette.panel.lerp(palette.accent_pressed, 0.14)
 	palette.button_pressed_outline = palette.button_pressed_bg
 	palette.button_pressed_text_color = palette.accent_pressed
-	palette.checkbox_modulate = palette.primary_text
+	palette.checkbox_modulate = palette.sidebar_indicator
 
 	# Icons
 	palette.icon_color_override = palette.primary_text
