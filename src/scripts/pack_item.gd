@@ -5,6 +5,7 @@ const DialogBoxScene = preload("res://src/scenes/dialog_box.tscn")
 var pack_data
 var _error_dialog: AcceptDialog
 var _theme_connected: bool = false
+var _using_placeholder_icon: bool = true
 
 @onready var up_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/UpButton
 @onready var down_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/DownButton
@@ -35,6 +36,9 @@ func setup(data):
 	# Use pre-loaded icon from manifest data
 	if data.pack_icon != null:
 		icon.texture = data.pack_icon
+		_using_placeholder_icon = false
+	else:
+		_using_placeholder_icon = true
 
 	# Checkbox
 	check_box.set_block_signals(true)
@@ -82,6 +86,10 @@ func get_pack_data():
 
 func apply_theme() -> void:
 	Themes.apply_to(self)
+	if _using_placeholder_icon:
+		icon.modulate = Themes.get_active_palette().icon_color_override
+	else:
+		icon.modulate = Color(1, 1, 1, 1)
 
 
 func _truncate_text(text: String, max_chars: int) -> String:
