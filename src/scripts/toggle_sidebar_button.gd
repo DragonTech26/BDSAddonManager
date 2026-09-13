@@ -9,8 +9,6 @@ var _hovered: bool = false
 
 
 func _ready() -> void:
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
 	Themes.theme_changed.connect(_on_theme_changed)
 	set_meta("hovered", false)
 	_apply_theme()

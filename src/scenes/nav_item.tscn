@@ -49,7 +49,7 @@ grow_vertical = 2
 texture = ExtResource("2_hnebq")
 stretch_mode = 3
 
-[node name="active" type="ColorRect" parent="." unique_id=90128207]
+[node name="Active" type="ColorRect" parent="." unique_id=90128207]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 1
 anchors_preset = 9

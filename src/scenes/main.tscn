@@ -218,7 +218,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TopContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar/VBoxContainer" unique_id=666076683]
-clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 

@@ -6,7 +6,7 @@ extends Control
 @export var page: NodePath
 
 @onready var background: ColorRect = $Background
-@onready var active_bar: ColorRect = $active
+@onready var active_bar: ColorRect = $Active
 
 var _hovered: bool = false
 
