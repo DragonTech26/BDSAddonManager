@@ -11,7 +11,7 @@ var _hovered: bool = false
 func _ready() -> void:
 	file_picker.filters = PackedStringArray(["*.mcpack ; MCPack files", "*.mcaddon ; MCAddon files", "*.zip ; Zip archives"])
 	file_picker.files_selected.connect(_on_files_selected)
-	file_picker.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	file_picker.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 	Themes.theme_changed.connect(_on_theme_changed)
 	set_meta("hovered", false)
 	_apply_theme()
