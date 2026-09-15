@@ -7,7 +7,7 @@ BDS Addon Manager lets you manage addons for self-hosted Minecraft: Bedrock Edit
 
 ## Features
 
-- **Modern GUI**: Simple layout with familiar controls.
+- **Modern GUI**: Simple layout with familiar controls and theme support.
 - **Pack Management**: Enable or disable packs, add or remove them, adjust load order, view dependencies, and handle subpacks.
 - **Configurable**: Options to hide default packs, text modifiers, prevent pack import conflicts, etc.
 - **Self Contained**: Single binary that requires no installation.
