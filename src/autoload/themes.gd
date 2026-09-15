@@ -354,7 +354,7 @@ func _create_light_palette() -> ThemePalette:
 	# Sidebar
 	palette.sidebar_bg = palette.titlebar_bg
 	palette.sidebar_hover_bg = Color.html("#EAEAEA")
-	palette.sidebar_indicator = Color.html("#7A00E4")
+	palette.sidebar_indicator = Color.html("#6AAEEA")
 
 	# Text
 	palette.primary_text = Color.html("#000000")
@@ -386,7 +386,7 @@ func _create_light_palette() -> ThemePalette:
 	palette.button_pressed_bg = palette.panel.lerp(palette.accent_pressed, 0.14)
 	palette.button_pressed_outline = palette.button_pressed_bg
 	palette.button_pressed_text_color = palette.accent_pressed
-	palette.checkbox_modulate = Color.html("#AC77DA")
+	palette.checkbox_modulate = palette.sidebar_indicator
 
 	# Icons
 	palette.icon_color_override = Color.html("#0B111C")
