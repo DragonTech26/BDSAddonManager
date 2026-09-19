@@ -4,10 +4,12 @@ const PREFIXES_FILE: String = "user://hidden_pack_prefixes.conf"
 
 const BEHAVIOR_PACKS_SECTION: String = "BEHAVIOR PACKS"
 const RESOURCE_PACKS_SECTION: String = "RESOURCE PACKS"
+const UUID_SECTION: String = "UUID"
 
 const FILE_MESSAGE: PackedStringArray = [
 	"# Comment out lines to disable them; deleted lines will be regenerated.",
 	"# Add custom prefixes in the appropriate section, one per line. Lines starting with # are ignored.",
+	"# Add pack UUIDs under [UUID], one per line, to hide a specific pack. An inline comment is allowed.",
 	"",
 ]
 
@@ -34,8 +36,8 @@ const DEFAULT_PREFIXES: Dictionary = {
 		"@minecraft",
 		"experimental",
 	],
+	UUID_SECTION: [],
 }
-
 
 func _ready() -> void:
 	load_or_create_prefixes_file()
@@ -47,22 +49,46 @@ func load_or_create_prefixes_file() -> void:
 	_save_prefix_file(sections)
 
 
-func get_behavior_pack_prefixes() -> Array[String]:
-	return get_prefixes(BEHAVIOR_PACKS_SECTION)
+func get_hidden_behavior_pack_entries() -> Dictionary:
+	return get_hidden_entries(BEHAVIOR_PACKS_SECTION)
 
 
-func get_resource_pack_prefixes() -> Array[String]:
-	return get_prefixes(RESOURCE_PACKS_SECTION)
+func get_hidden_resource_pack_entries() -> Dictionary:
+	return get_hidden_entries(RESOURCE_PACKS_SECTION)
 
 
-func get_prefixes(section_name: String) -> Array[String]:
+func get_hidden_uuids() -> Array[String]:
 	load_or_create_prefixes_file()
+	return _read_uuids()
 
-	var prefixes: Array[String] = []
+
+func get_hidden_entries(section_name: String) -> Dictionary:
+	load_or_create_prefixes_file()
+	return {
+		"prefixes": _read_prefixes(section_name),
+		"uuids": _read_uuids(),
+	}
+
+
+func should_hide_pack(entries: Dictionary, pack_name: String, pack_uuid: String) -> bool:
+	if pack_uuid != "" and entries["uuids"].has(pack_uuid.strip_edges().to_lower()):
+		return true
+
+	var n := pack_name.strip_edges().to_lower()
+	for prefix in entries["prefixes"]:
+		if n.begins_with(prefix):
+			return true
+
+	return false
+
+
+func _read_section_lines(section_name: String) -> Array[String]:
+	var lines: Array[String] = []
+
 	var file := FileAccess.open(PREFIXES_FILE, FileAccess.READ)
 	if file == null:
 		print("[WARN] Could not read hidden prefixes file: " + PREFIXES_FILE)
-		return prefixes
+		return lines
 
 	var current_section := ""
 	while not file.eof_reached():
@@ -76,10 +102,31 @@ func get_prefixes(section_name: String) -> Array[String]:
 			continue
 
 		if current_section == section_name:
-			prefixes.append(line.to_lower())
+			lines.append(line)
 
 	file.close()
+	return lines
+
+
+func _read_prefixes(section_name: String) -> Array[String]:
+	var prefixes: Array[String] = []
+
+	for line in _read_section_lines(section_name):
+		prefixes.append(line.to_lower())
+
 	return prefixes
+
+
+func _read_uuids() -> Array[String]:
+	var uuids: Array[String] = []
+
+	for line in _read_section_lines(UUID_SECTION):
+		# Remove UUID note
+		var uuid := line.split("#", true, 1)[0].strip_edges().to_lower()
+		if uuid != "":
+			uuids.append(uuid)
+
+	return uuids
 
 
 func _read_prefix_file() -> Dictionary:

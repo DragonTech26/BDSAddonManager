@@ -17,16 +17,10 @@ func load_packs(packs):
 	var show_packs = packs
 	if LoadSettings.get_setting("HIDE_DEFAULT_SERVER_PACKS"):
 		var filtered: Array = []
-		var hidden_prefixes: Array[String] = HiddenPackPrefixes.get_behavior_pack_prefixes()
+		var hidden_packs := HiddenPackPrefixes.get_hidden_behavior_pack_entries()
 
 		for p in packs:
-			var n: String = str(p.name).to_lower()
-			var should_hide := false
-			for prefix in hidden_prefixes:
-				if n.begins_with(prefix):
-					should_hide = true
-					break
-			if should_hide:
+			if HiddenPackPrefixes.should_hide_pack(hidden_packs, p.name, p.pack_id):
 				continue
 			filtered.append(p)
 		show_packs = filtered
