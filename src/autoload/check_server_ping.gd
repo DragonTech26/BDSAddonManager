@@ -5,6 +5,7 @@ func ping_bedrock_server(ip: String, port: int) -> void:
 	if ip.is_empty() || port == 0:
 		return
 
+	Global.ServerPing = false
 	var nethernet_ok := await _ping_nethernet_http(ip, port)
 	if nethernet_ok:
 		return
@@ -13,7 +14,7 @@ func ping_bedrock_server(ip: String, port: int) -> void:
 	await _ping_raknet(ip, port)
 
 
-# NetherNet - https://wiki.bedrock.dev/servers/nethernet
+# NetherNet - https://mojang.github.io/bedrock-protocol-docs/guides/nether-net-onboarding-guide/et
 func _ping_nethernet_http(ip: String, port: int, timeout: float = 3.0) -> bool:
 	var http := HTTPRequest.new()
 	add_child(http)
@@ -45,6 +46,17 @@ func _ping_nethernet_http(ip: String, port: int, timeout: float = 3.0) -> bool:
 		return false
 
 	if response_code >= 200 and response_code < 300:
+		var body: PackedByteArray = result[3]
+		var json := JSON.new()
+		var parse_err := json.parse(body.get_string_from_utf8())
+
+		if parse_err != OK:
+			print("[NETWORK] Got 2xx but couldn't parse server info JSON: ", json.get_error_message())
+		else:
+			var server_info: Dictionary = json.data
+			print("[NETWORK] Server info: ", server_info)
+			Global.ServerPingData = JSON.stringify(server_info)
+
 		print("[NETWORK] Success! Bedrock server is ALIVE (NetherNet, HTTP ", response_code, ").")
 		Global.ServerPing = true
 		return true

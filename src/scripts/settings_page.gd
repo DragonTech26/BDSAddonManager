@@ -115,24 +115,44 @@ func GetServerConnectionInfo() -> void:
 			ip_label.visible = true
 			ip_label.text = " Address: " + Global.ServerIP + ":" + str(Global.ServerPort)
 
-			if Global.ServerPingData.strip_edges() != "":
-				var data_segments = Global.ServerPingData.split(";")
-				if data_segments.size() > 8:
-					gamemode_label.visible = true
-					gamemode_label.text = " Gamemode: " + data_segments[8]
-					game_version_label.visible = true
-					game_version_label.text = " Game version: " + data_segments[3]
+			var raw := Global.ServerPingData.strip_edges()
+			if raw != "":
+				var version_text := "Unknown"
+				var gamemode_text := "Unknown"
+
+				if raw.begins_with("{"):
+					# NetherNet
+					var json := JSON.new()
+					if json.parse(raw) == OK and typeof(json.data) == TYPE_DICTIONARY:
+						var info: Dictionary = json.data
+						version_text = str(info.get("version", "Unknown"))
+						gamemode_text = _gamemode_name_from_type(info.get("gameType", -1))
 				else:
-					gamemode_label.visible = true
-					gamemode_label.text = " Gamemode: Unknown"
-					game_version_label.visible = true
-					game_version_label.text = " Game version: Unknown"
+					# RakNet
+					var data_segments := raw.split(";")
+					if data_segments.size() > 8:
+						version_text = data_segments[3]
+						gamemode_text = data_segments[8]
+
+				gamemode_label.visible = true
+				gamemode_label.text = " Gamemode: " + gamemode_text
+				game_version_label.visible = true
+				game_version_label.text = " Game version: " + version_text
 		else:
 			display_name += " - Offline"
 			ip_label.visible = true
 			ip_label.text = " Address: " + Global.ServerIP + ":" + str(Global.ServerPort)
 
 	world_name_label.text = display_name
+
+
+func _gamemode_name_from_type(game_type: int) -> String:
+	match game_type:
+		0: return "Survival"
+		1: return "Creative"
+		2: return "Adventure"
+		5: return "Default"
+		_: return "Unknown"
 
 
 func _on_reset_confirmed() -> void:
