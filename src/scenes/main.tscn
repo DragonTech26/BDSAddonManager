@@ -790,7 +790,7 @@ horizontal_alignment = 1
 [node name="HideDefaultPacks" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=201122710]
 clip_contents = false
 layout_mode = 2
-text = " Hide vanilla packs"
+text = " Hide filtered packs"
 fit_content = true
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer/HideDefaultPacks" unique_id=1072835856]
@@ -812,7 +812,7 @@ mouse_default_cursor_shape = 2
 [node name="HideDefaultPacksDesc" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=917178356]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
-text = " Hides default server packs"
+text = " Hides default server packs and any packs you've chosen to hide"
 fit_content = true
 
 [node name="HideTextModifiers" type="RichTextLabel" parent="HBoxContainer/Body/Pages/MarginContainer/SettingsPage/MarginContainer/VBoxContainer/PageContent/LeftSide/ProgramSettingsPanel/VBoxContainer" unique_id=1155777201]
@@ -1182,8 +1182,9 @@ Managing existing packs
 2. Use the arrow buttons to change pack priority. Items on top will take presidence over lower packs.
 3. If a pack contains subpacks, use the dropdown menu to select which subpack is applied.
 4. Use the checkbox to enable/disable active packs.
-5. Deleting a pack will remove it from your world and disk. This may take some time. Do not close the software while deletion is in progress.
-6. Click the save button and confirm to apply changes.
+5. Right click to hide packs. Toggle hidden packs in settings to view them again. Right click to unhide them.
+6. Deleting a pack will remove it from your world and disk. This may take some time. Do not close the software while deletion is in progress.
+7. Click the save button and confirm to apply changes.
 
 Importing a pack:
 1. Select the Import Packs button on the sidebar to open the file picker.
