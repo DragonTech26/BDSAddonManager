@@ -70,6 +70,56 @@ func get_hidden_entries(section_name: String) -> Dictionary:
 	}
 
 
+func add_hidden_uuid(uuid: String, comment: String = "") -> bool:
+	var clean_uuid := uuid.strip_edges().to_lower()
+	if clean_uuid.is_empty():
+		return false
+
+	if get_hidden_uuids().has(clean_uuid):
+		print("[INFO] UUID %s is already in the hidden packs list" % clean_uuid)
+		return false
+
+	var sections := _sync_default_prefixes(_read_prefix_file())
+
+	var line := clean_uuid
+	if comment != "":
+		line += " # " + comment
+
+	sections[UUID_SECTION].append(line)
+	_save_prefix_file(sections)
+	print("[INFO] Added UUID %s (%s) to hidden packs" % [clean_uuid, comment])
+	return true
+
+
+func is_uuid_hidden(uuid: String) -> bool:
+	return get_hidden_uuids().has(uuid.strip_edges().to_lower())
+
+
+func remove_hidden_uuid(uuid: String) -> bool:
+	var clean_uuid := uuid.strip_edges().to_lower()
+	if clean_uuid.is_empty():
+		return false
+
+	var sections := _sync_default_prefixes(_read_prefix_file())
+	var kept: Array[String] = []
+	var removed := false
+
+	for line in sections[UUID_SECTION]:
+		var entry := str(line).split("#", true, 1)[0].strip_edges().to_lower()
+		if entry == clean_uuid:
+			removed = true
+			continue
+		kept.append(str(line))
+
+	if not removed:
+		return false
+
+	sections[UUID_SECTION] = kept
+	_save_prefix_file(sections)
+	print("[INFO] Removed UUID %s from hidden packs" % clean_uuid)
+	return true
+
+
 func should_hide_pack(entries: Dictionary, pack_name: String, pack_uuid: String) -> bool:
 	if pack_uuid != "" and entries["uuids"].has(pack_uuid.strip_edges().to_lower()):
 		return true

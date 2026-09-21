@@ -4,6 +4,7 @@ const DialogBoxScene = preload("res://src/scenes/dialog_box.tscn")
 
 var pack_data
 var _error_dialog: AcceptDialog
+var _context_menu: PopupMenu
 var _theme_connected: bool = false
 var _using_placeholder_icon: bool = true
 
@@ -20,6 +21,7 @@ var _using_placeholder_icon: bool = true
 
 func _ready() -> void:
 	add_to_group("pack_item_panel")
+	_build_context_menu()
 	if not _theme_connected:
 		Themes.theme_changed.connect(_on_theme_changed)
 		_theme_connected = true
@@ -168,13 +170,7 @@ func _on_confirm_delete() -> void:
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_WAIT)
 	await get_tree().process_frame
 
-	var base_path := ""
-	if str(pack_data.type) == "behavior":
-		base_path = Global.WorldBehaviorPackPath
-	else:
-		base_path = Global.WorldResourcePackPath
-
-	var target_dir := base_path.path_join(str(pack_data.pack_folder))
+	var target_dir := _get_pack_dir()
 	var success := false
 	print("[FILE] Target directory: %s" % target_dir)
 
@@ -288,15 +284,18 @@ func _on_down_button_mouse_exited() -> void:
 		down_button.get_node("Icon").modulate = Themes.get_active_palette().icon_color_override
 
 
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		if pack_data == null:
+			return
+		_update_context_menu()
+		_context_menu.popup_on_parent(Rect2i(Vector2i(get_global_mouse_position()), Vector2i.ZERO))
+		accept_event()
+
+
 func _on_pack_icon_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var base_path := ""
-		if str(pack_data.type) == "behavior":
-			base_path = Global.WorldBehaviorPackPath
-		else:
-			base_path = Global.WorldResourcePackPath
-
-		var target_dir := base_path.path_join(str(pack_data.pack_folder))
+		var target_dir := _get_pack_dir()
 		if OS.get_name() == "Windows":
 			if target_dir.begins_with("//"):
 				target_dir = "\\\\" + target_dir.substr(2).replace("/", "\\")
@@ -305,6 +304,39 @@ func _on_pack_icon_gui_input(event: InputEvent) -> void:
 
 		OS.shell_open(target_dir)
 		print("[INFO] Opened file manager at: " + target_dir)
+
+
+func _build_context_menu() -> void:
+	_context_menu = PopupMenu.new()
+	_context_menu.id_pressed.connect(_on_context_menu_id_pressed)
+	add_child(_context_menu)
+
+
+func _update_context_menu() -> void:
+	_context_menu.clear()
+	if HiddenPackPrefixes.is_uuid_hidden(str(pack_data.pack_id)):
+		_context_menu.add_item("Unhide this pack", 1)
+	else:
+		_context_menu.add_item("Hide this pack", 0)
+
+
+func _on_context_menu_id_pressed(id: int) -> void:
+	if pack_data == null:
+		return
+
+	var uuid := str(pack_data.pack_id)
+
+	match id:
+		0:
+			HiddenPackPrefixes.add_hidden_uuid(uuid, _get_pack_dir())
+			if LoadSettings.get_setting("HIDE_DEFAULT_SERVER_PACKS"):
+				var container := get_parent()
+				if container != null:
+					container.remove_child(self)
+					_update_buttons_for_all(container)
+				queue_free()
+		1:
+			HiddenPackPrefixes.remove_hidden_uuid(uuid)
 
 
 func _move_item(delta: int) -> void:
@@ -327,6 +359,16 @@ func _move_item(delta: int) -> void:
 	_update_buttons_for_all(container)
 
 	Global.HasUnsavedChanges = true
+
+
+func _get_pack_dir() -> String:
+	var base_path := ""
+	if str(pack_data.type) == "behavior":
+		base_path = Global.WorldBehaviorPackPath
+	else:
+		base_path = Global.WorldResourcePackPath
+
+	return base_path.path_join(str(pack_data.pack_folder))
 
 
 func _sync_global_order(container: Node) -> void:
