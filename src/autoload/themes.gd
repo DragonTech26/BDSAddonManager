@@ -726,7 +726,7 @@ func _apply_sprite_overrides(sprite: Sprite2D, palette: ThemePalette) -> void:
 
 
 func _is_ui_icon(node_name: String) -> bool:
-	return node_name in ["Icon", "DependencyInfo"]
+	return node_name in ["Icon", "DependencyInfo", "HiddenIcon"]
 
 
 func _is_hovered_sidebar_node(control: Node) -> bool:

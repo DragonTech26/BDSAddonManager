@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bf03mn4cuut37" path="res://assets/graphics/warning-circle.svg" id="4_3vdsl"]
 [ext_resource type="Texture2D" uid="uid://dfxt3sqwrp4p0" path="res://assets/graphics/x.svg" id="4_4jlgp"]
 [ext_resource type="Texture2D" uid="uid://cs2v2xpasrnty" path="res://assets/graphics/caret.svg" id="4_kn27u"]
+[ext_resource type="Texture2D" uid="uid://defhkfccvfen7" path="res://assets/graphics/eye-slash.svg" id="4_w835p"]
 
 [node name="PackItem" type="PanelContainer" unique_id=479773634]
 anchors_preset = 15
@@ -101,6 +102,16 @@ text = "Resource/Behavior Pack Name"
 fit_content = true
 scroll_active = false
 vertical_alignment = 1
+
+[node name="HiddenIcon" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1557002691]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "This pack may require a dependency to work properly!"
+mouse_default_cursor_shape = 16
+texture = ExtResource("4_w835p")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DependencyInfo" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=386730492]
 custom_minimum_size = Vector2(25, 25)

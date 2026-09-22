@@ -17,6 +17,7 @@ var _using_placeholder_icon: bool = true
 @onready var dropdown: OptionButton = $MarginContainer/HBoxContainer/SubpackDropdown
 @onready var delete_btn: Button = $MarginContainer/HBoxContainer/DeleteButton
 @onready var dependency_alert: TextureRect = $MarginContainer/HBoxContainer/DependencyInfo
+@onready var hidden_icon: TextureRect = $MarginContainer/HBoxContainer/HiddenIcon
 
 
 func _ready() -> void:
@@ -34,6 +35,7 @@ func setup(data):
 	name_label.text = data.name
 	pack_version_label.text = "v" + String(".").join(data.version)
 	name_label.tooltip_text = _wrap_text(data.description)
+	_update_hidden_icon()
 
 	# Use pre-loaded icon from manifest data
 	if data.pack_icon != null:
@@ -312,6 +314,15 @@ func _build_context_menu() -> void:
 	add_child(_context_menu)
 
 
+func _update_hidden_icon() -> void:
+	if pack_data == null:
+		return
+	if HiddenPackPrefixes.is_uuid_hidden(str(pack_data.pack_id)):
+		hidden_icon.visible = true
+	else:
+		hidden_icon.visible = false
+
+
 func _update_context_menu() -> void:
 	_context_menu.clear()
 	if HiddenPackPrefixes.is_uuid_hidden(str(pack_data.pack_id)):
@@ -335,8 +346,11 @@ func _on_context_menu_id_pressed(id: int) -> void:
 					container.remove_child(self)
 					_update_buttons_for_all(container)
 				queue_free()
+			else:
+				_update_hidden_icon()
 		1:
 			HiddenPackPrefixes.remove_hidden_uuid(uuid)
+			_update_hidden_icon()
 
 
 func _move_item(delta: int) -> void:
