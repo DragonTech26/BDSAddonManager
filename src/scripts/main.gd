@@ -8,8 +8,16 @@ var is_editor: bool = false
 func _ready() -> void:
 	if OS.is_debug_build():
 		is_editor = true
-		print("[DEBUG] Is debug build: " + str(is_editor))
-		print("[DEBUG] Program version: " + ProjectSettings.get_setting("application/config/version"))
+		print("[DEBUG] Is debug build: ", OS.is_debug_build())
+		print("[DEBUG] Program version: ", ProjectSettings.get_setting("application/config/version"))
+
+		print("[DEBUG] OS: ", OS.get_name())
+		print("[DEBUG] Distribution: ", OS.get_distribution_name())
+		print("[DEBUG] OS version: ", OS.get_version())
+
+		print("[DEBUG] Processor: ", OS.get_processor_name())
+		print("[DEBUG] CPU threads: ", OS.get_processor_count())
+		print("[DEBUG] RAM: ", OS.get_memory_info().physical / 1024 / 1024, " MB")
 
 	theme = Themes.get_active_theme()
 	Themes.theme_changed.connect(_on_theme_changed)
