@@ -314,13 +314,22 @@ func _build_context_menu() -> void:
 	add_child(_context_menu)
 
 
-func _update_hidden_icon() -> void:
-	if pack_data == null:
-		return
-	if HiddenPackPrefixes.is_uuid_hidden(str(pack_data.pack_id)):
-		hidden_icon.visible = true
+func _get_hidden_entries() -> Dictionary:
+	if str(pack_data.type) == "behavior":
+		return HiddenPackPrefixes.get_hidden_behavior_pack_entries()
 	else:
-		hidden_icon.visible = false
+		return HiddenPackPrefixes.get_hidden_resource_pack_entries()
+
+
+func _is_pack_hidden() -> bool:
+	if pack_data == null:
+		return false
+	var entries := _get_hidden_entries()
+	return HiddenPackPrefixes.should_hide_pack(entries, str(pack_data.name), str(pack_data.pack_id))
+
+
+func _update_hidden_icon() -> void:
+	hidden_icon.visible = _is_pack_hidden()
 
 
 func _update_context_menu() -> void:
