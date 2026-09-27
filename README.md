@@ -40,12 +40,12 @@ BDS Addon Manager lets you manage addons for self-hosted Minecraft: Bedrock Edit
 <details>
   <summary>Click to expand</summary>
   <p>
-    <img width="400" alt="recent list" src="https://github.com/user-attachments/assets/21572e14-9dcb-4bfa-b7d8-2c86c6c7b0e7" />
-    <img width="400" alt="world files" src="https://github.com/user-attachments/assets/4c12d7cc-a846-4ae2-a2b9-057722f06c3e" />
-    <img width="400" alt="edit packs page" src="https://github.com/user-attachments/assets/62fea48a-6647-45f8-940d-e2fedee35764" />
-    <img width="400" alt="settings page" src="https://github.com/user-attachments/assets/e26721e9-4396-44b6-928d-2a0a55eb79d6" />
+    <img width="400" alt="recent list" src="https://github.com/user-attachments/assets/6f835c7a-cac6-4c67-a103-46978583f6c3" />
+    <img width="400" alt="world files" src="https://github.com/user-attachments/assets/77c65a81-646b-43c1-be2e-60deffb487d9" />
+    <img width="400" alt="edit packs page" src="https://github.com/user-attachments/assets/10ea257d-f21d-4009-b802-ab6100b0d999" />
+    <img width="400" alt="settings page" src="https://github.com/user-attachments/assets/710e90b7-0c4c-4efc-97ca-b995ba6ec3fe" />
   </p>
-</details>
+
 
 ## Licenses
 
