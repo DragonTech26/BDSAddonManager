@@ -45,7 +45,7 @@ BDS Addon Manager lets you manage addons for self-hosted Minecraft: Bedrock Edit
     <img width="400" alt="edit packs page" src="https://github.com/user-attachments/assets/10ea257d-f21d-4009-b802-ab6100b0d999" />
     <img width="400" alt="settings page" src="https://github.com/user-attachments/assets/710e90b7-0c4c-4efc-97ca-b995ba6ec3fe" />
   </p>
-
+</details>
 
 ## Licenses
 
